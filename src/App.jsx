@@ -10,7 +10,6 @@ import Products from './Pages/Home/Home';
 import RequireAuth from './router/RequireAuth';
 import UserPanel from './Pages/UserPanel/UserPanel';
 import RequireAdminRole from './router/RequireAdminRole';
-import BuildYourPc from './Pages/BuildYourPc/BuildYourPc';
 import AdminPanel from './Pages/AdminPanel/AdminPanel';
 import RecoverPassword from "./Pages/RecoverPassword";
 import CookieConsent from './components/CookieConsent/CookieConsent';

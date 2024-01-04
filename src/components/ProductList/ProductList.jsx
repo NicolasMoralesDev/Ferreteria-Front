@@ -29,7 +29,7 @@ const ProductList = () => {
 
         if (location.pathname == "/") {
             const data = await getAllProducts(page);
-            setProducts(data.productos);
+            setProducts(data);
             setTotal(data.total)
             setLoading(false);
         } else {
