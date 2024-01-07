@@ -5,12 +5,13 @@ import { Toaster } from 'react-hot-toast'
 
 const ProductCard = ({product, handleClick}) => {
   return (
-      <div className={`card d-flex justify-content-center mb-3 mt-3  ${styles.card}`} onClick={() => {handleClick(product)}}>
-          <div className="w-100 d-flex justify-content-center">
-              <div className="col-md-4">
+      <div className={`${styles.card}`} onClick={() => {handleClick(product)}}>
+         
+              <div className={styles.imgconte}>
                   <img src={product.imageUrl} className={styles.img} alt={product.name}></img>
-              </div>
-              <div className="col-md-8 p-3 card-body">
+                  </div>
+            
+              <div className={styles.cardbody}>
                       <h5 className="card-title">{product.name}</h5>
                       <p>{product.brand}</p>
                       <p className="card-text fw-bold">Precio $ {product.price}</p>
@@ -19,7 +20,7 @@ const ProductCard = ({product, handleClick}) => {
                           reverseOrder={false}
                       />
               </div>
-          </div>
+
       </div>
 
   )

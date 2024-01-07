@@ -4,19 +4,20 @@ import SearchBar from "./SearchBar/SearchBar"
 import UserWidget from "./UserWidget/UserWidget"
 import RegisterWidget from "./UserWidget/RegisterWidget"
 import NavbarLinks from "./NavbarLinks/NavbarLinks"
-import logo from "./../../assets/logotienda.png";
+import logo from "./../../assets/Logocorralon.png";
 import { Link } from "react-router-dom";
+import "../Navbar/Navbar.css";
 
 const Navbar = () => {
   return (
-    <div className="container-fluid ">
+    <div className="container-fluid navbar-contenenedor ">
 
       <Row className="d-flex align-items-center justify-content-around gap-3 pt-2">
         <Col xs={7} sm={4} md={2} className="d-flex justify-content-center">
           <div className="container">
             <div className="h-25">
               <Link className='nav-link mx-5 link-light fw-bold' to='/' >
-              <img src={logo} alt="Logo del Sitio" className="mx-auto img-fluid bg-light"/>
+              <img src={logo} alt="Logo del Sitio" className="mx-auto img-fluid bg-light logonav"/>
               </Link>
             </div>
           </div>

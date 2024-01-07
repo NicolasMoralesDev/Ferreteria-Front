@@ -12,7 +12,7 @@ export default function Home() {
         <meta name="description" content="Bienvenido a TecnoTienda! Una web con los mejores precios en Hardware del mercado." />
       </Helmet>
 
-        <main>
+        <main className='main-conteiner'>
           <ProductsCarousel/>
           <ProductList />
         </main>

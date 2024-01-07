@@ -1,5 +1,8 @@
 .App {
-  min-height: 100vh;
+ height: auto;
+width: 100%;
   display: flex;
   flex-direction: column;
+ background: url(https://img.freepik.com/foto-gratis/fondo-madera_24972-623.jpg?w=900&t=st=1704658045~exp=1704658645~hmac=b5da51ffff7c5b35cb07d7e63411334b04ae1e78f8e5c51ad820cbb22acda313);
+ background-size: 100%;
 }

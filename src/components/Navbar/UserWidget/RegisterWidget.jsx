@@ -7,7 +7,7 @@ import Modal from "../../Modal/Modal";
 import RegisterForm from "../../RegisterForm/RegisterForm";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-
+import "../UserWidget/register.css"
 
 const UserWidget = () => {
 
@@ -67,7 +67,7 @@ const LoginButton = () => {
 
   return (
     <>
-      <Button onClick={handleOpenModal} className="d-flex align-items-center gap-2 btn-success">
+      <Button onClick={handleOpenModal} className="d-flex align-items-center gap-2 botonasor">
         <FaUserCircle />
         <p>Registrarse</p>
       </Button>

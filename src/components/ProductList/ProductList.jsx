@@ -61,12 +61,12 @@ const ProductList = () => {
 
     return (
         <div className="container">
-            <h1 className="text-center m-5">Nuestros Productos:</h1>
+            <h1 className="text-center m-5 products-title">Nuestros Productos</h1>
           <Row className="d-flex align-items-center justify-content-center">
             {products ?
                 products.map((product) => (
                     <Col xs={12} lg={12} xl={6} key={uuidv4()} >
-                        <ProductCard product={product}  moveToCart={moveToCart} handleClick={handleProductClick}/>
+                        <ProductCard className="card-orange" product={product}  moveToCart={moveToCart} handleClick={handleProductClick}/>
                     </ Col>
                     )
                 ) :
