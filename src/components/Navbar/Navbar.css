@@ -1,9 +1,11 @@
 .navbar-contenenedor{
     background-color: rgb(45, 43, 42);
+    height: auto;
 }
 .navlinks-contenedor{
     background-color: rgb(226, 67, 9);
 }
 .logonav{
+    width: 70px;
     border-radius: 100px;
 }

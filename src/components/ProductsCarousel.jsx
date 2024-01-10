@@ -3,6 +3,7 @@ import procesador from "../assets/Promo-diciembre.png";
 import placamadre from "../assets/asus-placa.png";
 
 
+
 const ProductsCarousel = () => {
 
   const images = [  procesador, placamadre];
