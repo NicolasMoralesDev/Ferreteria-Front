@@ -1,7 +1,7 @@
-
+import "./footer.css"
 const Footer = () => {
   return (
-    <footer className="footer text-light bg-dark position-relative bottom-0 p-4" style={styles.footer}>
+    <footer className="footer text-light back position-relative bottom-0 p-4" style={styles.footer}>
       <div className="container-fluid">
         <div className="row cntainer-fluid d-flex flex-row justify-content-center">
           <div className="col-lg-6 link-light">
