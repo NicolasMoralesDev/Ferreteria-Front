@@ -1,6 +1,7 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import { useRouteError } from 'react-router-dom'
+import '../index.css'
 
 const Error = () => {
 
@@ -16,7 +17,7 @@ const Error = () => {
     }
 
     return (
-        <>
+        <>                
             <div id="error-page" className='mb-3'>
                 <Helmet>
                     <meta charSet="utf-8" />
@@ -24,11 +25,12 @@ const Error = () => {
                     <link rel="canonical" href="http://mysite.com/example" />
                     <meta name="description" content="Ha ocurrido un error." />
                 </Helmet>
+
                 <div className='d-flex justify-content-center align-items-center container flex-column ' >
                     <div className='mt-5 gap-3 d-flex justify-content-center flex-column align-items-center gap-5'>
                         <h1 className='text-4xl font-bold'>Oops!</h1>
-                        <h3> Parece que a ocurrido un error!!</h3>
-                        <h3 className='text-center'>
+                        <h3 className='text-light'> Parece que a ocurrido un error!!</h3>
+                        <h3 className='text-center text-light'>
                             {errorMessage}
                         </h3>
                         <a title='volver' href={"/"} className='btn text-light fw-bold  btn-orange-custom w-25'>volver</a>

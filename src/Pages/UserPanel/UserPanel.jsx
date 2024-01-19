@@ -15,6 +15,7 @@ import { PacmanLoader } from "react-spinners"
 import { Helmet } from 'react-helmet';
 import { PaginationContext } from '../../context/PaginationContext';
 import { SalesTable } from '../../components/SalesTable/SalesTable';
+import Navbar from '../../components/Navbar/Navbar';
 
 const UserPanel = () => {
 
@@ -68,6 +69,11 @@ const UserPanel = () => {
 const SalesSection = ({ saleList }) => {
   const navigate = useNavigate();
   return (
+    <>
+    
+    
+
+    <Navbar/>
     <Row className='justify-content-center align-items-center'>
       <Col xs={12} lg={10} xl={8} className={styles.box}>
         <div className={styles.header}>
@@ -82,7 +88,7 @@ const SalesSection = ({ saleList }) => {
           </>
         )}
       </Col>
-    </Row>
+    </Row>    </>
   )
 }
 

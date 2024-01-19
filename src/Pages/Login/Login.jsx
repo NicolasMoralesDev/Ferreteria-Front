@@ -5,6 +5,8 @@ import { useUser } from '../../context/Hooks';
 import { Col, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
+import Navbar from '../../components/Navbar/Navbar';
+import Footer from '../../components/Footer';
 
 const Login = () => {
 
@@ -50,7 +52,8 @@ const Login = () => {
                 <link rel="canonical" href="http://mysite.com/example" />
                 <meta name="description" content="Inicia session para acceder a tu cuenta." />
             </Helmet>
-            <div className={`container`}>
+            <Navbar/>
+            <div className={`container mb-5`}>
                 <Row className="d-flex justify-content-around">
                     <Col xs={7} lg={5} xl={3}>
                         <h1 style={{padding: "30px"}}>Iniciar sesión</h1>
@@ -64,6 +67,7 @@ const Login = () => {
                 </Row>
                 
             </div>
+            <Footer/>
         </>
 
     )
