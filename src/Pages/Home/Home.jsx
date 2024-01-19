@@ -9,7 +9,7 @@ export default function Home() {
         <meta charSet='utf-8' />
         <title>El corralon | Inicio</title>
         <link rel='canonical' href='http://mysite.com/example' />
-        <meta name="description" content="Bienvenido a TecnoTienda! Una web con los mejores precios en Hardware del mercado." />
+        <meta name="description" content="Bienvenido a Corralon Online! Una web con los mejores precios en del mercado." />
       </Helmet>
 
         <main className='main-conteiner'>

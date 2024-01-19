@@ -13,6 +13,7 @@ import { Link } from 'react-router-dom';
 import styles from './TableCheckout.module.css';
 import { PacmanLoader } from "react-spinners"
 import Mp from "../../assets/mercado-pago.svg";
+import ItemCount from '../ProductDetail/ItemCount';
 
 const TableCheckout = () => {
 
@@ -46,8 +47,8 @@ const TableCheckout = () => {
   }
 
   return (
-    <div className={`container mb-5 mt-5 ${styles.main}`}>
-      <h2 className='text-center pt-5 mb-5'>CHECKOUT </h2>
+    <div className={`container mb-5 mt-5 ${styles.main} p-2`}>
+      <h2 className='text-center pt-5 mb-5 text-black'>CHECKOUT </h2>
       <Table striped responsive className='fw-bold'>
         <thead>
           <tr>
@@ -56,6 +57,7 @@ const TableCheckout = () => {
             <th>Marca</th>
             <th>Cantidad</th>
             <th>Precio</th>
+            <th>Modificar</th>
             <th>Quitar</th>
           </tr>
         </thead>
@@ -75,6 +77,7 @@ const TableCheckout = () => {
                   <td>{i.product.brand}</td>
                   <td>{i.amount}</td>
                   <td>$ {i.product.price}</td>
+                  <td> <ItemCount stock={i.product.stock} initial={i.amount}/> </td>
                   <td>
                     <button
                       onClick={() => handleDeleteItem(i.product.id)}
@@ -292,7 +295,7 @@ const CheckoutModal = () => {
 const EmptyCart = () => {
   return (
     <div className={`container mb-5 mt-5 ${styles.main}`}>
-      <h2 className='text-center'>Checkout </h2>
+      <h2 className='text-center text-black'>Checkout </h2>
       <div className='alert alert-warning' role='alert'>
         No hay productos en el carrito
       </div>

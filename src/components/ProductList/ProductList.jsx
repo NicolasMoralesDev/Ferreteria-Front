@@ -61,7 +61,7 @@ const ProductList = () => {
 
     return (
         <div className="container">
-            <h1 className="text-center m-5 products-title">Nuestros Productos</h1>
+            <h1 className="text-center m-5 products-title">ULTIMOS INGRESOS</h1>
           <Row className="d-flex align-items-center justify-content-center">
             {products ?
                 products.map((product) => (

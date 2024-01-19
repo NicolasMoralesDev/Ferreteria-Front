@@ -49,9 +49,9 @@ const Help = () => {
                 </div>
 
                 <div className="container mt-4 bg-white">
-                    <h2>TecnoTienda te ayuda, ¿Cuál es tu consulta?</h2>
+                    <h2>Corralon Online te ayuda, ¿Cuál es tu consulta?</h2>
                     <p><strong>Contactanos:</strong></p>
-                    <p>Email: <a href="mailto:infotecno@tecnocompro.com">infotecno@tecnocompro.com</a></p>
+                    <p>Email: <a href="mailto:infotecno@tecnocompro.com">infocorralon@corralon.com</a></p>
                     <p>WhatsApp: +54 - 011 - 1234565</p>
                 </div>
 

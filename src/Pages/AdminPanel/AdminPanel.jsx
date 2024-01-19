@@ -42,9 +42,9 @@ const AdminPanel = () => {
                 <link rel="canonical" href="http://mysite.com/example" />
                 <meta name="description" content="Ha ocurrido un error." />
             </Helmet>
-            <div className='container'>
+            <div className='container mb-5 '>
 
-                <div className="row mx-auto ">
+                <div className="row mx-auto container-admin">
                     <div className="col-6 col-md-2 mt-5">
                         <div className="accordion accordion-flush" id="accordionFlush">
                             <div>
