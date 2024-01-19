@@ -19,7 +19,7 @@ const ProductDetail = ({ product = null, handleCloseModal }) => {
         <img src={product.imageUrl} className="img-thumbnail rounded-start fixed-size-image" alt={product.name}></img>
       </div>
       <div className="col-md-6">
-        <p>{product.description}</p>
+        <p className="text-black p-3">{product.description}</p>
         <p><small className="text-body-secondary">Precio $ {product.price}</small></p>
         <ItemCount stock={product.stock} initial={initial} onAdd={onAdd}/>
       </div>

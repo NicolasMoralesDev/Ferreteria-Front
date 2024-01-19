@@ -8,14 +8,17 @@ import { isInteger } from 'formik';
 
 
 const CardCart = () => {
+
     const [data, setData] = useState(null);
     
+ const { cart } = useCart();
 
-    let total = 0;
-    let redondo= 0;
+    const total = cart.reduce(
+        (acc, item) => acc + item.amount * item.product.price,
+        0
+      );
 
-
-    const { cart } = useCart();
+   
 
     useEffect(() => {
         if (cart.length > 0) {
@@ -31,9 +34,7 @@ const CardCart = () => {
                 {
                     data.map(item => {
 
-                        total += item.product.price;
-                      redondo+= Math.round(total)
-                      console.log(redondo);
+
                         return (
                             <div className="card mb-3 mt-3 dropdown-item" style={{ maxWidth: '700px' }} key={uuidv4()}>
                                 <div className="row g-0 d-flex">
@@ -46,7 +47,7 @@ const CardCart = () => {
                                             <p className="card-text fw-bold text-black">Total: $ {item.product.price * item.amount}</p>
                                             <div className='d-flex flex-column'>
                                                 <h6>Cantidad: {item.amount}</h6>
-                                                <ItemCount stock={item.product.stock} initial={item.amount} />
+                                                <ItemCount stock={item.product.stock} initial={item.amount} isEnabled={true} />
                                             </div>
 
 
@@ -57,7 +58,7 @@ const CardCart = () => {
                             </div>)
                     }
                     )}
-                <h6 className='text-center'>Total = ${redondo}</h6>
+                <h6 className='text-center'>Total = ${total}</h6>
             </div>
             : <h6 className='text-center'>Sin Productos</h6>
     )

@@ -14,6 +14,7 @@ import styles from './TableCheckout.module.css';
 import { PacmanLoader } from "react-spinners"
 import Mp from "../../assets/mercado-pago.svg";
 import ItemCount from '../ProductDetail/ItemCount';
+import { useEffect } from 'react';
 
 const TableCheckout = () => {
 
@@ -26,6 +27,14 @@ const TableCheckout = () => {
     (acc, item) => acc + item.amount * item.product.price,
     0
   );
+
+  useEffect(() => {
+    
+  
+  total
+
+  }, [<ItemCount/>])
+  
 
   const handleDeleteItem = (id) => {
     removeFromCart(id);
@@ -77,7 +86,7 @@ const TableCheckout = () => {
                   <td>{i.product.brand}</td>
                   <td>{i.amount}</td>
                   <td>$ {i.product.price}</td>
-                  <td> <ItemCount stock={i.product.stock} initial={i.amount}/> </td>
+                  <td> <ItemCount stock={i.product.stock} initial={i.amount} isEnabled={true}/> </td>
                   <td>
                     <button
                       onClick={() => handleDeleteItem(i.product.id)}

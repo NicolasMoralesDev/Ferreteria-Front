@@ -43,7 +43,7 @@ const AdminProductList = () => {
     try {
       // Llama a la función updateProduct con el ID del producto y los datos editados
       const res = await updateProduct(editedProduct);
-      console.log("res", res);
+
       if (res.status == 200) {
         Swal.fire({
           title: 'Producto modificado',

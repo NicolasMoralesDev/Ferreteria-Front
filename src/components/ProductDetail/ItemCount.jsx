@@ -4,7 +4,7 @@ import styles from './ItemCount.module.css'
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 import { Button } from 'react-bootstrap';
 
-const ItemCount = ({ stock, initial, onAdd }) => {
+const ItemCount = ({ stock, initial, onAdd, isEnabled }) => {
 
   const [amount, setAmount] = useState(initial)
 
@@ -29,7 +29,10 @@ const ItemCount = ({ stock, initial, onAdd }) => {
       <span className={styles.plus} onClick={handlePlus}>
         <AiOutlinePlus />
       </span>
+       { !isEnabled ?
       <Button onClick={() => onAdd(amount)}>Agregar</Button>
+      : <></>
+      }
     </div>
   );
 };

@@ -7,7 +7,6 @@ export const getAllProducts = async (page = 0) => {
 
        /*  const response = await axiosConf.get(`public/products?page=${page}`); */
          const response = await axios.get(`https://6274471f3d2b5100742a5877.mockapi.io/prueba`);
-         console.log(response.data);
         return response.data;
 
     } catch (error) {
