@@ -4,12 +4,12 @@ const Footer = () => {
     <footer className="footer text-light back position-relative bottom-0 p-4" style={styles.footer}>
       <div className="container-fluid">
         <div className="row cntainer-fluid d-flex flex-row justify-content-center">
-          <div className="col-lg-6 link-light">
-            <div className="d-flex justify-content-center flex-column align-items-center">
-                 <h3>Links</h3>
-            <ul>
+          <div className="col-lg-6">
+            <div className="d-flex justify-content-start flex-column align-items-start">
+                 <h3 className="text-center align-self-center">Links</h3>
+            <ul className="fs-5">
               <li><a className="link-light" href="/">Home</a></li>
-              <li><a className="link-light" href="#">ayuda</a></li>
+              <li><a className="link-light" href="#">Contacto</a></li>
             </ul>
             </div>
           </div>

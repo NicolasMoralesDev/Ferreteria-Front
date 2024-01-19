@@ -1,6 +1,6 @@
-import ProductList from '../../components/ProductList/ProductList';
 import { Helmet } from 'react-helmet';
 import ProductsCarousel from '../../components/ProductsCarousel';
+import ProductsHome from '../../components/ProductsHome/ProductsHome';
 
 export default function Home() {
   return (
@@ -14,7 +14,7 @@ export default function Home() {
 
         <main className='main-conteiner'>
           <ProductsCarousel/>
-          <ProductList />
+          <ProductsHome/>
         </main>
 
     </>
