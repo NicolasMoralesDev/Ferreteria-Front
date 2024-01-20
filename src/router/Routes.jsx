@@ -8,6 +8,7 @@ import RecoverPassword from "../Pages/RecoverPassword";
 import RecuperarPassword from "../Pages/RecuperarPassword";
 import UserPanel from "../Pages/UserPanel/UserPanel";
 import Help from "../Pages/Help";
+import ProductCategory from "../components/ProductCategory"
 
 export  const routes = createBrowserRouter([
     {
@@ -27,12 +28,12 @@ export  const routes = createBrowserRouter([
         errorElement: <Error />
 
     },
-/*     {
+     {
         path: "/productos",
-        element: <Products />,
+        element: <ProductCategory />,
         errorElement: <Error />
 
-    }, */
+    }, 
     {
         path: "/user_panel",
         element: <UserPanel />,
