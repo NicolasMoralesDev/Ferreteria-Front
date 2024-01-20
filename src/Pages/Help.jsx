@@ -58,7 +58,7 @@ const Help = () => {
 
                         </li>
                         <li>
-                        <p className="link-nav">Email: <a href="mailto:infotecno@tecnocompro.com">infocorralon@corralon.com</a></p>
+                        <p>Email: <a href="mailto:infotecno@tecnocompro.com" className="link-light">infocorralon@corralon.com</a></p>
 
                         </li>
                         <li>
