@@ -3,22 +3,20 @@ import { useEffect } from 'react';
 import styles from "./CardCart.module.css"
 import { v4 as uuidv4 } from "uuid";
 import { useCart } from '../../../../context/Hooks.js';
-import ItemCount from '../../../ProductDetail/ItemCount.jsx';
-import { isInteger } from 'formik';
 
 
 const CardCart = () => {
 
     const [data, setData] = useState(null);
-    
- const { cart } = useCart();
+
+    const { cart } = useCart();
 
     const total = cart.reduce(
         (acc, item) => acc + item.amount * item.product.price,
         0
-      );
+    );
 
-   
+
 
     useEffect(() => {
         if (cart.length > 0) {
@@ -26,6 +24,7 @@ const CardCart = () => {
         } else {
             setData(null);
         }
+
     }, [cart])
 
     return (
@@ -47,9 +46,7 @@ const CardCart = () => {
                                             <p className="card-text fw-bold text-black">Total: $ {item.product.price * item.amount}</p>
                                             <div className='d-flex flex-column'>
                                                 <h6>Cantidad: {item.amount}</h6>
-                                                <ItemCount stock={item.product.stock} initial={item.amount} isEnabled={true} />
                                             </div>
-
 
                                         </div>
                                     </div>

@@ -2,6 +2,7 @@ import { Modal as BootstrapModal, Button } from 'react-bootstrap';
 
 // eslint-disable-next-line react/prop-types
 const Modal = ({ show, handleClose, title, children }) => {
+
   return (
     <BootstrapModal show={show} onHide={handleClose}>
       <BootstrapModal.Header closeButton>

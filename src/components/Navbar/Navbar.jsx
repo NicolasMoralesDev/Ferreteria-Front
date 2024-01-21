@@ -14,15 +14,15 @@ const Navbar = () => {
 
       <Row className="d-flex align-items-center justify-content-around gap-3 pt-2">
         <Col xs={7} sm={4} md={2} className="d-flex justify-content-center">
-          <div className="container">
-            <div className="h-25">
-              <Link className='nav-link mx-5 link-light fw-bold' to='/' >
+          <div className="container d-flex justify-content-center">
+            <div className="h-50">
+              <Link className='nav-link  link-light fw-bold' to='/' >
               <img src={logo} alt="Logo del Sitio" className="mx-auto img-fluid bg-light logonav"/>
               </Link>
             </div>
           </div>
         </Col>
-        <Col xs={10} sm={7} md={4} className="container-fluid"> {/* Añadido el breakpoint `lg` y la clase `container-fluid` */}
+        <Col xs={12} sm={7} md={4} className="container-fluid d-flex justify-content-center"> {/* Añadido el breakpoint `lg` y la clase `container-fluid` */}
           <SearchBar />
         </Col>
         <Col xs={10} md={5} className="d-flex gap-3 justify-content-center">
