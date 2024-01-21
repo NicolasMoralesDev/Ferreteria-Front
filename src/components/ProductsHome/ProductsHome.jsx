@@ -2,13 +2,11 @@ import React from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { useEffect } from 'react';
 import { useContext } from 'react';
-
 import { useCart } from '../../context/Hooks';
 import { useState } from 'react';
 import { PaginationContext } from '../../context/PaginationContext';
 import { getAllProducts } from '../../utils/fetchProductsList';
 import ProductCard from "../ProductCard/ProductCard";
-import PaginationProduts from '../ProductList/PaginationProduts/PaginationProduts';
 import "./productsHome.css"
 import ProductDetail from "../ProductDetail/ProductDetail";
 import ReactOwlCarousel from 'react-owl-carousel';
