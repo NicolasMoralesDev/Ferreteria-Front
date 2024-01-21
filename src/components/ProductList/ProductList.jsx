@@ -27,7 +27,7 @@ const ProductList = () => {
 
     const getData = async () => {
 
-        if (location.pathname == "/") {
+        if (location.pathname == "/productos") {
             const data = await getAllProducts(page);
             setProducts(data);
             setTotal(data.total)
@@ -60,12 +60,12 @@ const ProductList = () => {
     if (loading) return (<div style={{minHeight: "400px"}} className="d-flex justify-content-center align-items-center"><PacmanLoader color="#000000"/></div>)
 
     return (
-        <div className="container">
-            <h1 className="text-center m-5 products-title">ULTIMOS INGRESOS</h1>
-          <Row className="d-flex align-items-center justify-content-center">
+        <div className=" p-5">
+            <h1 className="text-center products-title p-2">PRODUCTOS</h1>
+          <Row>
             {products ?
                 products.map((product) => (
-                    <Col xs={12} lg={12} xl={6} key={uuidv4()} >
+                    <Col xs={12} lg={12} xl={12} key={uuidv4()} >
                         <ProductCard className="card-orange" product={product}  moveToCart={moveToCart} handleClick={handleProductClick}/>
                     </ Col>
                     )

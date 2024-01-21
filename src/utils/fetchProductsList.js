@@ -56,6 +56,23 @@ export const getProductByCategory = async (category, page = 0) => {
 
 }
 
+export const getCategory = async () => {
+
+    try {
+
+        const response = await axiosConf.get(`public/get/category`);
+
+        return response.data;
+
+    } catch (error) {
+        return error;
+    }
+
+}
+
+/* Requests Admin */
+
+
 export const deleteProduct = async (id) => {
 
     try {

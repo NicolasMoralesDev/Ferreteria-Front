@@ -9,6 +9,8 @@ import RecuperarPassword from "../Pages/RecuperarPassword";
 import UserPanel from "../Pages/UserPanel/UserPanel";
 import Help from "../Pages/Help";
 import ProductCategory from "../components/ProductCategory"
+import RequireAdminRole from "./RequireAdminRole";
+import RequireAuth from "./RequireAuth";
 
 export  const routes = createBrowserRouter([
     {
@@ -36,19 +38,19 @@ export  const routes = createBrowserRouter([
     }, 
     {
         path: "/user_panel",
-        element: <UserPanel />,
+        element: <RequireAuth><UserPanel /></RequireAuth> ,
         errorElement: <Error />
 
     },
     {
         path: "/dashboard",
-        element: <UserPanel />,
+        element: <RequireAuth><UserPanel /> </RequireAuth> ,
         errorElement: <Error />
 
     },
     {
         path: "/admin_panel",
-        element: <AdminPanel />,
+        element: <RequireAdminRole><AdminPanel /></RequireAdminRole> ,
         errorElement: <Error />
     },
     {
