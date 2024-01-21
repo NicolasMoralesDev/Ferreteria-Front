@@ -2,11 +2,14 @@
   list-style: none;
 }
 
- 
+
 a {
   text-decoration: none;
 }
 
+.btn:hover, .btn:active{
+   background-color: inherit;
+}
 
 :root {
   margin: 0;
@@ -24,10 +27,10 @@ p {
 }
 
 /* Body minheith 100vh */
-body{
+body {
   height: auto;
   width: 100%;
   display: flex;
   flex-direction: column;
-  background:linear-gradient(#2a2929 50%, #0c0b0b) ;
+  background: linear-gradient(#2a2929 50%, #0c0b0b);
 }
