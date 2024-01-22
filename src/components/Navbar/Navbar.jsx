@@ -31,8 +31,6 @@ const Navbar = () => {
           <CartWidget />
         </Col>
       </Row>
-
-
       <Row>
         <NavbarLinks />
       </Row>

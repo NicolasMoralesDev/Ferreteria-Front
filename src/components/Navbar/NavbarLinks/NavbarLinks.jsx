@@ -27,10 +27,9 @@ const NavbarLinks = () => {
                 AYUDA
               </Link>
             </li>
-
             <li className='nav-item text-center mx-2'>
               <Link className='nav-link mx-5 link-light fw-bold' to='/productos'>
-                PROIDUCTOS
+                PRODUCTOS
               </Link>
             </li>
           </ul>

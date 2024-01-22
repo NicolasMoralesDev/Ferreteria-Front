@@ -130,9 +130,10 @@ const TableCheckout = () => {
           <ExportAsPdf
           fileName='Presupuesto Corralon-Online'
             data={data}
-            headers={["Imagen", "Nombre", "Precio", "Marca", "Cantidad"]}
+            headers={["Imagen", "Nombre","Marca", "Precio",  "Cantidad"]}
             headerStyles={{ fillColor: "red" }}
             title="PRESUPUESTO"
+            footerStyles={"background-color:black"}
           >
             {(props) => (
               <button {...props} className='btn btn-danger fw-bold'>

@@ -29,9 +29,9 @@ export const useProductPdf = (cart) => {
   for (let index = 0; index < cart.length; index++) {
     const mock = {
       imagen: "",
-      name: "",
-      price: 0,
+      name: "",      
       brand: "",
+      price: 0,
       amount: 0,
       stock: 0
     };
