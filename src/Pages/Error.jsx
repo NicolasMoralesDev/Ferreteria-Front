@@ -29,7 +29,7 @@ const Error = () => {
                 <div className='d-flex justify-content-center align-items-center container flex-column ' >
                     <div className='mt-5 gap-3 d-flex justify-content-center flex-column align-items-center gap-5'>
                         <h1 className='text-4xl font-bold'>Oops!</h1>
-                        <h3 className='text-light'> Parece que a ocurrido un error!!</h3>
+                        <h3 className='text-light'> Parece que a ocurrido un Error!</h3>
                         <h3 className='text-center text-light'>
                             {errorMessage}
                         </h3>

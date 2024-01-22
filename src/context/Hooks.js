@@ -21,3 +21,32 @@ export const useCart = () => {
   }
   return context;
 }
+
+export const useProductPdf = (cart) => {
+  const product = [];
+
+
+  for (let index = 0; index < cart.length; index++) {
+    const mock = {
+      imagen: "",
+      name: "",
+      price: 0,
+      brand: "",
+      amount: 0,
+      stock: 0
+    };
+    const element = cart[index];
+    mock.imagen = element.product.imageUrl
+    mock.amount = element.amount;
+    mock.stock = element.product.stock;
+    mock.name = element.product.name;
+    mock.brand = element.product.brand;
+    mock.price = "$ " + element.product.price;
+
+    product.push(mock);
+
+
+  }
+
+  return product;
+}

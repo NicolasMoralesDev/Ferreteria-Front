@@ -1,5 +1,8 @@
 import "./footer.css"
 const Footer = () => {
+
+  const data = import.meta.env.VITE_PORT;
+
   return (
     <footer className="footer text-light back position-relative bottom-0 p-4" style={styles.footer}>
       <div className="container-fluid">
@@ -9,7 +12,7 @@ const Footer = () => {
                  <h3 className="text-center align-self-center">Links</h3>
             <ul className="fs-5">
               <li><a className="link-light" href="/">Home</a></li>
-              <li><a className="link-light" href="#">Contacto</a></li>
+              <li><a className="link-light" href="/ayuda">Ayuda</a></li>
             </ul>
             </div>
           </div>
