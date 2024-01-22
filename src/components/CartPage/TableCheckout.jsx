@@ -11,7 +11,7 @@ import { payMd, sendSale } from '../../utils/fetchSales';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
 import styles from './TableCheckout.module.css';
-import { PacmanLoader } from "react-spinners"
+import { ClimbingBoxLoader } from "react-spinners"
 import Mp from "../../assets/mercado-pago.svg";
 import ItemCount from '../ProductDetail/ItemCount';
 import { useEffect } from 'react';
@@ -242,7 +242,7 @@ const CheckoutModal = () => {
 
   if (loading) {
     return <div className="d-flex justify-content-center align-items-center" style={{ minHeight: "400px" }}>
-      <PacmanLoader color="#000000" />
+      <ClimbingBoxLoader color="rgba(239, 239, 239, 1)" />
     </div>
   }
 

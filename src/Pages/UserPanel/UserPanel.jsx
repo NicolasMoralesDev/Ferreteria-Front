@@ -11,7 +11,7 @@ import Loading from '../../components/Loading/Loading';
 import ChangePasswordForm from '../../components/ChangePasswordForm/ChangePasswordForm';
 import { changePasswordRequest } from '../../utils/fetchUser';
 import Swal from 'sweetalert2';
-import { PacmanLoader } from "react-spinners"
+import { ClimbingBoxLoader } from "react-spinners"
 import { Helmet } from 'react-helmet';
 import { PaginationContext } from '../../context/PaginationContext';
 import { SalesTable } from '../../components/SalesTable/SalesTable';
@@ -186,7 +186,7 @@ const UserButtons = () => {
       <Modal show={showModal} handleClose={handleCloseModal} title="Cambiar contraseña">
         {loading ?
           <div className="d-flex justify-content-center align-items-center" style={{ minHeight: "300px" }}>
-            <PacmanLoader color="#000000" />
+            <ClimbingBoxLoader color="rgba(239, 239, 239, 1)" />
           </div>
           :
           <ChangePasswordForm handleSubmit={handleSubmit} />}

@@ -6,7 +6,7 @@ import PaginationProduts from "./PaginationProduts/PaginationProduts";
 import { PaginationContext } from "../../context/PaginationContext";
 import { useCart } from "../../context/Hooks";
 import {  Col, Row } from "react-bootstrap";
-import { PacmanLoader } from "react-spinners"
+import { ClimbingBoxLoader } from "react-spinners"
 import { useSearchParams } from "react-router-dom";
 import ProductCard from "../ProductCard/ProductCard";
 import Modal from "../Modal/Modal";
@@ -57,7 +57,7 @@ const ProductList = () => {
       setShowModal(false);
     }
 
-    if (loading) return (<div style={{minHeight: "400px"}} className="d-flex justify-content-center align-items-center"><PacmanLoader color="#000000"/></div>)
+    if (loading) return (<div style={{minHeight: "400px"}} className="d-flex justify-content-center align-items-center"><ClimbingBoxLoader color="rgba(239, 239, 239, 1)"/></div>)
 
     return (
         <div className=" p-5">
