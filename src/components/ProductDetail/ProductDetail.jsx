@@ -4,14 +4,10 @@ import ItemCount from "./ItemCount";
 // eslint-disable-next-line react/prop-types
 const ProductDetail = ({ product = null, handleCloseModal }) => { 
 
-  const { addToCart, getProductQuantity } = useCart();
+  const {  getProductQuantity } = useCart();
 
   const initial = getProductQuantity(product.id);
 
-  const onAdd = (amount) => {
-    addToCart(product, amount);
-    handleCloseModal();
-  }
 
   return (
     <div className="row">
@@ -21,7 +17,7 @@ const ProductDetail = ({ product = null, handleCloseModal }) => {
       <div className="col-md-6">
         <p className="text-black p-3">{product.description}</p>
         <p><small className="text-body-secondary">Precio $ {product.price}</small></p>
-        <ItemCount stock={product.stock} initial={initial} onAdd={onAdd}/>
+        <ItemCount stock={product.stock} initial={initial} handleModal={handleCloseModal} product={product}/>
       </div>
     </div>
   );

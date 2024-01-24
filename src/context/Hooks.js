@@ -22,6 +22,15 @@ export const useCart = () => {
   return context;
 }
 
+export const useOnAdd = (product, amount, handleCloseModal, addToCart, isEnabled) => {
+
+  addToCart(product, amount);
+  if (!isEnabled) {
+    handleCloseModal();
+  }
+
+}
+
 export const useProductPdf = (cart) => {
   const product = [];
 
@@ -29,7 +38,7 @@ export const useProductPdf = (cart) => {
   for (let index = 0; index < cart.length; index++) {
     const mock = {
       imagen: "",
-      name: "",      
+      name: "",
       brand: "",
       price: 0,
       amount: 0,

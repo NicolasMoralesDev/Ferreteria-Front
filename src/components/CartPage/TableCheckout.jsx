@@ -1,5 +1,5 @@
 import Table from 'react-bootstrap/Table';
-import { useCart, useUser, useProductPdf } from '../../context/Hooks';
+import { useCart, useUser, useProductPdf, useOnAdd } from '../../context/Hooks';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
@@ -21,7 +21,7 @@ const TableCheckout = () => {
 
 
   const [showModal, setShowModal] = useState(false);
-  const { cart, removeFromCart } = useCart();
+  const { cart, removeFromCart, addToCart } = useCart();
 
   const data = useProductPdf(cart);
 
@@ -79,7 +79,7 @@ const TableCheckout = () => {
             cart.map((i) => {
               return (
                 <tr key={Date.now() * i.product.id}>
-                  <td className='w-25'>
+                  <td className='w-25 text-center'>
                     <img
                       src={i.product.imageUrl}
                       alt={i.product.name}
@@ -90,7 +90,7 @@ const TableCheckout = () => {
                   <td>{i.product.brand}</td>
                   <td>{i.amount}</td>
                   <td>$ {i.product.price}</td>
-                  <td> <ItemCount stock={i.product.stock} initial={i.amount} isEnabled={true} /> </td>
+                  <td> <ItemCount stock={i.product.stock} initial={i.amount} isEnabled={true} product={i.product} /> </td>
                   <td>
                     <button
                       onClick={() => handleDeleteItem(i.product.id)}
@@ -128,9 +128,9 @@ const TableCheckout = () => {
           </div>
 
           <ExportAsPdf
-          fileName='Presupuesto Corralon-Online'
+            fileName='Presupuesto Corralon-Online'
             data={data}
-            headers={["Imagen", "Nombre","Marca", "Precio",  "Cantidad"]}
+            headers={["Imagen", "Nombre", "Marca", "Precio", "Cantidad"]}
             headerStyles={{ fillColor: "red" }}
             title="PRESUPUESTO"
             footerStyles={"background-color:black"}

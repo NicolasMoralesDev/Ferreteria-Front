@@ -3,20 +3,24 @@ import { useState } from 'react';
 import styles from './ItemCount.module.css'
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 import { Button } from 'react-bootstrap';
+import { useCart, useOnAdd } from '../../context/Hooks';
 
-const ItemCount = ({ stock, initial, onAdd, isEnabled }) => {
+const ItemCount = ({ stock, initial, isEnabled, handleModal, product }) => {
 
   const [amount, setAmount] = useState(initial)
+  const { addToCart } = useCart();
 
 
   const handlePlus = () => {
+
+
     if (amount < stock){
-      setAmount(amount + 1);
+        setAmount(amount + 1);
     }
   }
   const handleMinus = () => {
     if (amount > 1){
-      setAmount(amount - 1);
+        setAmount(amount - 1);
     }
   }
 
@@ -29,10 +33,8 @@ const ItemCount = ({ stock, initial, onAdd, isEnabled }) => {
       <span className={styles.plus} onClick={handlePlus}>
         <AiOutlinePlus />
       </span>
-       { !isEnabled ?
-      <Button onClick={() => onAdd(amount)}>Agregar</Button>
-      : <></>
-      }
+      <Button className='fw-bold' onClick={() => useOnAdd(product, amount, handleModal, addToCart, isEnabled)}>Agregar</Button>
+    
     </div>
   );
 };
