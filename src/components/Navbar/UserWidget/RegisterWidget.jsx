@@ -72,7 +72,7 @@ const LoginButton = () => {
         <p>Registrarse</p>
       </Button>
         <Modal show={showModal} handleClose={handleCloseModal} title="Registrarse">
-          <RegisterForm handleSubmit={handleRegisterSubmit}/>
+          <RegisterForm handleSubmit={handleRegisterSubmit} titleStyle={"text-black"}/>
         </Modal>
     </>
   )

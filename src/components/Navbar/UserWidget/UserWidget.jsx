@@ -89,7 +89,7 @@ const LoginButton = () => {
         <p>Iniciar Sesión</p>
       </Button>
         <Modal show={showModal} handleClose={handleCloseModal} title="Iniciar Sesión">
-          <LoginForm handleSubmit={handleLoginSubmit}/>
+          <LoginForm handleSubmit={handleLoginSubmit} titleStyle={"text-black"} linkStyle={"link-Black"}/>
         </Modal>
     </>
   )

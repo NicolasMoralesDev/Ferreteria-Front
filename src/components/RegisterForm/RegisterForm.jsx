@@ -13,7 +13,7 @@ const validationSchema = object().shape({
 });
 
 // eslint-disable-next-line react/prop-types
-const RegisterForm = ({ handleSubmit, secondaryButton = null }) => {
+const RegisterForm = ({ handleSubmit, secondaryButton = null, titleStyle }) => {
   return (
     <Formik
       initialValues={{
@@ -28,7 +28,7 @@ const RegisterForm = ({ handleSubmit, secondaryButton = null }) => {
     >
       <Form as={BootstrapForm}>
         <div className='mb-3 gap-2'>
-          <label htmlFor='newEmail' className='text-light'>Correo electrónico:</label>
+          <label htmlFor='newEmail' className={titleStyle}>Correo electrónico:</label>
           <Field
             type='email'
             name='email'
@@ -39,7 +39,7 @@ const RegisterForm = ({ handleSubmit, secondaryButton = null }) => {
           <ErrorMessage name='email' component={Alert} variant='danger' />
         </div>
         <div className='mb-3'>
-          <label htmlFor='newPassword' className='text-light'>Contraseña:</label>
+          <label htmlFor='newPassword' className={titleStyle}>Contraseña:</label>
           <Field
             type='password'
             name='password'
@@ -49,7 +49,7 @@ const RegisterForm = ({ handleSubmit, secondaryButton = null }) => {
           <ErrorMessage name='password' component={Alert} variant='danger' />
         </div>
         <div className='mb-3'>
-          <label htmlFor='confirmPassword' className='text-light'>Repita la contraseña:</label>
+          <label htmlFor='confirmPassword' className={titleStyle}>Repita la contraseña:</label>
           <Field
             type='password'
             name='confirmPassword'
@@ -63,7 +63,7 @@ const RegisterForm = ({ handleSubmit, secondaryButton = null }) => {
           />
         </div>
         <div className='mb-3'>
-          <label htmlFor='firstName' className='text-light'>Nombre:</label>
+          <label htmlFor='firstName' className={titleStyle}>Nombre:</label>
           <Field
             type='text'
             name='firstName'
@@ -73,7 +73,7 @@ const RegisterForm = ({ handleSubmit, secondaryButton = null }) => {
           <ErrorMessage name='firstName' component={Alert} variant='danger' />
         </div>
         <div className='mb-3'>
-          <label htmlFor='lastName' className='text-light'>Apellido:</label>
+          <label htmlFor='lastName' className={titleStyle}>Apellido:</label>
           <Field
             type='text'
             name='lastName'

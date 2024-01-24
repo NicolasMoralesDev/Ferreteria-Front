@@ -57,11 +57,11 @@ const Login = () => {
                 <Row className="d-flex justify-content-around">
                     <Col xs={7} lg={5} xl={3}>
                         <h1 style={{padding: "30px"}}>Iniciar sesión</h1>
-                        <LoginForm handleSubmit={handleLoginSubmit}/>
+                        <LoginForm handleSubmit={handleLoginSubmit} titleStyle={"text-light"} linkStyle={"link-light"}/>
                     </Col>
                     <Col xs={7} lg={5} xl={3}>
                         <h1 style={{padding: "30px"}}>Registrarse</h1>
-                        <RegisterForm handleSubmit={handleRegisterSubmit}/>
+                        <RegisterForm handleSubmit={handleRegisterSubmit} titleStyle={"text-light"}/>
                         
                     </Col>
                 </Row>
