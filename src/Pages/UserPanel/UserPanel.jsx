@@ -51,6 +51,7 @@ const UserPanel = () => {
         <title>Panel de Usuario</title>
         <link rel="canonical" href="http://mysite.com/example" />
       </Helmet>
+      <Navbar/>
 
       <div className={styles.main}>
         <div className={`container ${styles.container}`}>
@@ -70,10 +71,6 @@ const SalesSection = ({ saleList }) => {
   const navigate = useNavigate();
   return (
     <>
-    
-    
-
-    <Navbar/>
     <Row className='justify-content-center align-items-center'>
       <Col xs={12} lg={10} xl={8} className={styles.box}>
         <div className={styles.header}>
@@ -102,15 +99,15 @@ const UserSection = ({ user }) => {
         <Col sm={6} className={`d-flex justify-content-center ${styles.box}>`}>
           <div className={styles.box}>
             <div>
-              <h6 style={{ display: "inline-block", paddingRight: "10px" }}>Nombre: </h6>
+              <h6 style={{ display: "inline-block", paddingRight: "10px", color: "white"}}>Nombre: </h6>
               <p style={{ display: "inline-block" }}>{user.firstName}</p>
             </div>
             <div>
-              <h6 style={{ display: "inline-block", paddingRight: "10px" }}>Apellido: </h6>
+              <h6 style={{ display: "inline-block", paddingRight: "10px", color: "white" }}>Apellido: </h6>
               <p style={{ display: "inline-block" }}>{user.lastName}</p>
             </div>
             <div>
-              <h6 style={{ display: "inline-block", paddingRight: "10px" }}>Email: </h6>
+              <h6 style={{ display: "inline-block", paddingRight: "10px", color: "white" }}>Email: </h6>
               <p style={{ display: "inline-block" }}>{user.email}</p>
             </div>
           </div>

@@ -25,7 +25,7 @@ const SearchBar = () => {
            <input
         type="text"
         className={styles.searchBar}
-        placeholder="Buscar..."
+        placeholder="¿Que estas Buscando?"
         onChange={handleChange}
       />
   

@@ -5,6 +5,7 @@ import AdminProductList from './AdminProductList';
 import AdminSalesByUser from './AdminSalesByUser';
 import AdminSalesList from './AdminSalesList';
 import { Helmet } from 'react-helmet';
+import Navbar from '../../components/Navbar/Navbar';
 
 const AdminPanel = () => {
 
@@ -42,6 +43,7 @@ const AdminPanel = () => {
                 <link rel="canonical" href="http://mysite.com/example" />
                 <meta name="description" content="Ha ocurrido un error." />
             </Helmet>
+            <Navbar/>
             <div className='container mb-5 '>
 
                 <div className="row mx-auto container-admin">
