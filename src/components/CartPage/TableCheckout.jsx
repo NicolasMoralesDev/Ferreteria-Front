@@ -1,5 +1,5 @@
 import Table from 'react-bootstrap/Table';
-import { useCart, useUser, useProductPdf, useOnAdd } from '../../context/Hooks';
+import { useCart, useUser, useProductPdf } from '../../context/Hooks';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
@@ -33,7 +33,6 @@ const TableCheckout = () => {
   );
 
   useEffect(() => {
-
 
     total
 
