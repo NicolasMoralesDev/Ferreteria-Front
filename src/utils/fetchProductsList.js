@@ -1,6 +1,7 @@
 import axios from "axios";
 import axiosConf from "./axiosConf";
 
+
 export const getAllProducts = async (page = 0) => {
 
     try {
@@ -35,6 +36,20 @@ export const getProductByQuery = async (page = 0, query) => {
 
         const response = await axiosConf.get(`public/product?page=${page}&q=${query}`);
         return response.data;
+
+    } catch (error) {
+        return error;
+    }
+
+}
+
+export const getProductsFilter = async (subCategory, page = 0) => {
+
+    try {
+
+         const response = await axiosConf.get(`public/products/subCategory?page=${page}&subcategory=${subCategory}`); 
+        return response.data;
+   
 
     } catch (error) {
         return error;
@@ -97,6 +112,7 @@ export const addProduct = async (product) => {
     }
 
 }
+
 export const updateProduct = async ( updatedProductData) => {
     try {
         const response = await axiosConf.put(`admin/products`, updatedProductData);
