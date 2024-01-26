@@ -9,6 +9,7 @@ import AdminUpdateProductModal from "./AdminUpdateProductModal";
 import Modal from "../../components/Modal/Modal"
 import { Table } from "react-bootstrap";
 import Swal from "sweetalert2";
+import { dataConver } from "../../context/Hooks";
 
 const AdminProductList = () => {
 
@@ -19,9 +20,12 @@ const AdminProductList = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const getData = async () => {
+    
     const data = await getAllProducts(page);
-    setProducts(data.productos);
-    setTotal(data.total)
+    const productsConver = dataConver(data); 
+    setProducts(productsConver);
+    setTotal(data.total);
+
   }
 
 
@@ -86,15 +90,16 @@ const AdminProductList = () => {
             <th>Imagen</th>
             <th>Marca</th>
             <th>Descripción</th>
-            <th>Categoría</th>
+            <th>SubCategoría</th>
             <th>Precio</th>
             <th>Stock</th>
             <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
-          {products.map((product) => (
-
+          {
+     
+          products.map((product) => (
             <tr key={uuidv4()} >
               <td>{product.id}</td>
               <td>{product.name}</td>
@@ -103,7 +108,7 @@ const AdminProductList = () => {
               </td>
               <td>{product.brand}</td>
               <td className={styles.rowList}>{product.description}</td>
-              <td>{product.category}</td>
+              <td>{product.subCategory.title}</td>
               <td className="fw-bold text-center">${product.price}</td>
               <td>{product.stock}</td>
               <td  className="p-3 d-flex gap-2 flex-wrap">

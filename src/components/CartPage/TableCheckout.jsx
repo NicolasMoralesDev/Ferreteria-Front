@@ -21,7 +21,7 @@ const TableCheckout = () => {
 
 
   const [showModal, setShowModal] = useState(false);
-  const { cart, removeFromCart, addToCart } = useCart();
+  const { cart, removeFromCart } = useCart();
 
   const data = useProductPdf(cart);
 
@@ -66,6 +66,7 @@ const TableCheckout = () => {
           <tr>
             <th>Imagen</th>
             <th>Nombre</th>
+            <th>Medida</th>
             <th>Marca</th>
             <th>Cantidad</th>
             <th>Precio</th>
@@ -86,6 +87,7 @@ const TableCheckout = () => {
                     />
                   </td>
                   <td>{i.product.name}</td>
+                  <td>{i.product.medida}</td>
                   <td>{i.product.brand}</td>
                   <td>{i.amount}</td>
                   <td>$ {i.product.price}</td>
@@ -129,7 +131,7 @@ const TableCheckout = () => {
           <ExportAsPdf
             fileName='Presupuesto Corralon-Online'
             data={data}
-            headers={["Imagen", "Nombre", "Marca", "Precio", "Cantidad"]}
+            headers={[/* "Imagen", */ "Nombre","Medida", "Marca", "Precio", "Cantidad"]}
             headerStyles={{ fillColor: "red" }}
             title="PRESUPUESTO"
             footerStyles={"background-color:black"}
@@ -188,7 +190,7 @@ const CheckoutModal = () => {
   const prepareShippingData = (values) => {
     const shippingData = {
       itemList: cart.map((item) => ({
-        product: { id: item.product.id },
+        product: { idProduct: item.product.id },
         amount: item.amount,
       })),
       address: values.address,

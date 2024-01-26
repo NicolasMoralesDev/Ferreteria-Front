@@ -1,13 +1,15 @@
-import React, { Fragment, useContext, useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useState } from 'react'
 import { getCategory, getProductsFilter } from '../../utils/fetchProductsList';
 import { Accordion } from 'react-bootstrap';
 import { PaginationContext } from '../../context/PaginationContext';
+import { dataConver } from '../../context/Hooks';
 
 const CategoryPanel = () => {
 
     const [data, setData] = useState([]);
-    const { page, setTotal } = useContext(PaginationContext);
+    const { page, setTotal, setProduct } = useContext(PaginationContext);
+
 
     const getData = async () => {
 
@@ -24,7 +26,9 @@ const CategoryPanel = () => {
     const getProductsByFilters = async (data) => {
 
         const response = await getProductsFilter(data, page);
-        console.log(response);
+        setTotal(response.total);
+        const products = dataConver(response);
+        setProduct(products);
 
     }
 
@@ -39,19 +43,19 @@ const CategoryPanel = () => {
                     </div>
 
                     <Accordion>
-                        { data.length > 0 ? 
-                        data.map( i => (
-                        <Accordion.Item eventKey={i.idCategory} key={i.idCategory}>
-                            <Accordion.Header>{i.title}</Accordion.Header>
-                            { i.subCategory.map( i =>
-                            <Accordion.Body key={i.idSubCategory} onClick={()=> getProductsByFilters(i.idSubCategory)}>
-                             {i.title}
-                            </Accordion.Body>
+                        {data.length > 0 ?
+                            data.map(i => (
+                                <Accordion.Item eventKey={i.idCategory} key={i.idCategory}>
+                                    <Accordion.Header>{i.title}</Accordion.Header>
+                                    {i.subCategory.map(i =>
+                                        <Accordion.Body key={i.idSubCategory} onClick={() => getProductsByFilters(i.idSubCategory)}>
+                                            {i.title}
+                                        </Accordion.Body>
+                                    )
+                                    }
+                                </Accordion.Item>)
                             )
-                            }
-                        </Accordion.Item>)
-                        )
-                        : <></>
+                            : <></>
                         }
                     </Accordion>
                     {/*   {

@@ -17,22 +17,34 @@ const ProductList = () => {
     const [searchParams] = useSearchParams();
 
     const { addToCart } = useCart();
-    const { page, setTotal } = useContext(PaginationContext);
+    const { page, setTotal, product } = useContext(PaginationContext);
+    
     const [loading, setLoading] = useState(true);
 
-    const [products, setProducts] = useState([{}]);
+    const [products, setProducts] = useState({});
     const moveToCart = (product) => {
         addToCart(product, 1);
     }
-
     const getData = async () => {
 
         if (location.pathname == "/productos") {
+
+            if (product) {
+
+                 setProducts(product); 
+              
+                  setLoading(false);
+
+            } else {
+
             const data = await getAllProducts(page);
-            setProducts(data);
+           setProducts(data);
             setTotal(data.total)
             setLoading(false);
+
+            }
         } else {
+
         const data = await getProductByQuery(page, searchParams.get("q"));
         setProducts(data.productos);
         setTotal(data.total)
@@ -43,7 +55,7 @@ const ProductList = () => {
 
     useEffect(() => {
         getData();
-    }, [page, searchParams])
+    }, [page, searchParams, product])
 
     const [showModal, setShowModal] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(null);
@@ -72,7 +84,7 @@ const ProductList = () => {
                 ) :
                 <h1 className="text-center">Sin productos</h1>
             }
-            </Row>
+        </Row> 
             <div className="container-fluid d-flex justify-content-center align-items-center mt-5 mb-5">
                 <PaginationProduts />
             </div>

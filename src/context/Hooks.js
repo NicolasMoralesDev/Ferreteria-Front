@@ -37,15 +37,17 @@ export const useProductPdf = (cart) => {
 
   for (let index = 0; index < cart.length; index++) {
     const mock = {
-      imagen: "",
+/*       imagen: "", */
       name: "",
+      medida: "",
       brand: "",
       price: 0,
       amount: 0,
       stock: 0
     };
     const element = cart[index];
-    mock.imagen = element.product.imageUrl
+    mock.medida = element.product.medida;
+/*     mock.imagen = element.product.imageUrl */
     mock.amount = element.amount;
     mock.stock = element.product.stock;
     mock.name = element.product.name;
@@ -58,4 +60,41 @@ export const useProductPdf = (cart) => {
   }
 
   return product;
+}
+
+export const dataConver = (data) => {
+
+  const { productos } = data;
+
+  const newData = [{}];
+
+
+  for (let index = 0; index < productos.length; index++) {
+
+      const element = {
+          "id": productos[index].id,
+          "name": productos[index].name,
+          "description": productos[index].description,
+          "price": productos[index].price,
+          "subCategory": {
+              "idSubCategory": productos[index].subCategory.idSubCategory,
+              "title": productos[index].subCategory.title
+          },
+
+          "imageUrl": productos[index].imageUrl,                
+         /*  "brand": {
+              "idBrand": productos[index].brand.idBrand,
+              "title": productos[index].brand.title
+          }, */
+          "medida": productos[index].medida,
+          "stock": productos[index].stock
+      };
+
+      newData.push(element);
+
+  }
+  
+  newData.shift();
+
+  return newData;
 }

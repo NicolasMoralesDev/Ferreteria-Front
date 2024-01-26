@@ -6,8 +6,8 @@ export const getAllProducts = async (page = 0) => {
 
     try {
 
-       /*  const response = await axiosConf.get(`public/products?page=${page}`); */
-         const response = await axios.get(`https://6274471f3d2b5100742a5877.mockapi.io/prueba`);
+       const response = await axiosConf.get(`public/products?page=${page}`); 
+/*         const response = await axios.get(`https://6274471f3d2b5100742a5877.mockapi.io/prueba`); */
         return response.data;
 
     } catch (error) {
@@ -43,14 +43,16 @@ export const getProductByQuery = async (page = 0, query) => {
 
 }
 
+
+
 export const getProductsFilter = async (subCategory, page = 0) => {
 
     try {
 
          const response = await axiosConf.get(`public/products/subCategory?page=${page}&subcategory=${subCategory}`); 
+
         return response.data;
    
-
     } catch (error) {
         return error;
     }
@@ -117,6 +119,17 @@ export const updateProduct = async ( updatedProductData) => {
     try {
         const response = await axiosConf.put(`admin/products`, updatedProductData);
         return response;
+    } catch (error) {
+        return error;
+    }
+};
+
+
+export const getSubcategory = async () => {
+
+    try {
+        const response = await axiosConf.get(`public/get/subCategories`);
+        return response.data;
     } catch (error) {
         return error;
     }

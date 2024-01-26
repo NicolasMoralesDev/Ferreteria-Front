@@ -10,7 +10,6 @@ const ItemCount = ({ stock, initial, isEnabled, handleModal, product }) => {
   const [amount, setAmount] = useState(initial)
   const { addToCart } = useCart();
 
-
   const handlePlus = () => {
 
 

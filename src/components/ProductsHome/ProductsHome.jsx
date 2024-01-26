@@ -1,10 +1,8 @@
 import React from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { useEffect } from 'react';
-import { useContext } from 'react';
-import { useCart } from '../../context/Hooks';
+import { dataConver, useCart } from '../../context/Hooks';
 import { useState } from 'react';
-import { PaginationContext } from '../../context/PaginationContext';
 import { getAllProducts } from '../../utils/fetchProductsList';
 import ProductCard from "../ProductCard/ProductCard";
 import "./productsHome.css"
@@ -18,7 +16,7 @@ const ProductsHome = () => {
 
 
   const { addToCart } = useCart();
-  const { page, setTotal } = useContext(PaginationContext);
+/*   const { page, setTotal } = useContext(PaginationContext); */
   const [loading, setLoading] = useState(true);
 
   const [products, setProducts] = useState([{}]);
@@ -28,16 +26,17 @@ const ProductsHome = () => {
 
   const getData = async () => {
 
-    const data = await getAllProducts(page);
-    setProducts(data);
-    setTotal(data.total)
+    const data = await getAllProducts();
+    const productsConver = dataConver(data);
+    setProducts(productsConver);
+ /*    setTotal(data.total) */
     setLoading(false);
 
   }
 
   useEffect(() => {
     getData();
-  }, [page])
+  }, [])
 
   const [showModal, setShowModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);

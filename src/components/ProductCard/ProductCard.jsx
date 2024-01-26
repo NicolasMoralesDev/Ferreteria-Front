@@ -4,6 +4,7 @@ import styles from './ProductCard.module.css'
 import { Toaster } from 'react-hot-toast'
 
 const ProductCard = ({product, handleClick}) => {
+
   return (
       <div className={`${styles.card}`} onClick={() => {handleClick(product)}}>
          

@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { addProduct } from '../../utils/fetchProductsList';
+import { useEffect, useState } from 'react';
+import { addProduct, getSubcategory } from '../../utils/fetchProductsList';
 import Swal from 'sweetalert2';
 import UploadWidget from '../../components/cloundinary/UploadWidget';
 
@@ -8,17 +8,26 @@ const AdminAddProduct = () => {
     const [productData, setProductData] = useState({
         price: '',
         brand: '',
-        category: '',
+        subCategory: [],
         description: '',
         imageUrl: '',
         name: '',
         stock: '',
     });
 
+    const [subCategory, setSubCategory] = useState([{}]);
+
     const [url, updateUrl] = useState();
     const [error, updateError] = useState();
 
     productData.imageUrl = url;
+
+    const getAllSubcategory = async () => {
+
+        const request = await getSubcategory();
+        setSubCategory(request);
+
+    }
 
     const handleInputChange = (e) => {
 
@@ -56,7 +65,7 @@ const AdminAddProduct = () => {
             setProductData({
                 price: '',
                 brand: '',
-                category: '',
+                category: [],
                 description: '',
                 imageUrl: '',
                 name: '',
@@ -83,6 +92,15 @@ const AdminAddProduct = () => {
 
     }
 
+
+    useEffect(() => {
+      
+    
+     getAllSubcategory();
+
+    }, [])
+    
+
     return (
         <div className='container mt-3 mb-5'>
             <h2 className='mt-3 mb-3'>Agregar Producto</h2>
@@ -108,17 +126,13 @@ const AdminAddProduct = () => {
                         name="category"
                         onChange={handleInputChange}
                     >
-                        <option value="" disabled>Selecciona una categoría</option>
-                        <option value="Cooler">Cooler</option>
-                        <option value="Cpu">Cpu</option>
-                        <option value="Discos">Discos</option>
-                        <option value="Monitor">Monitor</option>
-                        <option value="Gabinete">Gabinete</option>
-                        <option value="Gpu">Gpu</option>
-                        <option value="Memoria">Memoria</option>
-                        <option value="Mother">Mother</option>
-                        <option value="Periferico">Periférico</option>
-                        <option value="Psu">Psu</option>
+                        <option>Selecciona una categoría</option>
+
+                        {
+                            subCategory.map( i =>
+                            <option value="Cooler">{i.title}</option>
+                        )
+                        }
                     </select>
                 </div>
                 <div className="form-floating mb-3">
