@@ -4,7 +4,7 @@ import "./productList.css"
 import { v4 as uuidv4 } from 'uuid'
 import PaginationProduts from "./PaginationProduts/PaginationProduts";
 import { PaginationContext } from "../../context/PaginationContext";
-import { useCart } from "../../context/Hooks";
+import { dataConver, useCart } from "../../context/Hooks";
 import {  Col, Row } from "react-bootstrap";
 import { ClimbingBoxLoader } from "react-spinners"
 import { useSearchParams } from "react-router-dom";
@@ -31,14 +31,18 @@ const ProductList = () => {
 
             if (product) {
 
-                 setProducts(product); 
+            
+             setProducts(product);
+             console.log(products);
+
               
                   setLoading(false);
 
             } else {
 
             const data = await getAllProducts(page);
-           setProducts(data);
+    /*         const datosConver = dataConver(data); */
+            setProducts(data.productos);
             setTotal(data.total)
             setLoading(false);
 
@@ -46,7 +50,8 @@ const ProductList = () => {
         } else {
 
         const data = await getProductByQuery(page, searchParams.get("q"));
-        setProducts(data.productos);
+        const datosConver = dataConver(data);
+        setProducts(datosConver);
         setTotal(data.total)
         setLoading(false);
         }

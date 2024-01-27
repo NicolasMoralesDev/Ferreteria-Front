@@ -9,7 +9,6 @@ import AdminUpdateProductModal from "./AdminUpdateProductModal";
 import Modal from "../../components/Modal/Modal"
 import { Table } from "react-bootstrap";
 import Swal from "sweetalert2";
-import { dataConver } from "../../context/Hooks";
 
 const AdminProductList = () => {
 
@@ -20,18 +19,12 @@ const AdminProductList = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const getData = async () => {
-    
+
     const data = await getAllProducts(page);
-    const productsConver = dataConver(data); 
-    setProducts(productsConver);
+    setProducts(data.productos);
     setTotal(data.total);
 
   }
-
-
-  useEffect(() => {
-    getData();
-  }, [page])
 
   const handleModifyProduct = (product) => {
     setSelectedProduct(product);
@@ -55,6 +48,7 @@ const AdminProductList = () => {
           icon: 'success',
           confirmButtonText: 'Aceptar',
         });
+        getData();
       } else {
         Swal.fire({
           title: 'Error',
@@ -79,6 +73,10 @@ const AdminProductList = () => {
     }
   };
 
+  useEffect(() => {
+    getData();
+  }, [page])
+
   return (
     <div className="table-dashboard">
       <h1>Productos</h1>
@@ -89,6 +87,7 @@ const AdminProductList = () => {
             <th>Nombre</th>
             <th>Imagen</th>
             <th>Marca</th>
+            <th>Medida</th>
             <th>Descripción</th>
             <th>SubCategoría</th>
             <th>Precio</th>
@@ -106,12 +105,13 @@ const AdminProductList = () => {
               <td>
               <img src={product.imageUrl} alt={product.name} className="w-25"/>
               </td>
-              <td>{product.brand}</td>
+              <td>{product.brand}</td> 
+              <td>{product.medida}</td>
               <td className={styles.rowList}>{product.description}</td>
-              <td>{product.subCategory.title}</td>
+              <td>{product.subCategory}</td>
               <td className="fw-bold text-center">${product.price}</td>
               <td>{product.stock}</td>
-              <td  className="p-3 d-flex gap-2 flex-wrap">
+              <td  className="p-4 d-flex gap-2 flex-wrap">
 
                 <button
                   className="btn btn-warning btn-sm mx-2 fw-bold text-light w-100"

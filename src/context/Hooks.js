@@ -68,24 +68,17 @@ export const dataConver = (data) => {
 
   const newData = [{}];
 
-
   for (let index = 0; index < productos.length; index++) {
+
 
       const element = {
           "id": productos[index].id,
           "name": productos[index].name,
           "description": productos[index].description,
           "price": productos[index].price,
-          "subCategory": {
-              "idSubCategory": productos[index].subCategory.idSubCategory,
-              "title": productos[index].subCategory.title
-          },
-
+          "subCategory": productos[index].subCategory.title,
           "imageUrl": productos[index].imageUrl,                
-         /*  "brand": {
-              "idBrand": productos[index].brand.idBrand,
-              "title": productos[index].brand.title
-          }, */
+          "brand": productos[index].brand.title, 
           "medida": productos[index].medida,
           "stock": productos[index].stock
       };

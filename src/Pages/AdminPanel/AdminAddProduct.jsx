@@ -1,31 +1,38 @@
 import { useEffect, useState } from 'react';
-import { addProduct, getSubcategory } from '../../utils/fetchProductsList';
+import { addProduct, getBrand, getSubcategory } from '../../utils/fetchProductsList';
 import Swal from 'sweetalert2';
 import UploadWidget from '../../components/cloundinary/UploadWidget';
 
 const AdminAddProduct = () => {
 
     const [productData, setProductData] = useState({
-        price: '',
-        brand: '',
-        subCategory: [],
+        price: 0,
+        brand: "",
+        subCategory: "",
         description: '',
         imageUrl: '',
         name: '',
-        stock: '',
+        medida: "",
+        stock: 0,
     });
 
     const [subCategory, setSubCategory] = useState([{}]);
+    const [brand, setBrand] = useState([{}]);
+
+
 
     const [url, updateUrl] = useState();
     const [error, updateError] = useState();
 
     productData.imageUrl = url;
 
-    const getAllSubcategory = async () => {
+    const getAllSubcategoryAndBrand = async () => {
 
         const request = await getSubcategory();
         setSubCategory(request);
+
+        const requestBrand = await getBrand();
+        setBrand(requestBrand);
 
     }
 
@@ -63,13 +70,14 @@ const AdminAddProduct = () => {
             });
         } finally {
             setProductData({
-                price: '',
-                brand: '',
-                category: [],
+                price: 0,
+                brand: "",
+                subCategory: "",
                 description: '',
                 imageUrl: '',
                 name: '',
-                stock: '',
+                medida:"",
+                stock: 0,
             });
         }
     };
@@ -96,7 +104,7 @@ const AdminAddProduct = () => {
     useEffect(() => {
       
     
-     getAllSubcategory();
+     getAllSubcategoryAndBrand();
 
     }, [])
     
@@ -111,26 +119,41 @@ const AdminAddProduct = () => {
                     <label htmlFor="floatingName">Nombre</label>
                 </div>
                 <div className="form-floating mb-3">
-                    <input type="text" className="form-control" placeholder="Marca" id="floatingBrand" value={productData.brand} name='brand' onChange={handleInputChange} />
-                    <label htmlFor="floatingBrand">Marca</label>
+                <select
+                        className="form-select"
+                        id="floatingBrand"
+                        name="brand"
+                        onChange={handleInputChange}
+                    >
+                        <option value="">Selecciona una Marca</option>
+
+                        {
+                            brand.map( i =>
+                            <option value={i.title} key={i.idBrand} onCanPlay={()=> handleInputBrand(i)}>{i.title}</option>
+                        )
+                        }
+                    </select>
                 </div>
                 <div className="form-floating mb-3">
                     <input type="text" className="form-control" placeholder="Descripcion" id="floatingDescription" value={productData.description} name='description' onChange={handleInputChange} />
                     <label htmlFor="floatingDescription">Descripcion</label>
                 </div>
                 <div className="form-floating mb-3">
+                    <input type="text" className="form-control" placeholder="Medida" id="floatingMedida" value={productData.medida} name='medida' onChange={handleInputChange} />
+                    <label htmlFor="floatingMedida">Medida</label>
+                </div>
+                <div className="form-floating mb-3">
                     <select
                         className="form-select"
                         id="floatingCategory"
-                        value={productData.category}
-                        name="category"
+                        name="subCategory"
                         onChange={handleInputChange}
                     >
-                        <option>Selecciona una categoría</option>
+                        <option value="">Selecciona una subCategoria</option>
 
                         {
                             subCategory.map( i =>
-                            <option value="Cooler">{i.title}</option>
+                            <option value={i.title} key={i.idSubCategory}>{i.title}</option>
                         )
                         }
                     </select>

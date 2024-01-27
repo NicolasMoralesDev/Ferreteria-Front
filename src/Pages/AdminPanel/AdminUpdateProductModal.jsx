@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from 'react';
 import UploadWidget from '../../components/cloundinary/UploadWidget';
+import { getBrand, getSubcategory } from '../../utils/fetchProductsList';
 
 const AdminUpdateProductModal = ({ product, onClose, onSave }) => {
 
@@ -8,6 +9,19 @@ const AdminUpdateProductModal = ({ product, onClose, onSave }) => {
   const [edit, setEdit] = useState(false);
   const [error, updateError] = useState();
   const [editedProduct, setEditedProduct] = useState({ ...product });
+  const [subCategory, setSubCategory] = useState([{}]);
+  const [brand, setBrand] = useState([{}]);
+
+
+  const getAllData = async () => {
+
+   const requestCate = await getSubcategory();
+   setSubCategory(requestCate);
+
+   const requestBrand = await getBrand();
+   setBrand(requestBrand);
+
+  }
 
   useEffect(() => {
     setEditedProduct({ ...product });
@@ -22,6 +36,11 @@ const AdminUpdateProductModal = ({ product, onClose, onSave }) => {
     }));
   };
 
+  useEffect(() => {
+    getAllData();
+  
+  }, [])
+  
   const handleSave = () => {
 
     if (edit) {
@@ -31,8 +50,9 @@ const AdminUpdateProductModal = ({ product, onClose, onSave }) => {
         id: editedProduct.id,
         name: editedProduct.name,
         description: editedProduct.description,
+        medida: editedProduct.medida,
         price: editedProduct.price,
-        category: editedProduct.category,
+        subCategory: editedProduct.subCategory,
         brand: editedProduct.brand,
         imageUrl: url,
         stock: editedProduct.stock,
@@ -46,8 +66,9 @@ const AdminUpdateProductModal = ({ product, onClose, onSave }) => {
         id: editedProduct.id,
         name: editedProduct.name,
         description: editedProduct.description,
+        medida: editedProduct.medida,
         price: editedProduct.price,
-        category: editedProduct.category,
+        subCategory: editedProduct.subCategory,
         brand: editedProduct.brand,
         imageUrl: editedProduct.imageUrl,
         stock: editedProduct.stock,
@@ -83,14 +104,29 @@ const AdminUpdateProductModal = ({ product, onClose, onSave }) => {
         </div>
         <div className="mb-3">
           <label htmlFor="recipient-brand" className="col-form-label">Marca:</label>
-          <input type="text" className="form-control" id="recipient-brand" name="brand" value={editedProduct.brand} onChange={handleInputChange} />
+          <select
+            className="form-select"
+            id="recipient-brand"
+            name="brand"
+            value={editedProduct.brand}
+            onChange={handleInputChange}
+          >
+            <option value="" disabled>Selecciona una Marca</option>
+            { brand.map( i =>
+            <option value={i} key={i.title}>{i.title}</option>
+            )}
+          </select>
         </div>
         <div className="mb-3">
           <label htmlFor="recipient-description" className="col-form-label">Descripcion:</label>
           <input type="text" className="form-control" id="recipient-description" name="description" value={editedProduct.description} onChange={handleInputChange} />
         </div>
         <div className="mb-3">
-          <label htmlFor="recipient-category" className="col-form-label">Categoría:</label>
+          <label htmlFor="recipient-medida" className="col-form-label">Medida:</label>
+          <input type="text" className="form-control" id="recipient-medida" name="medida" value={editedProduct.medida} onChange={handleInputChange} />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="recipient-category" className="col-form-label">Sub Categoría:</label>
           <select
             className="form-select"
             id="recipient-category"
@@ -98,17 +134,10 @@ const AdminUpdateProductModal = ({ product, onClose, onSave }) => {
             value={editedProduct.category}
             onChange={handleInputChange}
           >
-            <option value="" disabled>Selecciona una categoría</option>
-            <option value="Cooler">Cooler</option>
-            <option value="Cpu">Cpu</option>
-            <option value="Discos">Discos</option>
-            <option value="Monitor">Monitor</option>
-            <option value="Gabinete">Gabinete</option>
-            <option value="Gpu">Gpu</option>
-            <option value="Memoria">Memoria</option>
-            <option value="Mother">Mother</option>
-            <option value="Periferico">Periférico</option>
-            <option value="Psu">Psu</option>
+            <option value="" disabled>Selecciona una Sub Categoría</option>
+            { subCategory.map( i =>
+            <option value={i} key={i.title}>{i.title}</option>
+            )}
           </select>
         </div>
         <div className="mb-3">

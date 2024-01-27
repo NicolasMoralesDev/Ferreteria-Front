@@ -27,8 +27,8 @@ const ProductsHome = () => {
   const getData = async () => {
 
     const data = await getAllProducts();
-    const productsConver = dataConver(data);
-    setProducts(productsConver);
+   /*  const datosConver = dataConver(data); */
+    setProducts(data.productos);
  /*    setTotal(data.total) */
     setLoading(false);
 

@@ -1,4 +1,3 @@
-import axios from "axios";
 import axiosConf from "./axiosConf";
 
 
@@ -6,8 +5,8 @@ export const getAllProducts = async (page = 0) => {
 
     try {
 
-       const response = await axiosConf.get(`public/products?page=${page}`); 
-/*         const response = await axios.get(`https://6274471f3d2b5100742a5877.mockapi.io/prueba`); */
+        const response = await axiosConf.get(`public/products?page=${page}`);
+        /*         const response = await axios.get(`https://6274471f3d2b5100742a5877.mockapi.io/prueba`); */
         return response.data;
 
     } catch (error) {
@@ -49,10 +48,10 @@ export const getProductsFilter = async (subCategory, page = 0) => {
 
     try {
 
-         const response = await axiosConf.get(`public/products/subCategory?page=${page}&subcategory=${subCategory}`); 
+        const response = await axiosConf.get(`public/products/subCategory?page=${page}&subcategory=${subCategory}`);
 
         return response.data;
-   
+
     } catch (error) {
         return error;
     }
@@ -115,10 +114,12 @@ export const addProduct = async (product) => {
 
 }
 
-export const updateProduct = async ( updatedProductData) => {
+export const updateProduct = async (updatedProductData) => {
     try {
+
         const response = await axiosConf.put(`admin/products`, updatedProductData);
         return response;
+
     } catch (error) {
         return error;
     }
@@ -133,4 +134,17 @@ export const getSubcategory = async () => {
     } catch (error) {
         return error;
     }
+};
+
+export const getBrand = async () => {
+
+    try {
+
+        const response = await axiosConf.get(`public/brand/get`);
+        return response.data;
+
+    } catch (error) {
+        return error;
+    }
+
 };
