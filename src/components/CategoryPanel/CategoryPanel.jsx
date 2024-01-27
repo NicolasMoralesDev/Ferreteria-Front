@@ -3,12 +3,15 @@ import { useState } from 'react'
 import { getCategory, getProductsFilter } from '../../utils/fetchProductsList';
 import { Accordion } from 'react-bootstrap';
 import { PaginationContext } from '../../context/PaginationContext';
+import { useLocation } from 'react-router-dom';
 
 const CategoryPanel = () => {
 
     const [data, setData] = useState([]);
     const { page, setTotal, setProduct } = useContext(PaginationContext);
 
+    const ruta = useLocation();
+    const currentPath = ruta.pathname;
 
     const getData = async () => {
 
@@ -30,6 +33,10 @@ const CategoryPanel = () => {
 
     }
 
+    const redirect = ()=>{
+        location.replace("/productos");
+    }
+
 
     return (
         <>
@@ -37,7 +44,11 @@ const CategoryPanel = () => {
 
                 <>
                     <div>
-                        <h2>CATEGORIAS</h2>
+                        {currentPath != "/productos" ?
+                            <h4 className='text-black'>CATEGORIAS</h4>
+                            :
+                            <h2>CATEGORIAS</h2>
+                        }
                     </div>
 
                     <Accordion>
@@ -46,7 +57,7 @@ const CategoryPanel = () => {
                                 <Accordion.Item eventKey={i.idCategory} key={i.idCategory}>
                                     <Accordion.Header>{i.title}</Accordion.Header>
                                     {i.subCategory.map(i =>
-                                        <Accordion.Body key={i.idSubCategory} onClick={() => getProductsByFilters(i.idSubCategory)}>
+                                        <Accordion.Body key={i.idSubCategory} onClick={() =>{ getProductsByFilters(i.idSubCategory), currentPath != "/productos" ? redirect() : <></> }}>
                                             {i.title}
                                         </Accordion.Body>
                                     )

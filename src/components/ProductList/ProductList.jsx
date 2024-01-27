@@ -1,13 +1,13 @@
 import { useContext, useEffect, useState } from "react"
-import { getAllProducts, getProductByQuery } from "../../utils/fetchProductsList"
+import { getProductByQuery } from "../../utils/fetchProductsList"
 import "./productList.css"
 import { v4 as uuidv4 } from 'uuid'
 import PaginationProduts from "./PaginationProduts/PaginationProduts";
 import { PaginationContext } from "../../context/PaginationContext";
-import { dataConver, useCart } from "../../context/Hooks";
+import { useCart } from "../../context/Hooks";
 import {  Col, Row } from "react-bootstrap";
 import { ClimbingBoxLoader } from "react-spinners"
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import ProductCard from "../ProductCard/ProductCard";
 import Modal from "../Modal/Modal";
 import ProductDetail from "../ProductDetail/ProductDetail";
@@ -18,8 +18,10 @@ const ProductList = () => {
 
     const { addToCart } = useCart();
     const { page, setTotal, product } = useContext(PaginationContext);
-    
     const [loading, setLoading] = useState(true);
+
+    const location = useLocation();
+    const currentPath = location.pathname;
 
     const [products, setProducts] = useState({});
     const moveToCart = (product) => {
@@ -27,33 +29,22 @@ const ProductList = () => {
     }
     const getData = async () => {
 
-        if (location.pathname == "/productos") {
+        if (currentPath == "/productos") {
 
             if (product) {
 
-            
-             setProducts(product);
-             console.log(products);
-
-              
-                  setLoading(false);
-
-            } else {
-
-            const data = await getAllProducts(page);
-    /*         const datosConver = dataConver(data); */
-            setProducts(data.productos);
-            setTotal(data.total)
-            setLoading(false);
+                console.log(product);
+                setProducts(product);
+                setLoading(false);
 
             }
-        } else {
 
         const data = await getProductByQuery(page, searchParams.get("q"));
-        const datosConver = dataConver(data);
-        setProducts(datosConver);
-        setTotal(data.total)
+
+        setProducts(data.productos);
+        setTotal(data.total);
         setLoading(false);
+
         }
      
     }
