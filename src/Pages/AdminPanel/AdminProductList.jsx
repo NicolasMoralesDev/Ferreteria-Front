@@ -20,7 +20,7 @@ const AdminProductList = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const getData = async () => {
-    
+
     const data = await getAllProducts(page);
     const productsConver = dataConver(data); 
     setProducts(productsConver);
@@ -89,6 +89,7 @@ const AdminProductList = () => {
             <th>Nombre</th>
             <th>Imagen</th>
             <th>Marca</th>
+            <th>Medida</th>
             <th>Descripción</th>
             <th>SubCategoría</th>
             <th>Precio</th>
@@ -106,12 +107,13 @@ const AdminProductList = () => {
               <td>
               <img src={product.imageUrl} alt={product.name} className="w-25"/>
               </td>
-              <td>{product.brand}</td>
+              <td>{product.brand}</td> 
+              <td>{product.medida}</td>
               <td className={styles.rowList}>{product.description}</td>
               <td>{product.subCategory.title}</td>
               <td className="fw-bold text-center">${product.price}</td>
               <td>{product.stock}</td>
-              <td  className="p-3 d-flex gap-2 flex-wrap">
+              <td  className="p-4 d-flex gap-2 flex-wrap">
 
                 <button
                   className="btn btn-warning btn-sm mx-2 fw-bold text-light w-100"

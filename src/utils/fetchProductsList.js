@@ -106,8 +106,9 @@ export const addProduct = async (product) => {
 
     try {
 
-        const response = await axiosConf.post(`admin/products`, product);
-        return response.data;
+     /*    const response = await axiosConf.post(`admin/products`, product); */
+        console.log(product);
+        /* return response.data; */
 
     } catch (error) {
         return error;
@@ -133,4 +134,16 @@ export const getSubcategory = async () => {
     } catch (error) {
         return error;
     }
+};
+
+export const getBrand = async () => {
+
+    try {
+        const response = await axiosConf.get(`public/brand/get`);
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        return error;
+    }
+
 };

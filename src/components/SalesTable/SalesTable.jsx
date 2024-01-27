@@ -33,6 +33,7 @@ export const SalesTable = ({ userSales }) => {
                                 <th>Dirección</th>
                                 <th>Teléfono</th>
                                 <th>Estado</th>
+                                <th>Modificar estado</th>
 
                             </tr>
                         </thead>
@@ -44,6 +45,9 @@ export const SalesTable = ({ userSales }) => {
                                     <td>{sale.address}</td>
                                     <td>{sale.phone}</td>
                                     <td>{sale.status}</td>
+                                    <td>
+                                        <button className='btn btn-danger fw-bold'>cambiar</button>
+                                    </td>
 
                                 </tr>
                             ))}

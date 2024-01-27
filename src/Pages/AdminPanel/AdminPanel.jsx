@@ -50,7 +50,7 @@ const AdminPanel = () => {
                     <div className="col-6 col-md-2 mt-5">
                         <div className="accordion accordion-flush" id="accordionFlush">
                             <div>
-                                <h2>Admin</h2>
+                                <h2>Secciones</h2>
                             </div>
                             <div className="accordion-item">
                                 <h2 className="accordion-header">
