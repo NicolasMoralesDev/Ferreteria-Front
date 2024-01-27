@@ -3,7 +3,6 @@ import { useState } from 'react'
 import { getCategory, getProductsFilter } from '../../utils/fetchProductsList';
 import { Accordion } from 'react-bootstrap';
 import { PaginationContext } from '../../context/PaginationContext';
-import { dataConver } from '../../context/Hooks';
 
 const CategoryPanel = () => {
 
@@ -27,8 +26,7 @@ const CategoryPanel = () => {
 
         const response = await getProductsFilter(data, page);
         setTotal(response.total);
-        const products = dataConver(response);
-        setProduct(products);
+        setProduct(response.productos);
 
     }
 
