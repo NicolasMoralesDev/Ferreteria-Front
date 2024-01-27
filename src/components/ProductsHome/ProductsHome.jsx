@@ -1,7 +1,7 @@
 import React from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { useEffect } from 'react';
-import { dataConver, useCart } from '../../context/Hooks';
+import { useCart } from '../../context/Hooks';
 import { useState } from 'react';
 import { getAllProducts } from '../../utils/fetchProductsList';
 import ProductCard from "../ProductCard/ProductCard";
@@ -27,8 +27,7 @@ const ProductsHome = () => {
   const getData = async () => {
 
     const data = await getAllProducts();
-    const productsConver = dataConver(data);
-    setProducts(productsConver);
+    setProducts(data.productos);
  /*    setTotal(data.total) */
     setLoading(false);
 

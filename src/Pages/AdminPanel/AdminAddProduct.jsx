@@ -6,17 +6,18 @@ import UploadWidget from '../../components/cloundinary/UploadWidget';
 const AdminAddProduct = () => {
 
     const [productData, setProductData] = useState({
-        price: '',
-        brand: [],
-        subCategory: [],
+        price: 0,
+        brand: 0,
+        subCategory: 0,
         description: '',
         imageUrl: '',
         name: '',
-        stock: '',
+        stock: 0,
     });
 
     const [subCategory, setSubCategory] = useState([{}]);
     const [brand, setBrand] = useState([{}]);
+
 
 
     const [url, updateUrl] = useState();
@@ -37,7 +38,7 @@ const AdminAddProduct = () => {
     const handleInputChange = (e) => {
 
         productData.imageUrl = url;
-console.log(productData);
+
         const { name, value } = e.target;
         setProductData((prevData) => ({
             ...prevData,
@@ -68,13 +69,13 @@ console.log(productData);
             });
         } finally {
             setProductData({
-                price: '',
-                brand: [],
+                price: 0,
+                brand: {},
                 subCategory: [],
                 description: '',
                 imageUrl: '',
                 name: '',
-                stock: '',
+                stock: 0,
             });
         }
     };
@@ -119,16 +120,14 @@ console.log(productData);
                 <select
                         className="form-select"
                         id="floatingBrand"
-                        value={productData.subCategory}
                         name="brand"
                         onChange={handleInputChange}
-                        multiple={false}
                     >
                         <option value="">Selecciona una Marca</option>
 
                         {
                             brand.map( i =>
-                            <option value={i} key={i.title}>{i.title}</option>
+                            <option value={i.idBrand} key={i.idBrand} onCanPlay={()=> handleInputBrand(i)}>{i.title}</option>
                         )
                         }
                     </select>
@@ -141,15 +140,14 @@ console.log(productData);
                     <select
                         className="form-select"
                         id="floatingCategory"
-                        value={productData.subCategory}
-                        name="category"
+                        name="subCategory"
                         onChange={handleInputChange}
                     >
-                        <option value="">Selecciona una categoría</option>
+                        <option value="">Selecciona una subCategoria</option>
 
                         {
                             subCategory.map( i =>
-                            <option value={i} key={i.title}>{i.title}</option>
+                            <option value={i.idSubCategory} key={i.idSubCategory}>{i.title}</option>
                         )
                         }
                     </select>

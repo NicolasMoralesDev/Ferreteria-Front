@@ -9,7 +9,6 @@ import AdminUpdateProductModal from "./AdminUpdateProductModal";
 import Modal from "../../components/Modal/Modal"
 import { Table } from "react-bootstrap";
 import Swal from "sweetalert2";
-import { dataConver } from "../../context/Hooks";
 
 const AdminProductList = () => {
 
@@ -22,8 +21,7 @@ const AdminProductList = () => {
   const getData = async () => {
 
     const data = await getAllProducts(page);
-    const productsConver = dataConver(data); 
-    setProducts(productsConver);
+    setProducts(data.productos);
     setTotal(data.total);
 
   }
