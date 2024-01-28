@@ -81,7 +81,7 @@ const ProductsHome = () => {
 
     <main className="container mb-5">
       <h1 className="text-center m-5 products-title">ULTIMOS INGRESOS</h1>
-      {products.length > 1 ?
+      {products.length > 1  ?
         <ReactOwlCarousel className='owl-theme' loop margin={11}   {...opciones}>
 
           {

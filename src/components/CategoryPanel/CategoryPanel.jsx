@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { getCategory, getProductsFilter } from '../../utils/fetchProductsList';
 import { Accordion } from 'react-bootstrap';
 import { PaginationContext } from '../../context/PaginationContext';
-import { useLocation } from 'react-router-dom';
+import { redirect, useLocation } from 'react-router-dom';
 
 const CategoryPanel = () => {
 
@@ -31,11 +31,15 @@ const CategoryPanel = () => {
         setTotal(response.total);
         setProduct(response.productos);
 
+        if (currentPath !== "/productos") {
+             
+             localStorage.setItem("productos", JSON.stringify(response.productos));
+             localStorage.setItem("total", JSON.stringify(response.total));
+
+             location.replace("/productos");
+        } 
     }
 
-    const redirect = ()=>{
-        location.replace("/productos");
-    }
 
 
     return (
@@ -57,7 +61,7 @@ const CategoryPanel = () => {
                                 <Accordion.Item eventKey={i.idCategory} key={i.idCategory}>
                                     <Accordion.Header>{i.title}</Accordion.Header>
                                     {i.subCategory.map(i =>
-                                        <Accordion.Body key={i.idSubCategory} onClick={() =>{ getProductsByFilters(i.idSubCategory), currentPath != "/productos" ? redirect() : <></> }}>
+                                        <Accordion.Body key={i.idSubCategory} onClick={() => getProductsByFilters(i.idSubCategory)}>
                                             {i.title}
                                         </Accordion.Body>
                                     )

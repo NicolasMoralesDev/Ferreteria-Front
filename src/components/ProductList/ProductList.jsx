@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid'
 import PaginationProduts from "./PaginationProduts/PaginationProduts";
 import { PaginationContext } from "../../context/PaginationContext";
 import { useCart } from "../../context/Hooks";
-import {  Col, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import { ClimbingBoxLoader } from "react-spinners"
 import { useLocation, useSearchParams } from "react-router-dom";
 import ProductCard from "../ProductCard/ProductCard";
@@ -31,22 +31,24 @@ const ProductList = () => {
 
         if (currentPath == "/productos") {
 
-            if (product) {
+            const dataLocal = JSON.parse(localStorage.getItem("productos"));
 
-                console.log(product);
-                setProducts(product);
+            if (dataLocal != null) {
+
+                setProducts(dataLocal);
+                setTotal(JSON.parse(localStorage.getItem("total")));
                 setLoading(false);
 
+            } else {
+
+                const data = await getProductByQuery(page, searchParams.get("q"));
+
+                setProducts(data.productos);
+                setTotal(data.total);
+                setLoading(false);
             }
-
-        const data = await getProductByQuery(page, searchParams.get("q"));
-
-        setProducts(data.productos);
-        setTotal(data.total);
-        setLoading(false);
-
         }
-     
+
     }
 
     useEffect(() => {
@@ -57,37 +59,37 @@ const ProductList = () => {
     const [selectedProduct, setSelectedProduct] = useState(null);
 
     const handleProductClick = (product) => {
-      setSelectedProduct(product);
-      setShowModal(true);
+        setSelectedProduct(product);
+        setShowModal(true);
     }
 
     const handleCloseModal = () => {
-      setShowModal(false);
+        setShowModal(false);
     }
 
-    if (loading) return (<div style={{minHeight: "400px"}} className="d-flex justify-content-center align-items-center"><ClimbingBoxLoader color="rgba(239, 239, 239, 1)"/></div>)
+    if (loading) return (<div style={{ minHeight: "400px" }} className="d-flex justify-content-center align-items-center"><ClimbingBoxLoader color="rgba(239, 239, 239, 1)" /></div>)
 
     return (
         <div className=" p-5">
             <h1 className="text-center products-title p-2">PRODUCTOS</h1>
-          <Row>
-            {products ?
-                products.map((product) => (
-                    <Col xs={12} lg={12} xl={12} key={uuidv4()} >
-                        <ProductCard className="card-orange" product={product}  moveToCart={moveToCart} handleClick={handleProductClick}/>
-                    </ Col>
+            <Row>
+                {products ?
+                    products.map((product) => (
+                        <Col xs={12} lg={12} xl={12} key={uuidv4()} >
+                            <ProductCard className="card-orange" product={product} moveToCart={moveToCart} handleClick={handleProductClick} />
+                        </ Col>
                     )
-                ) :
-                <h1 className="text-center">Sin productos</h1>
-            }
-        </Row> 
+                    ) :
+                    <h1 className="text-center">Sin productos</h1>
+                }
+            </Row>
             <div className="container-fluid d-flex justify-content-center align-items-center mt-5 mb-5">
                 <PaginationProduts />
             </div>
-            {selectedProduct && 
-            <Modal show={showModal} handleClose={handleCloseModal} title={selectedProduct.name}>
-                <ProductDetail product={selectedProduct} handleCloseModal={handleCloseModal}/>
-            </Modal>}
+            {selectedProduct &&
+                <Modal show={showModal} handleClose={handleCloseModal} title={selectedProduct.name}>
+                    <ProductDetail product={selectedProduct} handleCloseModal={handleCloseModal} />
+                </Modal>}
 
         </div>
 
