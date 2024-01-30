@@ -66,7 +66,7 @@ const RecuperarPassword = () => {
                                     <Form.Label>Ingrese su correo:</Form.Label>
                                     <Form.Control name="email" onChange={handleChange} required type="email" placeholder="Ingrese su correo..." />
                                 </Form.Group>
-                                <Button className='fw-bold btn btn-success' type="submit">
+                                <Button title='Enviar' className='fw-bold btn btn-success' type="submit">
                                     Enviar
                                 </Button>
                             </Form>

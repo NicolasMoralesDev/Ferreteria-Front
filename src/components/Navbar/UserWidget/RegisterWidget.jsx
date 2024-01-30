@@ -1,11 +1,9 @@
 import { useUser } from "../../../context/Hooks"
-import Dropdown from 'react-bootstrap/Dropdown';
 import { FaUserCircle } from "react-icons/fa";
 import { Button } from "react-bootstrap";
 import { useState } from "react";
 import Modal from "../../Modal/Modal";
 import RegisterForm from "../../RegisterForm/RegisterForm";
-import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import "../UserWidget/register.css"
 

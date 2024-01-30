@@ -18,6 +18,7 @@ const Offcanva = ({handleClose, show}) => {
            <CategoryPanel/>
         </Offcanvas.Body>
       </Offcanvas>
+      
     </>
   )
 }

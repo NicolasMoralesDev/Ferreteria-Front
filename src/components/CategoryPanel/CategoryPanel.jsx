@@ -1,13 +1,18 @@
 import React, { useContext, useEffect } from 'react'
 import { useState } from 'react'
-import { getCategory, getProductsFilter } from '../../utils/fetchProductsList';
-import { Accordion } from 'react-bootstrap';
+import { findProductsByBrand, findProductsSubCategory, getBrand, getCategory } from '../../utils/fetchProductsList';
+import { Accordion, Form } from 'react-bootstrap';
 import { PaginationContext } from '../../context/PaginationContext';
 import { redirect, useLocation } from 'react-router-dom';
+import '../../index.css'
+import { useStorage } from '../../context/Hooks';
 
 const CategoryPanel = () => {
 
     const [data, setData] = useState([]);
+    const [brand, setBrand] = useState([]);
+    const [marca, setMarca] = useState(1);
+
     const { page, setTotal, setProduct } = useContext(PaginationContext);
 
     const ruta = useLocation();
@@ -17,6 +22,9 @@ const CategoryPanel = () => {
 
         const response = await getCategory();
         setData(response);
+
+        const responseBrand = await getBrand();
+        setBrand(responseBrand);
     }
 
     useEffect(() => {
@@ -25,22 +33,40 @@ const CategoryPanel = () => {
 
     }, [])
 
-    const getProductsByFilters = async (data) => {
+    const getProductsBySubCategory = async (data) => {
 
-        const response = await getProductsFilter(data, page);
+        const response = await findProductsSubCategory(data, page);
         setTotal(response.total);
-        setProduct(response.productos);
 
         if (currentPath !== "/productos") {
-             
-             localStorage.setItem("productos", JSON.stringify(response.productos));
-             localStorage.setItem("total", JSON.stringify(response.total));
-
-             location.replace("/productos");
-        } 
+            useStorage(response);  
+       } else {
+           localStorage.removeItem("productos");
+           setProduct(response.productos);
+       }
     }
 
 
+    const getProductsByBrand = async () => {
+
+        const response = await findProductsByBrand(marca, page);
+        setTotal(response.total);
+        
+
+        if (currentPath !== "/productos") {
+             useStorage(response);  
+        } else {
+            localStorage.removeItem("productos");
+            setProduct(response.productos);
+        }
+        
+
+    }
+    
+    const handleChange = (e) => {
+        setMarca(e.target.value);
+
+    }
 
     return (
         <>
@@ -48,20 +74,16 @@ const CategoryPanel = () => {
 
                 <>
                     <div>
-                        {currentPath != "/productos" ?
-                            <h4 className='text-black'>CATEGORIAS</h4>
-                            :
-                            <h2>CATEGORIAS</h2>
-                        }
+                            <h4 className={'text-black'}>CATEGORIAS</h4>
                     </div>
 
                     <Accordion>
-                        {data.length > 0 ?
+                        {data && data.length > 0 ?
                             data.map(i => (
                                 <Accordion.Item eventKey={i.idCategory} key={i.idCategory}>
                                     <Accordion.Header>{i.title}</Accordion.Header>
                                     {i.subCategory.map(i =>
-                                        <Accordion.Body key={i.idSubCategory} onClick={() => getProductsByFilters(i.idSubCategory)}>
+                                        <Accordion.Body key={i.idSubCategory} onClick={() => getProductsBySubCategory(i.idSubCategory)}>
                                             {i.title}
                                         </Accordion.Body>
                                     )
@@ -71,28 +93,33 @@ const CategoryPanel = () => {
                             : <></>
                         }
                     </Accordion>
-                    {/*   {
-                        data.length > 0 ?
 
-                            data.map(i =>
-                            <Fragment key={i.idCategory}>
-                                <div className="accordion-item">
-                                    <div className="accordion-header">
-                                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                            {i.title}
-                                        </button>
-                                    </div>
-                                    { i.subCategory.map( i =>
-                                    <div id="flush-collapseOne" key={i.idSubCategory} className="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                        <div className="accordion-body" onClick={()=> getAllProducts(i.title)}>{i.title}</div>
-                                    </div>
-                                    )}
-                                </div>
-                                </Fragment>
-                            )
-                            :
-                            <p className="text-center">Sin Datos</p>
-                    } */}
+                    <div className='mt-5'>
+                            <h4 className={"text-black"}>MARCAS</h4>
+                    </div>
+                   { brand && brand.length > 0 ?
+                    
+                        brand.map(
+                            i =>
+
+                        <Form.Check
+                        className={"text-black"}
+                            key={i.title}
+                            inline
+                            label={i.title}
+                            name={"brand"}
+                            type={'radio'}
+                            id={i.idBrand}
+                            value={i.idBrand}
+                            onChange={handleChange}
+                        />)
+                           :
+                           <h4 className='text-center'>Sin marcas</h4>
+                    }
+                   
+                    <div className='d-flex w-100'>
+                    <button title='filtrar' className='w-100 btn btn-info mt-4 btn-orange-custom text-light border-0 fw-bold' onClick={()=> getProductsByBrand()}>Filtrar</button>
+                    </div>
                 </>
             </div>
         </>

@@ -30,7 +30,7 @@ const CartWidget = () => {
       <div className="dropdown-menu mt-2">
         <div className="d-flex flex-column">
           <CardCart />
-          <a className='btn btn-success m-2 fw-bold' href='/carrito'>Terminar compra</a>
+          <a className='btn btn-success m-2 fw-bold' href='/carrito' title='terminar compra'>Terminar compra</a>
 
         </div>
 

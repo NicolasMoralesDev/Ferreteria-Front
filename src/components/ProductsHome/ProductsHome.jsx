@@ -81,7 +81,7 @@ const ProductsHome = () => {
 
     <main className="container mb-5">
       <h1 className="text-center m-5 products-title">ULTIMOS INGRESOS</h1>
-      {products.length > 1  ?
+      {products && products.length > 1 ?
         <ReactOwlCarousel className='owl-theme' loop margin={11}   {...opciones}>
 
           {
@@ -91,9 +91,10 @@ const ProductsHome = () => {
               </div>
             )
             )}
-        </ReactOwlCarousel> :
+        </ReactOwlCarousel>
+         :
+        <h2 className="text-center">Sin Productoa</h2>
 
-        <h1 className="text-center">Sin productos</h1>
       }
       {selectedProduct &&
         <Modal show={showModal} handleClose={handleCloseModal} title={selectedProduct.name}>

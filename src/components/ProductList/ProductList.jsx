@@ -23,29 +23,37 @@ const ProductList = () => {
     const location = useLocation();
     const currentPath = location.pathname;
 
-    const [products, setProducts] = useState({});
+    const [products, setProducts] = useState([]);
     const moveToCart = (product) => {
         addToCart(product, 1);
     }
+
     const getData = async () => {
+
+         const dataLocal = JSON.parse(localStorage.getItem("productos"));
 
         if (currentPath == "/productos") {
 
-            const dataLocal = JSON.parse(localStorage.getItem("productos"));
+            if (searchParams.get("q") != null) {
+                
+                const data = await getProductByQuery(page, searchParams.get("q"));
+                setProducts(data.productos);
+                setTotal(data.total);
+                setLoading(false);
+                searchParams.delete("q");
 
-            if (dataLocal != null) {
-
+            } else if (dataLocal != null) {
+   
                 setProducts(dataLocal);
                 setTotal(JSON.parse(localStorage.getItem("total")));
                 setLoading(false);
 
-            } else {
+            } else if (product.length > 0 ) {
 
-                const data = await getProductByQuery(page, searchParams.get("q"));
-
-                setProducts(data.productos);
-                setTotal(data.total);
+                setProducts(product);
+                setTotal(page);
                 setLoading(false);
+               
             }
         }
 
@@ -70,12 +78,12 @@ const ProductList = () => {
     if (loading) return (<div style={{ minHeight: "400px" }} className="d-flex justify-content-center align-items-center"><ClimbingBoxLoader color="rgba(239, 239, 239, 1)" /></div>)
 
     return (
-        <div className=" p-5">
+        <div className=" p-5 w-100">
             <h1 className="text-center products-title p-2">PRODUCTOS</h1>
             <Row>
-                {products ?
+                {products && products.length > 0 ?
                     products.map((product) => (
-                        <Col xs={12} lg={12} xl={12} key={uuidv4()} >
+                        <Col xs={12} lg={12} xl={4} key={uuidv4()} >
                             <ProductCard className="card-orange" product={product} moveToCart={moveToCart} handleClick={handleProductClick} />
                         </ Col>
                     )

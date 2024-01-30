@@ -137,7 +137,7 @@ const TableCheckout = () => {
             footerStyles={"background-color:black"}
           >
             {(props) => (
-              <button {...props} className='btn btn-danger fw-bold'>
+              <button {...props} title='Descargar Presupuesto' className='btn btn-danger fw-bold'>
                 Descargar Presupuesto
               </button>
             )}
@@ -329,7 +329,7 @@ const EmptyCart = () => {
         No hay productos en el carrito
       </div>
       <Link to='/'>
-        <button className='btn btn-primary'>Ir a comprar</button>
+        <button className='btn btn-primary' title='ir Comprar'>Ir a comprar</button>
       </Link>
     </div>
   );

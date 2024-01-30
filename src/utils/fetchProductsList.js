@@ -44,11 +44,25 @@ export const getProductByQuery = async (page = 0, query) => {
 
 
 
-export const getProductsFilter = async (subCategory, page = 0) => {
+export const findProductsSubCategory = async (subCategory, page = 0) => {
 
     try {
 
         const response = await axiosConf.get(`public/products/subCategory?page=${page}&subcategory=${subCategory}`);
+
+        return response.data;
+
+    } catch (error) {
+        return error;
+    }
+
+}
+
+export const findProductsByBrand = async (brand, page = 0) => {
+
+    try {
+
+        const response = await axiosConf.get(`public/products/brand?page=${page}&brand=${brand}`);
 
         return response.data;
 

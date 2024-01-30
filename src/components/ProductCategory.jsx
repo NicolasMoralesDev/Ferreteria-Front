@@ -17,17 +17,12 @@ const ProductCategory = () => {
                 <meta name="description" content="Ha ocurrido un error." />
             </Helmet>
             <Navbar />
-            <main className="mt-5 mb-5 container d-flex justify-content-center flex-wrap">
-                <Row>
-                    <Col xs={12} lg={12} xl={6}>
+            <main className="mt-5 mb-5 container d-flex flex-row flex-wrap">
+
+{/*                     <Col xs={12} lg={12} xl={6}>
                         <CategoryPanel />
-                    </Col>
-                    <Col xs={12} lg={12} xl={6}>
-                        <ProductList />
-                    </Col>
-
-                </Row>
-
+                    </Col> */}
+                   <ProductList />
             </main>
             <Footer />
         </>

@@ -63,7 +63,7 @@ export const useProductPdf = (cart) => {
 
 }
 
-export const dataConver = (data) => {
+/* export const dataConver = (data) => {
 
   const { productos } = data;
 
@@ -91,5 +91,16 @@ export const dataConver = (data) => {
   newData.shift();
 
   return newData;
+
+} */
+
+export const useStorage = ( response) => {
+
+
+    localStorage.setItem("productos", JSON.stringify(response.productos));
+    localStorage.setItem("total", JSON.stringify(response.total));
+
+    location.replace("/productos");
+
 
 }

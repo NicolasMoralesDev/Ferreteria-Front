@@ -33,6 +33,7 @@ export const SalesTable = ({ userSales }) => {
                                 <th>Dirección</th>
                                 <th>Teléfono</th>
                                 <th>Estado</th>
+                                <th></th>
                                 <th>Modificar estado</th>
 
                             </tr>
@@ -46,7 +47,14 @@ export const SalesTable = ({ userSales }) => {
                                     <td>{sale.phone}</td>
                                     <td>{sale.status}</td>
                                     <td>
-                                        <button className='btn btn-danger fw-bold'>cambiar</button>
+                                        <label  htmlFor="estado">Cambiar: </label>
+                                        <select name="status" id="estado">
+                                            <option value="CANCELADA">cancelar</option>
+                                            <option value="INFORMADA">informar pago</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <button className='btn btn-danger fw-bold' title='Cambiar estado'>cambiar</button>
                                     </td>
 
                                 </tr>

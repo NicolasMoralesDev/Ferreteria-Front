@@ -127,7 +127,7 @@ const AdminAddProduct = () => {
                     >
                         <option value="">Selecciona una Marca</option>
 
-                        {
+                        { 
                             brand.map( i =>
                             <option value={i.title} key={i.idBrand} onCanPlay={()=> handleInputBrand(i)}>{i.title}</option>
                         )
@@ -186,7 +186,7 @@ const AdminAddProduct = () => {
                 </div>
 
                 <div className="mb-3">
-                    <button type="submit" className="btn btn-primary">
+                    <button type="submit" title='Agregar Producto' className="btn btn-primary">
                         Agregar Producto
                     </button>
                 </div>
