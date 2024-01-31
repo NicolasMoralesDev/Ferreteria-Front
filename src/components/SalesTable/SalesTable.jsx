@@ -28,33 +28,47 @@ export const SalesTable = ({ userSales }) => {
                     <table className="table">
                         <thead>
                             <tr>
-                                <th>ID Venta</th>
+                                <th>ID</th>
                                 <th>Fecha</th>
                                 <th>Dirección</th>
                                 <th>Teléfono</th>
                                 <th>Estado</th>
                                 <th></th>
-                                <th>Modificar estado</th>
+                                <th>Opcion</th>
+                                <th>Detalle</th>
 
                             </tr>
                         </thead>
                         <tbody>
                             {userSales.map((sale) => (
-                                <tr key={sale.id} onClick={() => handleSelectSale(sale)} className={styles.fila}>
+                                <tr key={sale.id} className={styles.fila}>
                                     <td>{sale.id}</td>
                                     <td>{sale.date}</td>
                                     <td>{sale.address}</td>
                                     <td>{sale.phone}</td>
                                     <td>{sale.status}</td>
-                                    <td>
+                                    <td>{
+                                        sale.status != "CANCELADA" ?
+                                        <>
                                         <label  htmlFor="estado">Cambiar: </label>
                                         <select name="status" id="estado">
                                             <option value="CANCELADA">cancelar</option>
                                             <option value="INFORMADA">informar pago</option>
                                         </select>
+                                        </>
+                                             :
+                                        <></>
+                                        }
                                     </td>
                                     <td>
+                                        { sale.status != "CANCELADA" ?
                                         <button className='btn btn-danger fw-bold' title='Cambiar estado'>cambiar</button>
+                                        :
+                                      <></>
+                                        }
+                                    </td>
+                                    <td>
+                                        <button className='btn btn-success fw-bold' onClick={() => handleSelectSale(sale)}>ver</button>
                                     </td>
 
                                 </tr>
