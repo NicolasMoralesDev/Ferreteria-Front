@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import UploadWidget from '../../components/cloundinary/UploadWidget';
 import { getBrand, getSubcategory } from '../../utils/fetchProductsList';
+import { v4 as uuidv4 } from "uuid";
 
 const AdminUpdateProductModal = ({ product, onClose, onSave }) => {
 
@@ -100,12 +101,13 @@ const AdminUpdateProductModal = ({ product, onClose, onSave }) => {
       <form>
         <div className="mb-3">
           <label htmlFor="recipient-name" className="col-form-label">Nombre:</label>
-          <input type="text" className="form-control" id="recipient-name" name="name" value={editedProduct.name} onChange={handleInputChange} />
+          <input type="text" className="form-control" required id="recipient-name" name="name" value={editedProduct.name} onChange={handleInputChange} />
         </div>
         <div className="mb-3">
           <label htmlFor="recipient-brand" className="col-form-label">Marca:</label>
           <select
             className="form-select"
+            required
             id="recipient-brand"
             name="brand"
             value={editedProduct.brand}
@@ -113,22 +115,23 @@ const AdminUpdateProductModal = ({ product, onClose, onSave }) => {
           >
             <option value="" disabled>Selecciona una Marca</option>
             { brand.map( i =>
-            <option value={i} key={i.title}>{i.title}</option>
+            <option value={i} key={uuidv4()}>{i.title}</option>
             )}
           </select>
         </div>
         <div className="mb-3">
           <label htmlFor="recipient-description" className="col-form-label">Descripcion:</label>
-          <input type="text" className="form-control" id="recipient-description" name="description" value={editedProduct.description} onChange={handleInputChange} />
+          <input type="text" required className="form-control" id="recipient-description" name="description" value={editedProduct.description} onChange={handleInputChange} />
         </div>
         <div className="mb-3">
           <label htmlFor="recipient-medida" className="col-form-label">Medida:</label>
-          <input type="text" className="form-control" id="recipient-medida" name="medida" value={editedProduct.medida} onChange={handleInputChange} />
+          <input type="text" required className="form-control" id="recipient-medida" name="medida" value={editedProduct.medida} onChange={handleInputChange} />
         </div>
         <div className="mb-3">
           <label htmlFor="recipient-category" className="col-form-label">Sub Categoría:</label>
           <select
             className="form-select"
+            required
             id="recipient-category"
             name="category"
             value={editedProduct.category}
@@ -136,7 +139,7 @@ const AdminUpdateProductModal = ({ product, onClose, onSave }) => {
           >
             <option value="" disabled>Selecciona una Sub Categoría</option>
             { subCategory.map( i =>
-            <option value={i} key={i.title}>{i.title}</option>
+            <option value={i} key={uuidv4()}>{i.title}</option>
             )}
           </select>
         </div>

@@ -93,7 +93,7 @@ const ProductsHome = () => {
             )}
         </ReactOwlCarousel>
          :
-        <h2 className="text-center">Sin Productoa</h2>
+        <h2 className="text-center">Sin Productos</h2>
 
       }
       {selectedProduct &&

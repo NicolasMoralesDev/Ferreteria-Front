@@ -118,9 +118,9 @@ export const deleteProduct = async (id) => {
 export const addProduct = async (product) => {
 
     try {
-
+console.log(product);
        const response = await axiosConf.post(`admin/products`, product); 
-        return response.data; 
+       return response.data.msg; 
 
     } catch (error) {
         return error;
