@@ -6,6 +6,7 @@ import AdminSalesByUser from './AdminSalesByUser';
 import AdminSalesList from './AdminSalesList';
 import { Helmet } from 'react-helmet';
 import Navbar from '../../components/Navbar/Navbar';
+import SubCategory from '../../components/SubCategory/SubCategory';
 
 const AdminPanel = () => {
 
@@ -15,25 +16,11 @@ const AdminPanel = () => {
 
     const [selectedView, setSelectedView] = useState(null);
 
-    const handleAddProduct = () => {
+    const handleSeccion = (seccion) => {
         // Configura el estado para que renderice el componente de formulario de productos
-        setSelectedView('agregarProducto');
+        setSelectedView(seccion);
     };
 
-    const handleGetProducts = () => {
-        // Configura el estado para que renderice el componente de lista de productos
-        setSelectedView('listaProductos');
-    };
-
-    const handleGetUserSales = () => {
-        // Configura el estado para que renderice el componente de ventas por usuario
-        setSelectedView('ventasPorUsuario');
-    };
-
-    const handleGetSales = () => {
-        // Configura el estado para que renderice el componente de lista de ventas
-        setSelectedView('listaVentas');
-    };
 
     return (
         <>
@@ -74,14 +61,21 @@ const AdminPanel = () => {
                                         <button
                                             type="button"
                                             className="btn btn-light"
-                                            onClick={handleAddProduct}
+                                            onClick={()=> handleSeccion("agregarProducto")}
                                         >
                                             Agregar Producto
                                         </button>
                                         <button
                                             type="button"
                                             className="btn btn-light"
-                                            onClick={handleGetProducts}
+                                            onClick={()=> handleSeccion("subCategory")}
+                                        >
+                                            Crear Sub Categorias
+                                        </button>
+                                        <button
+                                            type="button"
+                                            className="btn btn-light"
+                                            onClick={()=> handleSeccion("listaProductos")}
                                         >
                                             Lista de Productos
                                         </button>
@@ -110,14 +104,14 @@ const AdminPanel = () => {
                                         <button
                                             type="button"
                                             className="btn btn-light"
-                                            onClick={handleGetUserSales}
+                                            onClick={()=> handleSeccion("ventasPorUsuario")}
                                         >
                                             Ventas por Usuario
                                         </button>
                                         <button
                                             type="button"
                                             className="btn btn-light"
-                                            onClick={handleGetSales}
+                                            onClick={()=> handleSeccion("listaVentas")}
                                         >
                                             Lista de Ventas
                                         </button>
@@ -133,6 +127,9 @@ const AdminPanel = () => {
                         )}
                         {isAdmin && selectedView === 'listaProductos' && (
                             <AdminProductList />
+                        )}
+                         {isAdmin && selectedView === 'subCategory' && (
+                            <SubCategory />
                         )}
                         {isAdmin && selectedView === 'ventasPorUsuario' && (
                             <AdminSalesByUser />

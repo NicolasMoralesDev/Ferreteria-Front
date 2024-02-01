@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
-import Offcanva from "../../OffCanvas/Offcanva";
-import { useState } from "react";
-import { Button } from "react-bootstrap";
+import { Suspense, lazy, useState } from "react";
+const LazyOffcanva = lazy(() => import('../../OffCanvas/Offcanva'));
+
 
 const NavbarLinks = () => {
 
@@ -53,7 +53,10 @@ const NavbarLinks = () => {
           </ul>
         </div>
       </nav>
-      <Offcanva show={show} handleClose={handleClose} />
+
+      <Suspense fallback={<div>Cargando Offcanva...</div>}>
+      <LazyOffcanva show={show} handleClose={handleClose} />
+    </Suspense>
     </>
   );
 };

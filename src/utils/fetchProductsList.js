@@ -6,11 +6,9 @@ export const getAllProducts = async (page = 0) => {
     try {
 
         const response = await axiosConf.get(`public/products?page=${page}`);
-        /*         const response = await axios.get(`https://6274471f3d2b5100742a5877.mockapi.io/prueba`); */
         return response.data;
 
     } catch (error) {
-        console.error("Error al obtener productos:", error);
         return error;
     }
 
@@ -118,7 +116,7 @@ export const deleteProduct = async (id) => {
 export const addProduct = async (product) => {
 
     try {
-console.log(product);
+
        const response = await axiosConf.post(`admin/products`, product); 
        return response.data.msg; 
 
@@ -138,6 +136,19 @@ export const updateProduct = async (updatedProductData) => {
         return error;
     }
 };
+
+
+export const postSubCategory = async (subCategory) => {
+    try {
+
+        const response = await axiosConf.post("admin/create/subcategory", subCategory);
+        console.log(response.data);
+        return response.data.msg;
+
+    } catch (error) {
+        return error;
+    }
+}
 
 
 export const getSubcategory = async () => {

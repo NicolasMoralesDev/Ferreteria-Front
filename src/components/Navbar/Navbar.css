@@ -15,3 +15,7 @@
 .navbar-toggler-icon {
     background-image: url("../../assets/hamburguer-icon.svg");
 }
+
+.navbar-toggler, .navbar-toggler:active{
+    border: 0;
+}

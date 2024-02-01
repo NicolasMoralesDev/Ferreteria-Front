@@ -4,6 +4,7 @@ import Modal from '../Modal/Modal';
 import { OrderDetail } from '../OrderDetail/OrderDetail';
 import PaginationProduts from '../ProductList/PaginationProduts/PaginationProduts';
 import styles from './SalesTable.module.css';
+import { payMd } from '../../utils/fetchSales';
 
 export const SalesTable = ({ userSales }) => {
 
@@ -14,6 +15,14 @@ export const SalesTable = ({ userSales }) => {
     const handleOpenModal = () => setShowModal(true);
 
 
+   const pay = async (sale) => {
+    
+     const total = sale.itemList.reduce((acc, item) => acc + item.amount, 0);
+     const amount = sale.itemList.reduce((acc, item) => acc + item.amount, 0);
+     const data = {amount, total};
+
+        await payMd(data);  
+   }
 
     const handleSelectSale = (sale) => {
         setSelectedSale(sale);
@@ -36,6 +45,7 @@ export const SalesTable = ({ userSales }) => {
                                 <th></th>
                                 <th>Opcion</th>
                                 <th>Detalle</th>
+                                <th>Pagar</th>
 
                             </tr>
                         </thead>
@@ -70,7 +80,7 @@ export const SalesTable = ({ userSales }) => {
                                     <td>
                                         <button className='btn btn-success fw-bold' onClick={() => handleSelectSale(sale)}>ver</button>
                                     </td>
-
+                                  <td><button className='btn btn-primary text-light fw-bold' onClick={()=> pay(sale)}>Pagar</button></td>
                                 </tr>
                             ))}
                         </tbody>
