@@ -12,7 +12,7 @@ const ProductDetail = ({ product = null, handleCloseModal }) => {
   return (
     <div className="row">
       <div className="col-md-6">
-        <img src={product.imageUrl} className="img-thumbnail rounded-start fixed-size-image" alt={product.name}></img>
+        <img src={product.imageUrl} loading="lazy" className="img-thumbnail rounded-start fixed-size-image" alt={product.name}></img>
       </div>
       <div className="col-md-6">
         <p className="text-black p-3">{product.description}</p>

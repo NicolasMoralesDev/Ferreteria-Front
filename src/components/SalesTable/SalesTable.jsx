@@ -4,12 +4,14 @@ import Modal from '../Modal/Modal';
 import { OrderDetail } from '../OrderDetail/OrderDetail';
 import PaginationProduts from '../ProductList/PaginationProduts/PaginationProduts';
 import styles from './SalesTable.module.css';
-import { payMd } from '../../utils/fetchSales';
+import { payMd, putStatusSale } from '../../utils/fetchSales';
+import Swal from 'sweetalert2';
 
 export const SalesTable = ({ userSales }) => {
 
     const [showModal, setShowModal] = useState(false);
     const [selectedSale, setSelectedSale] = useState(null);
+
 
     const handleCloseModal = () => setShowModal(false);
     const handleOpenModal = () => setShowModal(true);
@@ -19,15 +21,38 @@ export const SalesTable = ({ userSales }) => {
     
      const total = sale.itemList.reduce((acc, item) => acc + item.amount, 0);
      const amount = sale.itemList.reduce((acc, item) => acc + item.amount, 0);
-     const data = {amount, total};
+     const id = sale.id;
+     const data = {amount, total, id};
 
-        await payMd(data);  
+         await payMd(data);  
    }
 
     const handleSelectSale = (sale) => {
         setSelectedSale(sale);
         handleOpenModal();
     }
+
+    const handleChange = (e) => {
+        
+        userSales[e.target.id].status = e.target.value;
+    }
+
+    const changeStatus = async (index) => {
+
+
+        const request = await putStatusSale(userSales[index]);
+
+        Swal.fire({
+            icon: 'success',
+            title: request.msg,
+            confirmButtonAriaLabel: "siguiente",
+        }).then( i =>{
+            location.reload();}
+        );
+
+    }
+
+    
 
 
     return (
@@ -50,18 +75,19 @@ export const SalesTable = ({ userSales }) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {userSales.map((sale) => (
+                            {userSales.map((sale, index) => (
                                 <tr key={sale.id} className={styles.fila}>
                                     <td>{sale.id}</td>
                                     <td>{sale.date}</td>
                                     <td>{sale.address}</td>
                                     <td>{sale.phone}</td>
-                                    <td>{sale.status}</td>
+                                    <td className={ sale.status == "CANCELADA" ? "text-danger fw-bold" : sale.status == "APROBADA" ? "text-success fw-bold" : "text-warning fw-bold" }>{sale.status}</td>
                                     <td>{
-                                        sale.status != "CANCELADA" ?
+                                        sale.status != "CANCELADA" && sale.status != "INFORMADA" && sale.status != "APROBADA"?
                                         <>
                                         <label  htmlFor="estado">Cambiar: </label>
-                                        <select name="status" id="estado">
+                                        <select name="status" onChange={ handleChange } id={index}>
+                                            <option value=""> seleccione una opcion</option>
                                             <option value="CANCELADA">cancelar</option>
                                             <option value="INFORMADA">informar pago</option>
                                         </select>
@@ -71,16 +97,24 @@ export const SalesTable = ({ userSales }) => {
                                         }
                                     </td>
                                     <td>
-                                        { sale.status != "CANCELADA" ?
-                                        <button className='btn btn-danger fw-bold' title='Cambiar estado'>cambiar</button>
+                                        { sale.status != "CANCELADA" && sale.status != "INFORMADA" && sale.status != "APROBADA" ?
+                                        <button className='btn btn-danger fw-bold' title='Cambiar estado' onClick={()=> changeStatus(index)}>cambiar</button>
                                         :
-                                      <></>
+                                      <button className='btn btn-danger fw-bold' disabled title='Cambiar estado'>cambiar</button>
+
                                         }
                                     </td>
                                     <td>
                                         <button className='btn btn-success fw-bold' onClick={() => handleSelectSale(sale)}>ver</button>
                                     </td>
-                                  <td><button className='btn btn-primary text-light fw-bold' onClick={()=> pay(sale)}>Pagar</button></td>
+                                  <td>
+                                  { sale.status != "CANCELADA" && sale.status != "INFORMADA" && sale.status != "APROBADA" ?
+                                    
+                                    <button className='btn btn-primary text-light fw-bold' onClick={()=> pay(sale)}>Pagar</button> :
+                                    <button className='btn btn-primary text-light fw-bold' disabled>Pagar</button>
+
+                                    }
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>

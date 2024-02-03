@@ -1,7 +1,9 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 import styles from './ProductCard.module.css'
 import { Toaster } from 'react-hot-toast'
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const ProductCard = ({product, handleClick}) => {
 
@@ -9,7 +11,7 @@ const ProductCard = ({product, handleClick}) => {
       <div className={`${styles.card}`} onClick={() => {handleClick(product)}}>
          
               <div className={styles.imgconte}>
-                  <img src={product.imageUrl} className={styles.img} alt={product.name}></img>
+                  <LazyLoadImage loading='lazy' height={150}  effect="blur" src={product.imageUrl} className={styles.img} alt={product.name}/>
                   </div>
             
               <div className={styles.cardbody}>

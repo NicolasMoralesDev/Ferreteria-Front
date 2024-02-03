@@ -132,7 +132,7 @@ const AdminAddProduct = () => {
                         { 
                             brand.map( i =>
                                 
-                            <option value={i.title} key={uuidv4()} onCanPlay={()=> handleInputBrand(i)}>{i.title}</option>
+                            <option value={i.title} key={uuidv4()} onChange={()=> handleInputBrand(i)}>{i.title}</option>
                         )
                         }
                     </select>

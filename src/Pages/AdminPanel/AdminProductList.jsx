@@ -9,6 +9,7 @@ import AdminUpdateProductModal from "./AdminUpdateProductModal";
 import Modal from "../../components/Modal/Modal"
 import { Table } from "react-bootstrap";
 import Swal from "sweetalert2";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const AdminProductList = () => {
 
@@ -103,7 +104,7 @@ const AdminProductList = () => {
               <td>{product.id}</td>
               <td>{product.name}</td>
               <td>
-              <img src={product.imageUrl} alt={product.name} className="w-25"/>
+              <LazyLoadImage effect="blur" src={product.imageUrl} loading="lazy" alt={product.name} className="w-25"/>
               </td>
               <td>{product.brand}</td> 
               <td>{product.medida}</td>

@@ -142,7 +142,6 @@ export const postSubCategory = async (subCategory) => {
     try {
 
         const response = await axiosConf.post("admin/create/subcategory", subCategory);
-        console.log(response.data);
         return response.data.msg;
 
     } catch (error) {

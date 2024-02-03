@@ -17,7 +17,7 @@ const Navbar = () => {
           <div className="container d-flex justify-content-center">
             <div className="h-50">
               <Link className='nav-link  link-light fw-bold' to='/' >
-              <img src={logo} alt="Logo del Sitio" className="mx-auto img-fluid bg-light logonav"/>
+              <img src={logo} loading="lazy" alt="Logo del Sitio" className="mx-auto img-fluid bg-light logonav"/>
               </Link>
             </div>
           </div>
