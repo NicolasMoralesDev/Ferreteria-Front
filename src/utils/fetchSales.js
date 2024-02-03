@@ -14,14 +14,8 @@ export const sendSale = async (sale) => {
 export const payMd = async (sale) => {
     try {
 
-        let request = {
-            id: sale[2],
-            price: sale[1],
-            amount: sale[0]
-        };
-
-        const response = await axiosConf.post("user/sales/pay", request);
-        location.replace(response.data);
+      const response = await axiosConf.post("user/sales/pay", sale);
+      location.replace(response.data); 
 
     } catch (error) {
         return error;

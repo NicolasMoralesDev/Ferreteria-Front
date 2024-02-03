@@ -7,6 +7,7 @@ import NavbarLinks from "./NavbarLinks/NavbarLinks"
 import logo from "./../../assets/Logocorralon.png";
 import { Link } from "react-router-dom";
 import "../Navbar/Navbar.css";
+import { LazyLoadImage } from "react-lazy-load-image-component"
 
 const Navbar = () => {
   return (
@@ -17,7 +18,7 @@ const Navbar = () => {
           <div className="container d-flex justify-content-center">
             <div className="h-50">
               <Link className='nav-link  link-light fw-bold' to='/' >
-              <img src={logo} loading="lazy" alt="Logo del Sitio" className="mx-auto img-fluid bg-light logonav"/>
+              <LazyLoadImage  effect="blur" src={logo} loading="lazy" alt="Logo del Sitio" className="mx-auto img-fluid bg-light logonav"/>
               </Link>
             </div>
           </div>

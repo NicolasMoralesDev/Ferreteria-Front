@@ -19,12 +19,13 @@ export const SalesTable = ({ userSales }) => {
 
    const pay = async (sale) => {
     
-     const total = sale.itemList.reduce((acc, item) => acc + item.amount, 0);
-     const amount = sale.itemList.reduce((acc, item) => acc + item.amount, 0);
-     const id = sale.id;
-     const data = {amount, total, id};
+     const price = sale.itemList.reduce((acc, item) => acc + item.product.price * item.amount , 0);
 
-         await payMd(data);  
+     const id = sale.id;
+     const data = { price, id};
+     
+     await payMd(data);   
+
    }
 
     const handleSelectSale = (sale) => {

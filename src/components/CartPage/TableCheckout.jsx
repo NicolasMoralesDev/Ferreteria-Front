@@ -16,6 +16,7 @@ import Mp from "../../assets/mercado-pago.svg";
 import ItemCount from '../ProductDetail/ItemCount';
 import { useEffect } from 'react';
 import { ExportAsPdf } from 'react-export-table';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const TableCheckout = () => {
 
@@ -80,7 +81,8 @@ const TableCheckout = () => {
               return (
                 <tr key={Date.now() * i.product.id}>
                   <td className='w-25 text-center'>
-                    <img
+                    <LazyLoadImage
+                      effect='blur'
                       src={i.product.imageUrl}
                       alt={i.product.name}
                       height={'120px'}

@@ -1,3 +1,4 @@
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useCart } from "../../context/Hooks";
 import ItemCount from "./ItemCount";
 
@@ -12,7 +13,7 @@ const ProductDetail = ({ product = null, handleCloseModal }) => {
   return (
     <div className="row">
       <div className="col-md-6">
-        <img src={product.imageUrl} loading="lazy" className="img-thumbnail rounded-start fixed-size-image" alt={product.name}></img>
+        <LazyLoadImage effect="blur" src={product.imageUrl} loading="lazy" className="img-thumbnail rounded-start fixed-size-image" alt={product.name}></LazyLoadImage>
       </div>
       <div className="col-md-6">
         <p className="text-black p-3">{product.description}</p>

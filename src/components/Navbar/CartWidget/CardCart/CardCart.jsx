@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import styles from "./CardCart.module.css"
 import { v4 as uuidv4 } from "uuid";
 import { useCart } from '../../../../context/Hooks.js';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 
 const CardCart = () => {
@@ -38,7 +39,7 @@ const CardCart = () => {
                             <div className="card mb-3 mt-3 dropdown-item" style={{ maxWidth: '700px' }} key={uuidv4()}>
                                 <div className="row g-0 d-flex">
                                     <div className="col col-md-4">
-                                        <img src={item.product.imageUrl} alt={item.product.name} style={{ maxWidth: "100px" }} />
+                                        <LazyLoadImage effect='blur' src={item.product.imageUrl} alt={item.product.name} style={{ maxWidth: "100px" }} />
                                     </div>
                                     <div className="col col-md-8">
                                         <div className="card-body ">
