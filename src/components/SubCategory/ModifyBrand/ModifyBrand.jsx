@@ -51,7 +51,7 @@ export const DeleteBrand = () => {
 
                         <div className='mb-3'>
                             <label htmlFor="id" className='text-light p-2'> Seleccione una Marca</label>
-                            <Field name="id" id="id" as={"select"} className='form-control p-2'  multiple={true}>
+                            <Field name="id" id="id" as={"select"} className='form-control p-2'  multiple={false}>
 
                                 {brand.map(i =>
                                     <option value={i.idBrand} id='id' key={uuidv4()}>{i.title}</option>

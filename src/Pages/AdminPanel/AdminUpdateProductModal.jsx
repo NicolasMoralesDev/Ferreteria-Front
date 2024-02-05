@@ -115,7 +115,7 @@ const AdminUpdateProductModal = ({ product, onClose, onSave }) => {
           >
             <option value="" disabled>Selecciona una Marca</option>
             { brand.map( i =>
-            <option value={i} key={uuidv4()}>{i.title}</option>
+            <option value={i.title} key={uuidv4()}>{i.title}</option>
             )}
           </select>
         </div>
@@ -139,7 +139,7 @@ const AdminUpdateProductModal = ({ product, onClose, onSave }) => {
           >
             <option value="" disabled>Selecciona una Sub Categoría</option>
             { subCategory.map( i =>
-            <option value={i} key={uuidv4()}>{i.title}</option>
+            <option value={i.title} key={uuidv4()}>{i.title}</option>
             )}
           </select>
         </div>
