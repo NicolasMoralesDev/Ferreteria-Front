@@ -49,7 +49,7 @@ export const putStatusSale = async (sale) => {
     try {
 
         const response = await axiosConf.put("user/sale/change", sale);
-        return response.data;
+        return response;
 
     } catch (error) {
         

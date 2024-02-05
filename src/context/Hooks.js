@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { UserContext } from './UserContext';
 import { CartContext } from './CartContext';
+import Swal from 'sweetalert2';
 
 // Custom hooks
 
@@ -105,5 +106,22 @@ export const useStorage = ( response) => {
 
 }
 
-/* 
-export const useData =  */
+export const useAlert = (response, status) => {
+
+  if (response.status == status) {
+    Swal.fire({
+    title: response.data.msg,
+    icon: 'success',
+    confirmButtonText: 'continuar',
+    confirmButtonColor: '#009EE3',
+  });
+  } else {
+
+      Swal.fire({
+      title: response.response.data.error,
+      icon: 'warning',
+      confirmButtonText: 'continuar',
+      confirmButtonColor: '#009EE3',
+    });
+  }
+}

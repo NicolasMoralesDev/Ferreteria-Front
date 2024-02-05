@@ -185,7 +185,7 @@ const CheckoutModal = () => {
     return res;
   }
   const enviarPago = async () => {
-    const data = [totalItems, total]
+    const data = {id: user.id, price: total}
     await payMd(data);
   }
 

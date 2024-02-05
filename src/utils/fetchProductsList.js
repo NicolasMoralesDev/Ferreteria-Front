@@ -142,7 +142,7 @@ export const postSubCategory = async (subCategory) => {
     try {
 
         const response = await axiosConf.post("admin/create/subcategory", subCategory);
-        return response.data.msg;
+        return response;
 
     } catch (error) {
         return error;
@@ -172,3 +172,43 @@ export const getBrand = async () => {
     }
 
 };
+
+export const postBrand = async (formData) => {
+
+    try {
+        
+        const response = await axiosConf.post("admin/brand/create", formData);
+
+        return response;
+
+    } catch (error) {
+        return error;
+    }
+}
+
+export const modifyTitle = async (data) => {
+
+    try {
+
+        const responnse = await axiosConf.put("admin/brand/put", data[0])
+        return responnse; 
+        
+    } catch (error) {
+        
+        return error;
+    }
+
+}
+
+export const deleteBrands = async (id) => {
+
+    try {
+        
+        const response = await axiosConf.delete(`admin/brand/deleteById?id=${id.id}`);
+
+        return response;
+
+    } catch (error) {
+        return error;
+    }
+}
