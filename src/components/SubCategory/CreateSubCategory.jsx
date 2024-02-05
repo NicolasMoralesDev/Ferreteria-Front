@@ -44,8 +44,8 @@ const CreateSubCategory = () => {
               <ErrorMessage name="title" component={Alert} variant="danger" />
             </div>
             <div className='d-flex gap-3 '>
-              <button type="submit" className="me-2 btn btn-success">
-                crear
+              <button type="submit" className="me-2 btn btn-success fw-bold">
+                Crear
               </button>
             </div>
 

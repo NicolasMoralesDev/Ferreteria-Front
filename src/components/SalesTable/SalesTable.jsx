@@ -70,7 +70,7 @@ export const SalesTable = ({ userSales }) => {
                                 <th>Estado</th>
                                 <th></th>
                                 <th>Opcion Estado</th>
-                                <th>Detalle</th>
+                                <th className='text-center p-2'>Detalle</th>
 
                                 {currentPath == "/admin_panel" ?
                                     <></>
@@ -92,7 +92,6 @@ export const SalesTable = ({ userSales }) => {
                                     <td>{
                                         currentPath === "/admin_panel" ?
                                             <>
-                                                <label htmlFor="estado">Cambiar: </label>
                                                 <select name="status" onChange={handleChange} id={index}>
 
                                                     <option value=""> seleccione una opcion</option>
@@ -106,7 +105,6 @@ export const SalesTable = ({ userSales }) => {
                                             :
                                             sale.status != "CANCELADA" && sale.status != "INFORMADA" && sale.status != "APROBADA" ?
                                                 <>
-                                                    <label htmlFor="estado">Cambiar: </label>
                                                     <select name="status" onChange={handleChange} id={index}>
                                                         <option value=""> seleccione una opcion</option>
                                                         <option value="CANCELADA">cancelar</option>
