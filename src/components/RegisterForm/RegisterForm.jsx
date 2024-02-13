@@ -13,7 +13,7 @@ const validationSchema = object().shape({
 });
 
 // eslint-disable-next-line react/prop-types
-const RegisterForm = ({ handleSubmit, secondaryButton = null }) => {
+const RegisterForm = ({ handleSubmit, secondaryButton = null, titleStyle }) => {
   return (
     <Formik
       initialValues={{
@@ -27,8 +27,8 @@ const RegisterForm = ({ handleSubmit, secondaryButton = null }) => {
       onSubmit={handleSubmit}
     >
       <Form as={BootstrapForm}>
-        <div className='mb-3'>
-          <label htmlFor='newEmail'>Correo electrónico:</label>
+        <div className='mb-3 gap-2'>
+          <label htmlFor='newEmail' className={titleStyle}>Correo electrónico:</label>
           <Field
             type='email'
             name='email'
@@ -39,7 +39,7 @@ const RegisterForm = ({ handleSubmit, secondaryButton = null }) => {
           <ErrorMessage name='email' component={Alert} variant='danger' />
         </div>
         <div className='mb-3'>
-          <label htmlFor='newPassword'>Contraseña:</label>
+          <label htmlFor='newPassword' className={titleStyle}>Contraseña:</label>
           <Field
             type='password'
             name='password'
@@ -49,7 +49,7 @@ const RegisterForm = ({ handleSubmit, secondaryButton = null }) => {
           <ErrorMessage name='password' component={Alert} variant='danger' />
         </div>
         <div className='mb-3'>
-          <label htmlFor='confirmPassword'>Repita la contraseña:</label>
+          <label htmlFor='confirmPassword' className={titleStyle}>Repita la contraseña:</label>
           <Field
             type='password'
             name='confirmPassword'
@@ -63,7 +63,7 @@ const RegisterForm = ({ handleSubmit, secondaryButton = null }) => {
           />
         </div>
         <div className='mb-3'>
-          <label htmlFor='firstName'>Nombre:</label>
+          <label htmlFor='firstName' className={titleStyle}>Nombre:</label>
           <Field
             type='text'
             name='firstName'
@@ -73,7 +73,7 @@ const RegisterForm = ({ handleSubmit, secondaryButton = null }) => {
           <ErrorMessage name='firstName' component={Alert} variant='danger' />
         </div>
         <div className='mb-3'>
-          <label htmlFor='lastName'>Apellido:</label>
+          <label htmlFor='lastName' className={titleStyle}>Apellido:</label>
           <Field
             type='text'
             name='lastName'

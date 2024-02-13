@@ -1,11 +1,14 @@
 import styles from './ProductsCarousel.module.css';
-import procesador from "../assets/Promo-diciembre.png";
-import placamadre from "../assets/asus-placa.png";
+import bosch from "../assets/nuevosIngresos.png";
+import bienvenidos from "../assets/bienvenidos.png";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+
 
 
 const ProductsCarousel = () => {
 
-  const images = [  procesador, placamadre];
+  const images = [  bosch, bienvenidos];
 
   return (
     
@@ -16,7 +19,7 @@ const ProductsCarousel = () => {
           {images.map((image, index) => (
             <div key={index} className={`carousel-item ${index === 0 ? 'active' : ''}`}>
              
-                <img src={image} className={` ${styles.productCarouselImg}`} alt={`image-${index}`} />
+                <LazyLoadImage effect='blur' src={image} loading='lazy' className={` ${styles.productCarouselImg}`} alt={`image-${index}`} />
                 </div>
           ))}
         </div>

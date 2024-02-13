@@ -1,13 +1,13 @@
 import { useContext, useEffect, useState } from "react"
-import { getAllProducts, getProductByQuery } from "../../utils/fetchProductsList"
+import { getProductByQuery } from "../../utils/fetchProductsList"
 import "./productList.css"
 import { v4 as uuidv4 } from 'uuid'
 import PaginationProduts from "./PaginationProduts/PaginationProduts";
 import { PaginationContext } from "../../context/PaginationContext";
 import { useCart } from "../../context/Hooks";
-import {  Col, Row } from "react-bootstrap";
-import { PacmanLoader } from "react-spinners"
-import { useSearchParams } from "react-router-dom";
+import { Col, Row } from "react-bootstrap";
+import { ClimbingBoxLoader } from "react-spinners"
+import { useLocation, useSearchParams } from "react-router-dom";
 import ProductCard from "../ProductCard/ProductCard";
 import Modal from "../Modal/Modal";
 import ProductDetail from "../ProductDetail/ProductDetail";
@@ -17,69 +17,87 @@ const ProductList = () => {
     const [searchParams] = useSearchParams();
 
     const { addToCart } = useCart();
-    const { page, setTotal } = useContext(PaginationContext);
+    const { page, setTotal, product } = useContext(PaginationContext);
     const [loading, setLoading] = useState(true);
 
-    const [products, setProducts] = useState([{}]);
+    const location = useLocation();
+    const currentPath = location.pathname;
+
+    const [products, setProducts] = useState([]);
     const moveToCart = (product) => {
         addToCart(product, 1);
     }
 
     const getData = async () => {
 
-        if (location.pathname == "/") {
-            const data = await getAllProducts(page);
-            setProducts(data.productos);
-            setTotal(data.total)
-            setLoading(false);
-        } else {
-        const data = await getProductByQuery(page, searchParams.get("q"));
-        setProducts(data.productos);
-        setTotal(data.total)
-        setLoading(false);
+         const dataLocal = JSON.parse(localStorage.getItem("productos"));
+
+        if (currentPath == "/productos") {
+
+            if (searchParams.get("q") != null) {
+                
+                const data = await getProductByQuery(page, searchParams.get("q"));
+                setProducts(data.productos);
+                setTotal(data.total);
+                setLoading(false);
+                searchParams.delete("q");
+
+            } else if (dataLocal != null) {
+   
+                setProducts(dataLocal);
+                setTotal(JSON.parse(localStorage.getItem("total")));
+                setLoading(false);
+
+            } else if (product.length > 0 ) {
+
+                setProducts(product);
+                setTotal(page);
+                setLoading(false);
+               
+            }
         }
-     
+
     }
 
     useEffect(() => {
         getData();
-    }, [page, searchParams])
+    }, [page, searchParams, product])
 
     const [showModal, setShowModal] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(null);
 
     const handleProductClick = (product) => {
-      setSelectedProduct(product);
-      setShowModal(true);
+        setSelectedProduct(product);
+        setShowModal(true);
     }
 
     const handleCloseModal = () => {
-      setShowModal(false);
+        setShowModal(false);
     }
 
-    if (loading) return (<div style={{minHeight: "400px"}} className="d-flex justify-content-center align-items-center"><PacmanLoader color="#000000"/></div>)
+    if (loading) return (<div style={{ minHeight: "400px" }} className="d-flex justify-content-center align-items-center"><ClimbingBoxLoader color="rgba(239, 239, 239, 1)" /></div>)
 
     return (
-        <div className="container">
-            <h1 className="text-center m-5">Nuestros Productos:</h1>
-          <Row className="d-flex align-items-center justify-content-center">
-            {products ?
-                products.map((product) => (
-                    <Col xs={12} lg={12} xl={6} key={uuidv4()} >
-                        <ProductCard product={product}  moveToCart={moveToCart} handleClick={handleProductClick}/>
-                    </ Col>
+        <div className=" p-5 w-100">
+            <h1 className="text-center products-title p-2">PRODUCTOS</h1>
+            <Row>
+                {products && products.length > 0 ?
+                    products.map((product) => (
+                        <Col xs={12} lg={12} xl={4} key={uuidv4()} >
+                            <ProductCard className="card-orange" product={product} moveToCart={moveToCart} handleClick={handleProductClick} />
+                        </ Col>
                     )
-                ) :
-                <h1 className="text-center">Sin productos</h1>
-            }
+                    ) :
+                    <h1 className="text-center">Sin productos</h1>
+                }
             </Row>
             <div className="container-fluid d-flex justify-content-center align-items-center mt-5 mb-5">
                 <PaginationProduts />
             </div>
-            {selectedProduct && 
-            <Modal show={showModal} handleClose={handleCloseModal} title={selectedProduct.name}>
-                <ProductDetail product={selectedProduct} handleCloseModal={handleCloseModal}/>
-            </Modal>}
+            {selectedProduct &&
+                <Modal show={showModal} handleClose={handleCloseModal} title={selectedProduct.name}>
+                    <ProductDetail product={selectedProduct} handleCloseModal={handleCloseModal} />
+                </Modal>}
 
         </div>
 

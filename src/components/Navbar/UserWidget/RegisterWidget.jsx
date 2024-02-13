@@ -1,13 +1,11 @@
 import { useUser } from "../../../context/Hooks"
-import Dropdown from 'react-bootstrap/Dropdown';
 import { FaUserCircle } from "react-icons/fa";
 import { Button } from "react-bootstrap";
 import { useState } from "react";
 import Modal from "../../Modal/Modal";
 import RegisterForm from "../../RegisterForm/RegisterForm";
-import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-
+import "../UserWidget/register.css"
 
 const UserWidget = () => {
 
@@ -67,12 +65,12 @@ const LoginButton = () => {
 
   return (
     <>
-      <Button onClick={handleOpenModal} className="d-flex align-items-center gap-2 btn-success">
+      <Button onClick={handleOpenModal} className="d-flex align-items-center gap-2 botonasor">
         <FaUserCircle />
         <p>Registrarse</p>
       </Button>
         <Modal show={showModal} handleClose={handleCloseModal} title="Registrarse">
-          <RegisterForm handleSubmit={handleRegisterSubmit}/>
+          <RegisterForm handleSubmit={handleRegisterSubmit} titleStyle={"text-black"}/>
         </Modal>
     </>
   )

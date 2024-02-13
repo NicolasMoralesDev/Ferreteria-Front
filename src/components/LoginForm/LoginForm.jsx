@@ -8,7 +8,7 @@ const validationSchema = object().shape({
 });
 
 // eslint-disable-next-line react/prop-types
-const LoginForm = ({ handleSubmit, secondaryButton = null }) => {
+const LoginForm = ({ handleSubmit, secondaryButton = null, titleStyle, linkStyle }) => {
   return (
     <Formik
       initialValues={{ email: '', password: '' }}
@@ -17,28 +17,30 @@ const LoginForm = ({ handleSubmit, secondaryButton = null }) => {
     >
       <Form as={BootstrapForm}>
         <div className="mb-3">
-          <label htmlFor="email">Email:</label>
+          <label htmlFor="email" className={titleStyle}>Email:</label>
           <Field
             type="email"
             name="email"
             className="form-control"
+            placeholder="email"
             id="email"
             autoComplete="off"
           />
           <ErrorMessage name="email" component={Alert} variant="danger" />
         </div>
         <div className="mb-3">
-          <label htmlFor="password">Contraseña:</label>
+          <label htmlFor="password" className={titleStyle}>Contraseña:</label>
           <Field
             type="password"
             name="password"
+            placeholder="contraseña"
             className="form-control"
             id="password"
           />
           <ErrorMessage name="password" component={Alert} variant="danger" />
         </div>
         <div className='d-flex gap-3 '>
-            <a href="/recuperarPassword" style={{marginTop: "10px"}}>¿Olvidaste tu contraseña?</a>
+            <a href="/recuperarPassword" style={{marginTop: "10px"}} className={linkStyle}>¿Olvidaste tu contraseña?</a>
           <Button type="submit" className="me-2">
             Iniciar sesión
           </Button>

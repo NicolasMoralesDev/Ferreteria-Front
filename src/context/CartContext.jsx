@@ -64,7 +64,7 @@ export const CartProvider = ({ children }) => {
     const itemInCart = cart.find((item) => item.product.id === productToAdd.id);
     if (itemInCart) {
       // If the product is already in the cart, update the amount
-      updateAmount(productToAdd.id, itemInCart.amount + amount);
+      updateAmount(productToAdd.id, itemInCart.amount = amount);
       toast.success('Se actualizó el producto en el carrito');
     } else {
       // If the product is not in the cart, add it

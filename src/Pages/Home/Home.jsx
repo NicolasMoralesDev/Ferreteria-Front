@@ -1,22 +1,32 @@
-import ProductList from '../../components/ProductList/ProductList';
+import { lazy, Suspense} from 'react';
 import { Helmet } from 'react-helmet';
-import ProductsCarousel from '../../components/ProductsCarousel';
+const LazyProductsCarousel = lazy(() => import('../../components/ProductsCarousel'));
+const LazyProductsHome = lazy(() => import('../../components/ProductsHome/ProductsHome'));
+import Navbar from '../../components/Navbar/Navbar';
+import Footer from '../../components/Footer';
+import '../../App.css';
+import Loading from '../../components/Loading/Loading';
+
 
 export default function Home() {
   return (
     <>
-      <Helmet>
+      <Helmet className="App">
         <meta charSet='utf-8' />
-        <title>TECNO TIENDA | HOME</title>
+        <title>El corralon | Inicio</title>
         <link rel='canonical' href='http://mysite.com/example' />
-        <meta name="description" content="Bienvenido a TecnoTienda! Una web con los mejores precios en Hardware del mercado." />
+        <meta name="description" content="Bienvenido a Corralon Online! Una web con los mejores precios en del mercado." />
       </Helmet>
-
-        <main>
-          <ProductsCarousel/>
-          <ProductList />
-        </main>
-
+      <Navbar />
+      <main className='main-conteiner App'>
+      <Suspense fallback={<Loading/>}>
+          <LazyProductsCarousel />
+        </Suspense>
+        <Suspense fallback={<Loading/>}>
+          <LazyProductsHome />
+        </Suspense>
+      </main>
+      <Footer />
     </>
   );
 }

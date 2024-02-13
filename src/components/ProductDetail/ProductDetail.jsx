@@ -1,27 +1,25 @@
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useCart } from "../../context/Hooks";
 import ItemCount from "./ItemCount";
 
+
 // eslint-disable-next-line react/prop-types
-const ProductDetail = ({ product = null, handleCloseModal }) => { 
+const ProductDetail = ({ product, handleCloseModal }) => { 
 
-  const { addToCart, getProductQuantity } = useCart();
+  const {  getProductQuantity } = useCart();
 
-  const initial = getProductQuantity(product.id);
+  const initial =  getProductQuantity(product.id) ;
 
-  const onAdd = (amount) => {
-    addToCart(product, amount);
-    handleCloseModal();
-  }
 
   return (
     <div className="row">
       <div className="col-md-6">
-        <img src={product.imageUrl} className="img-thumbnail rounded-start fixed-size-image" alt={product.name}></img>
+        <LazyLoadImage effect="blur" src={product.imageUrl} loading="lazy" className="img-thumbnail rounded-start fixed-size-image" alt={product.name}></LazyLoadImage>
       </div>
       <div className="col-md-6">
-        <p>{product.description}</p>
+        <p className="text-black p-3">{product.description}</p>
         <p><small className="text-body-secondary">Precio $ {product.price}</small></p>
-        <ItemCount stock={product.stock} initial={initial} onAdd={onAdd}/>
+        <ItemCount stock={product.stock} initial={initial} handleModal={handleCloseModal} product={product}/>
       </div>
     </div>
   );

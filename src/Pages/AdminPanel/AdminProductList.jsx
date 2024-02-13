@@ -9,6 +9,7 @@ import AdminUpdateProductModal from "./AdminUpdateProductModal";
 import Modal from "../../components/Modal/Modal"
 import { Table } from "react-bootstrap";
 import Swal from "sweetalert2";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const AdminProductList = () => {
 
@@ -19,15 +20,12 @@ const AdminProductList = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const getData = async () => {
+
     const data = await getAllProducts(page);
     setProducts(data.productos);
-    setTotal(data.total)
+    setTotal(data.total);
+
   }
-
-
-  useEffect(() => {
-    getData();
-  }, [page])
 
   const handleModifyProduct = (product) => {
     setSelectedProduct(product);
@@ -43,7 +41,7 @@ const AdminProductList = () => {
     try {
       // Llama a la función updateProduct con el ID del producto y los datos editados
       const res = await updateProduct(editedProduct);
-      console.log("res", res);
+
       if (res.status == 200) {
         Swal.fire({
           title: 'Producto modificado',
@@ -51,6 +49,7 @@ const AdminProductList = () => {
           icon: 'success',
           confirmButtonText: 'Aceptar',
         });
+        getData();
       } else {
         Swal.fire({
           title: 'Error',
@@ -75,6 +74,10 @@ const AdminProductList = () => {
     }
   };
 
+  useEffect(() => {
+    getData();
+  }, [page])
+
   return (
     <div className="table-dashboard">
       <h1>Productos</h1>
@@ -85,28 +88,31 @@ const AdminProductList = () => {
             <th>Nombre</th>
             <th>Imagen</th>
             <th>Marca</th>
+            <th>Medida</th>
             <th>Descripción</th>
-            <th>Categoría</th>
+            <th>SubCategoría</th>
             <th>Precio</th>
             <th>Stock</th>
             <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
-          {products.map((product) => (
-
+          {
+     
+          products.map((product) => (
             <tr key={uuidv4()} >
               <td>{product.id}</td>
               <td>{product.name}</td>
               <td>
-              <img src={product.imageUrl} alt={product.name} className="w-25"/>
+              <LazyLoadImage effect="blur" src={product.imageUrl} loading="lazy" alt={product.name} className="w-25"/>
               </td>
-              <td>{product.brand}</td>
+              <td>{product.brand}</td> 
+              <td>{product.medida}</td>
               <td className={styles.rowList}>{product.description}</td>
-              <td>{product.category}</td>
+              <td>{product.subCategory}</td>
               <td className="fw-bold text-center">${product.price}</td>
               <td>{product.stock}</td>
-              <td  className="p-3 d-flex gap-2 flex-wrap">
+              <td  className="p-4 d-flex gap-2 flex-wrap">
 
                 <button
                   className="btn btn-warning btn-sm mx-2 fw-bold text-light w-100"

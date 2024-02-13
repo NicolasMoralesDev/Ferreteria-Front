@@ -2,8 +2,10 @@ import axiosConf from "./axiosConf";
 
 export const sendSale = async (sale) => {
     try {
+        
         const response = await axiosConf.post("user/sale/save", sale);
         return response;
+
     } catch (error) {
         return error;
     }
@@ -12,14 +14,8 @@ export const sendSale = async (sale) => {
 export const payMd = async (sale) => {
     try {
 
-        let request = {
-            id: "23",
-            price: sale[1],
-            amount: sale[0]
-        };
-
-        const response = await axiosConf.post("user/sales/pay", request);
-        location.replace(response.data);
+      const response = await axiosConf.post("user/sales/pay", sale);
+      location.replace(response.data); 
 
     } catch (error) {
         return error;
@@ -45,5 +41,18 @@ export const getAllSales = async (page=0) => {
     } catch (error) {
         console.error("Error al obtener todas las ventas", error);
         throw error;
+    }
+}
+
+export const putStatusSale = async (sale) => {
+
+    try {
+
+        const response = await axiosConf.put("user/sale/change", sale);
+        return response;
+
+    } catch (error) {
+        
+        return error;
     }
 }

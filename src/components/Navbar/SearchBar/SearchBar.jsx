@@ -22,10 +22,11 @@ const SearchBar = () => {
     <div className={`d-flex align-items-center`}>
       <form action="" onSubmit={handleClick}>
 
-           <input
+        <input
         type="text"
         className={styles.searchBar}
-        placeholder="Buscar..."
+        placeholder="¿Que estas Buscando?"
+        required
         onChange={handleChange}
       />
   

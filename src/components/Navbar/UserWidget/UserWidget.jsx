@@ -7,6 +7,7 @@ import Modal from "../../Modal/Modal";
 import LoginForm from "../../LoginForm/LoginForm";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import "../UserWidget/login.css"
 
 
 const UserWidget = () => {
@@ -83,12 +84,12 @@ const LoginButton = () => {
 
   return (
     <>
-      <Button onClick={handleOpenModal} className="d-flex align-items-center gap-2">
+      <Button onClick={handleOpenModal} className="d-flex align-items-center gap-2 botonasol">
         <FaUserCircle />
         <p>Iniciar Sesión</p>
       </Button>
         <Modal show={showModal} handleClose={handleCloseModal} title="Iniciar Sesión">
-          <LoginForm handleSubmit={handleLoginSubmit}/>
+          <LoginForm handleSubmit={handleLoginSubmit} titleStyle={"text-black"} linkStyle={"link-Black"}/>
         </Modal>
     </>
   )

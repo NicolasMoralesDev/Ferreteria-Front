@@ -11,10 +11,11 @@ import Loading from '../../components/Loading/Loading';
 import ChangePasswordForm from '../../components/ChangePasswordForm/ChangePasswordForm';
 import { changePasswordRequest } from '../../utils/fetchUser';
 import Swal from 'sweetalert2';
-import { PacmanLoader } from "react-spinners"
+import { ClimbingBoxLoader } from "react-spinners"
 import { Helmet } from 'react-helmet';
 import { PaginationContext } from '../../context/PaginationContext';
 import { SalesTable } from '../../components/SalesTable/SalesTable';
+import Navbar from '../../components/Navbar/Navbar';
 
 const UserPanel = () => {
 
@@ -27,7 +28,7 @@ const UserPanel = () => {
   const getUserOrders = async () => {
     try {
       const response = await getUserSales(user.id, page);
-      console.log("response", response)
+
       if (response.data) {
         setSaleList(response.data.sales);
         setTotal(response.data.total);
@@ -50,6 +51,7 @@ const UserPanel = () => {
         <title>Panel de Usuario</title>
         <link rel="canonical" href="http://mysite.com/example" />
       </Helmet>
+      <Navbar/>
 
       <div className={styles.main}>
         <div className={`container ${styles.container}`}>
@@ -68,6 +70,7 @@ const UserPanel = () => {
 const SalesSection = ({ saleList }) => {
   const navigate = useNavigate();
   return (
+    <>
     <Row className='justify-content-center align-items-center'>
       <Col xs={12} lg={10} xl={8} className={styles.box}>
         <div className={styles.header}>
@@ -82,7 +85,7 @@ const SalesSection = ({ saleList }) => {
           </>
         )}
       </Col>
-    </Row>
+    </Row>    </>
   )
 }
 
@@ -96,15 +99,15 @@ const UserSection = ({ user }) => {
         <Col sm={6} className={`d-flex justify-content-center ${styles.box}>`}>
           <div className={styles.box}>
             <div>
-              <h6 style={{ display: "inline-block", paddingRight: "10px" }}>Nombre: </h6>
+              <h6 style={{ display: "inline-block", paddingRight: "10px", color: "white"}}>Nombre: </h6>
               <p style={{ display: "inline-block" }}>{user.firstName}</p>
             </div>
             <div>
-              <h6 style={{ display: "inline-block", paddingRight: "10px" }}>Apellido: </h6>
+              <h6 style={{ display: "inline-block", paddingRight: "10px", color: "white" }}>Apellido: </h6>
               <p style={{ display: "inline-block" }}>{user.lastName}</p>
             </div>
             <div>
-              <h6 style={{ display: "inline-block", paddingRight: "10px" }}>Email: </h6>
+              <h6 style={{ display: "inline-block", paddingRight: "10px", color: "white" }}>Email: </h6>
               <p style={{ display: "inline-block" }}>{user.email}</p>
             </div>
           </div>
@@ -180,7 +183,7 @@ const UserButtons = () => {
       <Modal show={showModal} handleClose={handleCloseModal} title="Cambiar contraseña">
         {loading ?
           <div className="d-flex justify-content-center align-items-center" style={{ minHeight: "300px" }}>
-            <PacmanLoader color="#000000" />
+            <ClimbingBoxLoader color="rgba(239, 239, 239, 1)" />
           </div>
           :
           <ChangePasswordForm handleSubmit={handleSubmit} />}
