@@ -7,10 +7,6 @@ a {
   text-decoration: none;
 }
 
-.btn:hover, .btn:active{
-   background-color: inherit;
-}
-
 :root {
   margin: 0;
   padding: 0;

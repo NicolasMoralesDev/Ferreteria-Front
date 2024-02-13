@@ -123,12 +123,12 @@ const TableCheckout = () => {
       </Table>
       <div className='d-flex w-100 gap-3  justify-content-end align-items-center'>
         <div className='d-flex w-50'>
-          <div
+          <button
             className='btn btn-primary fw-bold p-3'
             onClick={handleOpenModal}
           >
             Crear orden
-          </div>
+          </button>
 
           <ExportAsPdf
             fileName='Presupuesto Corralon-Online'

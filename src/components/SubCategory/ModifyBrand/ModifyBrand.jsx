@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import { useAlert } from '../../../context/Hooks';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { Alert, Form as BoostrappForm } from 'react-bootstrap'
-import * as yup from "yup"
+import * as yup from "yup" 
 
 export const DeleteBrand = () => {
 

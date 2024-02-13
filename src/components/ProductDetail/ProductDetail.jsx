@@ -2,12 +2,13 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useCart } from "../../context/Hooks";
 import ItemCount from "./ItemCount";
 
+
 // eslint-disable-next-line react/prop-types
-const ProductDetail = ({ product = null, handleCloseModal }) => { 
+const ProductDetail = ({ product, handleCloseModal }) => { 
 
   const {  getProductQuantity } = useCart();
 
-  const initial = getProductQuantity(product.id);
+  const initial =  getProductQuantity(product.id) ;
 
 
   return (
