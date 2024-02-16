@@ -16,7 +16,6 @@ const ProductsHome = () => {
 
 
   const { addToCart } = useCart();
-/*   const { page, setTotal } = useContext(PaginationContext); */
   const [loading, setLoading] = useState(true);
 
   const [products, setProducts] = useState([{}]);
@@ -26,10 +25,9 @@ const ProductsHome = () => {
 
   const getData = async () => {
 
-    const data = await getAllProducts();
+    const data = await getAllProducts(0,8);
 
     setProducts(data.productos);
- /*    setTotal(data.total) */
     setLoading(false);
 
   }

@@ -107,7 +107,6 @@ export const useStorage = ( response) => {
 }
 
 export const useAlert = (response, status) => {
-
   if (response.status == status) {
     Swal.fire({
     title: response.data.msg,

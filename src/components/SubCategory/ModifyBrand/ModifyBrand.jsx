@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { deleteBrands, getBrand, modifyTitle } from '../../../utils/fetchProductsList'
 import { v4 as uuidv4 } from "uuid";
-import { useAlert } from '../../../context/Hooks';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { Alert, Form as BoostrappForm } from 'react-bootstrap'
 import * as yup from "yup" 
@@ -24,9 +23,7 @@ export const DeleteBrand = () => {
 
     const deleteBrand = async (id) => {
 
-        const response = await deleteBrands(id);
-
-        useAlert(response, 200);
+     await deleteBrands(id);
 
     }
 
@@ -92,8 +89,7 @@ export const ModifyBrands = () => {
         brandNew.push(brand[marca]);
         brandNew[0].title = titulo;
 
-        const response = await modifyTitle(brandNew);
-        useAlert(response, 200); 
+         await modifyTitle(brandNew);
 
     }
 
@@ -109,7 +105,7 @@ export const ModifyBrands = () => {
 
         getBrands();
 
-    }, [deleteBrands, modifyTitle]);
+    }, []);
 
     return (
         <section className='container mt-3'>
