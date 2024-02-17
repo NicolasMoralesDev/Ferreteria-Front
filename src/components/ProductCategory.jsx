@@ -19,10 +19,11 @@ const ProductCategory = () => {
             <Navbar />
             <main className="mt-5 mb-5 container d-flex flex-row flex-wrap">
 
-{/*                     <Col xs={12} lg={12} xl={6}>
+                {/*<Col xs={12} lg={12} xl={6}>
                         <CategoryPanel />
-                    </Col> */}
-                   <ProductList />
+                    </Col> 
+                */}
+                <ProductList />
             </main>
             <Footer />
         </>

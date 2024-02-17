@@ -2,6 +2,8 @@ import { useContext } from 'react';
 import { UserContext } from './UserContext';
 import { CartContext } from './CartContext';
 import Swal from 'sweetalert2';
+import toast from 'react-hot-toast';
+import { CompareContext } from './CompareContext';
 
 // Custom hooks
 
@@ -12,6 +14,17 @@ export const useUser = () => {
     throw new Error("useUser must be used within a UserProvider");
   }
   return context;
+}
+
+export const useCompare = () => {
+
+  const context = useContext(CompareContext);
+
+  if (!context) {
+    throw new Error("useCart must be used within a CompareProvider");
+  }
+  return context; 
+  
 }
 
 // Hook for CartContext, returns the context value

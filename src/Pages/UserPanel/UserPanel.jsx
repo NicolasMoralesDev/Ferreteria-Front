@@ -16,6 +16,7 @@ import { Helmet } from 'react-helmet';
 import { PaginationContext } from '../../context/PaginationContext';
 import { SalesTable } from '../../components/SalesTable/SalesTable';
 import Navbar from '../../components/Navbar/Navbar';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const UserPanel = () => {
 
@@ -54,7 +55,9 @@ const UserPanel = () => {
       <Navbar/>
 
       <div className={styles.main}>
+        
         <div className={`container ${styles.container}`}>
+
           {loading ? <Loading /> :
             <>
               <SalesSection saleList={saleList} />
@@ -90,6 +93,7 @@ const SalesSection = ({ saleList }) => {
 }
 
 const UserSection = ({ user }) => {
+  console.log(user);
   return (
     <>
       <Row className='d-flex justify-content-center align-items-center'>
@@ -98,6 +102,8 @@ const UserSection = ({ user }) => {
         </div>
         <Col sm={6} className={`d-flex justify-content-center ${styles.box}>`}>
           <div className={styles.box}>
+          <LazyLoadImage effect='blur' src={user.urlImg} loading='lazy' className="w-25" alt={`image-perfil`} />
+
             <div>
               <h6 style={{ display: "inline-block", paddingRight: "10px", color: "white"}}>Nombre: </h6>
               <p style={{ display: "inline-block" }}>{user.firstName}</p>

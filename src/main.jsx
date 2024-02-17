@@ -8,9 +8,11 @@ import { PaginationProvider } from './context/PaginationContext.jsx'
 import { PaginationCategoryProvider } from './context/PaginationCategoryContext.jsx'
 import { RouterProvider } from 'react-router-dom'
 import { routes } from './router/Routes.jsx'
+import { CompareProvider } from './context/CompareContext.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <CartProvider>
+    <CompareProvider>
     <UserProvider>
       <PaginationProvider>
         <PaginationCategoryProvider>
@@ -18,6 +20,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         </PaginationCategoryProvider>
       </PaginationProvider>
     </UserProvider>
+    </CompareProvider>
   </CartProvider>
 
 

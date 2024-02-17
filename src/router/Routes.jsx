@@ -11,6 +11,7 @@ import Help from "../Pages/Help";
 import ProductCategory from "../components/ProductCategory"
 import RequireAdminRole from "./RequireAdminRole";
 import RequireAuth from "./RequireAuth";
+import CompareProduct from "../Pages/CompareProduct";
 
 export  const routes = createBrowserRouter([
     {
@@ -68,6 +69,12 @@ export  const routes = createBrowserRouter([
     {
         path: "/ayuda",
         element: <Help />,
+        errorElement: <Error />
+
+    },
+    {
+        path: "/comparar",
+        element: <CompareProduct />,
         errorElement: <Error />
 
     },
