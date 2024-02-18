@@ -1,4 +1,4 @@
-import { lazy, Suspense} from 'react';
+import { lazy, Suspense } from 'react';
 import { Helmet } from 'react-helmet';
 const LazyProductsCarousel = lazy(() => import('../../components/ProductsCarousel'));
 const LazyProductsHome = lazy(() => import('../../components/ProductsHome/ProductsHome'));
@@ -6,6 +6,7 @@ import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer';
 import '../../App.css';
 import Loading from '../../components/Loading/Loading';
+import { Toaster } from 'react-hot-toast';
 
 
 export default function Home() {
@@ -19,13 +20,17 @@ export default function Home() {
       </Helmet>
       <Navbar />
       <main className='main-conteiner App'>
-      <Suspense fallback={<Loading/>}>
+        <Suspense fallback={<Loading />}>
           <LazyProductsCarousel />
         </Suspense>
-        <Suspense fallback={<Loading/>}>
+        <Suspense fallback={<Loading />}>
           <LazyProductsHome />
         </Suspense>
       </main>
+      <Toaster
+        position="bottom-right"
+        reverseOrder={false}
+      />
       <Footer />
     </>
   );

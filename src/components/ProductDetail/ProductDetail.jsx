@@ -15,16 +15,16 @@ const ProductDetail = ({ product, handleCloseModal }) => {
 
 
   return (
-    <div className="row w-75">
+    <div className="row w-100">
       <div className="col-md-6">
         <LazyLoadImage effect="blur" src={product.imageUrl} loading="lazy" className="img-thumbnail rounded-start fixed-size-image" alt={product.name}></LazyLoadImage>
       </div>
       <div className="col-md-6">
-        <p className="text-black p-3  f">{product.description}</p>
+        <p className="text-black p-3">{product.description}</p>
         <p><small className="text-body-secondary">Precio $ {product.price}</small></p>
-        <div className="d-flex gap-2">
+        <div className="d-flex gap-2 flex-column">
           <ItemCount stock={product.stock} initial={initial} handleModal={handleCloseModal} product={product} />
-          <button className="btn btn-success fw-bold" onClick={() => addToCompare(product)}>Comparar</button>
+          <button className="btn btn-success fw-bold w-50 align-self-start" onClick={() => addToCompare(product)}>Comparar</button>
 
         </div>
       </div>          <Toaster

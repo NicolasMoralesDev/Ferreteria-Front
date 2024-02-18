@@ -23,7 +23,7 @@ const CompareProduct = () => {
             <div>
                 <h1 className='text-center text-light mb-5 mt-5'>Comparador de productos</h1>
                 <div className='container mt-5 mb-5'> <Row>
-                    {compare && compare.length > 1 ?
+                    {compare && compare.length > 0 ?
 
                         compare.map((product) => (
 
@@ -35,10 +35,11 @@ const CompareProduct = () => {
                                         <Card.Body>
                                             
                                             <Card.Title className='text-black'>{product.name}</Card.Title>
-                                            <p className='text-black'>Categoria:  <span className='fw-bold'>{product.product.subCategory}</span></p>
-                                            <p className='text-black'>Marca:  <span className='fw-bold'>{product.product.brand}</span></p>
-                                            <p className='text-black'>Se vende:  <span className='fw-bold'>por {product.product.medida}</span> </p>
-                                            <p className='text-black'>Precio: $  <span className='fw-bold'>{product.product.price}</span></p>
+                                            <p className='text-black'> <span className='fw-bold'>Descripcion:</span>  {product.product.description}</p>
+                                            <p className='text-black'> <span className='fw-bold'>Categoria:</span>  {product.product.subCategory}</p>
+                                            <p className='text-black'> <span className='fw-bold'>Marca:</span> {product.product.brand}</p>
+                                            <p className='text-black'> <span className='fw-bold'>Se vende por:</span>   {product.product.medida} </p>
+                                            <p className='text-black'> <span className='fw-bold'>Precio: $</span>  {product.product.price}</p>
 
                                         </Card.Body>
                                     </div>
