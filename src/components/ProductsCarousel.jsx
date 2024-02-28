@@ -19,7 +19,7 @@ const ProductsCarousel = () => {
           {images.map((image, index) => (
             <div key={index} className={`carousel-item ${index === 0 ? 'active' : ''}`}>
              
-                <LazyLoadImage effect='blur' src={image} loading='lazy' className={` ${styles.productCarouselImg}`} alt={`image-${index}`} />
+                <LazyLoadImage width="100%" effect='blur' src={image} loading='lazy' className={` ${styles.productCarouselImg}`} alt={`image-${index}`} />
                 </div>
           ))}
         </div>
