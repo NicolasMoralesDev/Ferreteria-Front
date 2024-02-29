@@ -2,7 +2,6 @@ import { useContext } from 'react';
 import { UserContext } from './UserContext';
 import { CartContext } from './CartContext';
 import Swal from 'sweetalert2';
-import toast from 'react-hot-toast';
 import { CompareContext } from './CompareContext';
 
 // Custom hooks
@@ -163,3 +162,33 @@ export const useOptions = {
       },
     },
 };
+
+export const useSendRequest = async (request, setLoading, funcion, handleCloseModal) => {
+
+  try {
+    setLoading(true);
+    const response = await funcion(request);
+    setLoading(false);
+    if (response.status == 200) {
+      Swal.fire({
+        icon: 'success',
+        title: 'Contraseña cambiada con éxito',
+        showConfirmButton: false,
+        timer: 1500
+      })
+      handleCloseModal();
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Algo salió mal, intente nuevamente',
+      })
+    }
+  } catch (error) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Algo salió mal, intente nuevamente',
+    })
+  }
+}

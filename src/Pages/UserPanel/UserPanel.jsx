@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Button, Col, Row } from 'react-bootstrap';
 import styles from './UserPanel.module.css';
-import { useUser } from '../../context/Hooks';
+import { useSendRequest, useUser } from '../../context/Hooks';
 import { useContext, useState } from 'react';
 import Modal from '../../components/Modal/Modal';
 import { getUserSales } from '../../utils/fetchSales';
@@ -17,6 +17,7 @@ import { PaginationContext } from '../../context/PaginationContext';
 import { SalesTable } from '../../components/SalesTable/SalesTable';
 import Navbar from '../../components/Navbar/Navbar';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import EditPerfiles from '../../components/EditPerfi/EditPerfiles';
 
 const UserPanel = () => {
 
@@ -94,7 +95,7 @@ const SalesSection = ({ saleList }) => {
 }
 
 const UserSection = ({ user }) => {
-  console.log(user);
+
   return (
     <>
       <Row className='d-flex justify-content-center align-items-center'>
@@ -135,9 +136,12 @@ const UserSection = ({ user }) => {
 const UserButtons = () => {
   const { user } = useUser();
 
+  const [showModalEdit, setShowModalEdit] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const handleCloseModal = () => setShowModal(false);
+  const handleCloseModalEdit = () => setShowModalEdit(false);
   const handleOpenModal = () => setShowModal(true);
+  const handleOpenModalEdit = () => setShowModalEdit(true);
   const [loading, setLoading] = useState(false);
 
   const prepareRequest = (values) => {
@@ -150,38 +154,15 @@ const UserButtons = () => {
     return request;
   }
 
-  const sendRequest = async (request) => {
-    try {
-      setLoading(true);
-      const response = await changePasswordRequest(request);
-      setLoading(false);
-      if (response.status == 200) {
-        Swal.fire({
-          icon: 'success',
-          title: 'Contraseña cambiada con éxito',
-          showConfirmButton: false,
-          timer: 1500
-        })
-        handleCloseModal();
-      } else {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Algo salió mal, intente nuevamente',
-        })
-      }
-    } catch (error) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Algo salió mal, intente nuevamente',
-      })
-    }
-  }
 
   const handleSubmit = (values) => {
     const request = prepareRequest(values);
-    sendRequest(request);
+    useSendRequest(request, setLoading, changePasswordRequest, handleCloseModal );
+  }
+
+  const submitEdit = (values) => {
+    const request = prepareRequest(values);
+    useSendRequest(request, setLoading);
   }
 
   return (
@@ -189,6 +170,7 @@ const UserButtons = () => {
       <Row className='d-flex justify-content-center align-items-center'>
         <Col xs={6} sm={6} className="d-flex gap-3">
           <Button onClick={handleOpenModal} className='fw-bold'>Cambiar contraseña</Button>
+          <Button onClick={handleOpenModalEdit} className='fw-bold'>Editar Perfil</Button>
         </Col>
       </Row>
       <Modal show={showModal} handleClose={handleCloseModal} title="Cambiar contraseña">
@@ -198,6 +180,14 @@ const UserButtons = () => {
           </div>
           :
           <ChangePasswordForm handleSubmit={handleSubmit} />}
+      </Modal>
+      <Modal show={showModalEdit} handleClose={handleCloseModalEdit} title="Editar Perfil">
+        {loading ?
+          <div className="d-flex justify-content-center align-items-center" style={{ minHeight: "300px" }}>
+            <ClimbingBoxLoader color="rgba(239, 239, 239, 1)" />
+          </div>
+          :
+          <EditPerfiles handleSubmit={submitEdit} />}
       </Modal>
     </>
   );
