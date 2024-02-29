@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react';
 import { Helmet } from 'react-helmet';
 const LazyProductsCarousel = lazy(() => import('../../components/ProductsCarousel'));
 const LazyProductsHome = lazy(() => import('../../components/ProductsHome/ProductsHome'));
+const LazyUsersProHome = lazy(() => import('../../components/CarouselUsersPro/CarouselUsersPro'));
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer';
 import '../../App.css';
@@ -25,6 +26,9 @@ export default function Home() {
         </Suspense>
         <Suspense fallback={<Loading />}>
           <LazyProductsHome />
+        </Suspense>
+        <Suspense fallback={<Loading/>}>
+          <LazyUsersProHome/>
         </Suspense>
       </main>
       <Toaster

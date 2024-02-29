@@ -88,7 +88,8 @@ const SalesSection = ({ saleList }) => {
           </>
         )}
       </Col>
-    </Row>    </>
+    </Row>    
+    </>
   )
 }
 
@@ -115,6 +116,10 @@ const UserSection = ({ user }) => {
             <div>
               <h6 style={{ display: "inline-block", paddingRight: "10px", color: "white" }}>Email: </h6>
               <p style={{ display: "inline-block" }}>{user.email}</p>
+            </div>
+            <div>
+              <h6 style={{ display: "inline-block", paddingRight: "10px", color: "white" }}>Rol: </h6>
+              <p style={{ display: "inline-block" }}>{user.role === "ROLE_PRO" ? "Profeccional" : "Comprador" }</p>
             </div>
           </div>
         </Col>

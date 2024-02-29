@@ -22,6 +22,7 @@ const RegisterForm = ({ handleSubmit, secondaryButton = null, titleStyle }) => {
         confirmPassword: '',
         firstName: '',
         lastName: '',
+        role:"ROLE_PRO"
       }}
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
@@ -80,6 +81,23 @@ const RegisterForm = ({ handleSubmit, secondaryButton = null, titleStyle }) => {
             className='form-control'
             id='lastName'
           />
+          <ErrorMessage name='lastName' component={Alert} variant='danger' />
+        </div>
+        <div className='mb-3'>
+          <label htmlFor='role' className={titleStyle}>Registrarse como:</label>
+          <Field
+            name='role'
+            className='form-control'
+            id='role'
+            as="select"
+          >
+            <option value="" disabled>Selecciona una opcion</option>
+
+            <option value={"ROLE_USER"} >comprador</option>
+            <option value={"ROLE_PRO"} >profeccional</option>
+
+            
+          </Field>
           <ErrorMessage name='lastName' component={Alert} variant='danger' />
         </div>
         <Button type='submit' className='me-2'>

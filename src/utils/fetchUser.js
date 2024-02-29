@@ -68,3 +68,16 @@ export const getUsers = async () => {
     throw error;
   }
 };
+
+export const getAllUsersPro = async () => {
+
+  try {
+
+    const response = await axiosConf.get(`public/get/userPro`);
+
+    return response.data;
+  } catch (error) {
+    console.error("Error al obtener la lista de usuarios profeccionales", error);
+    throw error;
+  }
+};

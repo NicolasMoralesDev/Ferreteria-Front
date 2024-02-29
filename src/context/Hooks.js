@@ -137,3 +137,29 @@ export const useAlert = (response, status) => {
     });
   }
 }
+
+export const useOptions = {
+    margin: 30,
+    responsiveClass: true,
+    nav: true,
+    dots: true,
+    autoplay: true,
+    smartSpeed: 1000,
+    responsive: {
+      0: {
+        items: 1,
+      },
+      400: {
+        items: 1,
+      },
+      600: {
+        items: 2,
+      },
+      700: {
+        items: 3,
+      },
+      1000: {
+        items: 4,
+      },
+    },
+};
