@@ -5,7 +5,6 @@ import { v4 as uuidv4 } from 'uuid';
 import PaginationProducts from "../../components/ProductList/PaginationProduts/PaginationProduts";
 import styles from './Admin.module.css';
 import AdminUpdateProductModal from "./AdminUpdateProductModal";
-
 import Modal from "../../components/Modal/Modal"
 import { Table } from "react-bootstrap";
 import Swal from "sweetalert2";

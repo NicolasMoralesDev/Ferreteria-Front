@@ -76,37 +76,6 @@ export const useProductPdf = (cart) => {
 
 }
 
-/* export const dataConver = (data) => {
-
-  const { productos } = data;
-
-  const newData = [{}];
-
-  for (let index = 0; index < productos.length; index++) {
-
-
-      const element = {
-          "id": productos[index].id,
-          "name": productos[index].name,
-          "description": productos[index].description,
-          "price": productos[index].price,
-          "subCategory": productos[index].subCategory.title,
-          "imageUrl": productos[index].imageUrl,                
-          "brand": productos[index].brand.title, 
-          "medida": productos[index].medida,
-          "stock": productos[index].stock
-      };
-
-      newData.push(element);
-
-  }
-  
-  newData.shift();
-
-  return newData;
-
-} */
-
 export const useStorage = ( response) => {
 
 
@@ -191,4 +160,32 @@ export const useSendRequest = async (request, setLoading, funcion, handleCloseMo
       text: 'Algo salió mal, intente nuevamente',
     })
   }
+}
+
+export const usePrepareRequest = (user, values, isRecoverPassword) => {
+  
+  if (isRecoverPassword) {
+
+     const request = {
+    userId: user.id,
+    currentPassword: values.currentPassword,
+    newPassword: values.newPassword,
+    confirmationPassword: values.confirmationPassword
+  }
+
+  return request;
+  } else {
+
+    const request = {
+      userId: user.id,
+      urlImg: user.urlImg,
+      lastName: values.lastName,
+      costo: values.costo,
+      firstName: values.firstName,
+      email: values.email
+    }
+    return request;
+
+  }
+ 
 }

@@ -1,44 +1,43 @@
 /* eslint-disable react/prop-types */
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { Button, Form as BootstrapForm, Alert } from 'react-bootstrap';
-import { object, string } from 'yup';
+import { number, object, string } from 'yup';
 
 const validationSchema = object().shape({
-  currentPassword: string()
-    .required('La actual contraseña es requerida')
-    .min(8, 'La contraseña debe contener mas de 8 caracteres')
-    .max(50, 'La contraseña no puede tener mas de 50 caracteres'),
-  newPassword: string()
-    .required('La nueva contraseña es requerida')
-    .min(8, 'La contraseña debe contener mas de 8 caracteres')
-    .max(50, 'La contraseña no puede tener mas de 50 caracteres'),
-  confirmationPassword: string()
-    .required('Confirmar contraseña es requerido')
-    .test('password', 'Las contraseñas no coinciden', function (value) {
-      return this.parent.newPassword === value;
-    }),
+  lastName: string()
+    .required('El Apellido es requerido'),
+  firstName: string()
+    .required('El nombre es requerido'),
+  urlImg: string()
+    .required('La foto de perfil es requerida'),
+  costo: number()
+  .required('El costo es requerido'),
+  email: string()
+  .required('El email es requerido'),
 });
 
-const EditPerfiles = ({ handleSubmit }) => {
+const EditPerfiles = ({ handleSubmit, user }) => {
   return (
     <Formik
       initialValues={{
-        imgUrl: '',
-        nombre: '',
-        confirmationPassword: '',
+        urlImg: user.urlImg,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        costo: user.costo,
+        email: user.email
       }}
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
       <Form as={BootstrapForm} className="d-flex justify-content-center">
-        <div className='col-8 text-center'>
+        <div className='col-8'>
           <div className='mb-3'>
-            <label htmlFor='currentPassword'>Contraseña actual:</label>
+            <label htmlFor='firstName'>Nombre:</label>
             <Field
-              type='password'
-              name='currentPassword'
+              type='text'
+              name='firstName'
               className='form-control'
-              id='currentPassword'
+              id='firstName'
             />
             <ErrorMessage
               name='currentPassword'
@@ -47,29 +46,57 @@ const EditPerfiles = ({ handleSubmit }) => {
             />
           </div>
           <div className='mb-3'>
-            <label htmlFor='newPassword'>Nueva contraseña:</label>
+            <label htmlFor='lastName'>Apellido:</label>
             <Field
-              type='password'
-              name='newPassword'
+              type='text'
+              name='lastName'
               className='form-control'
-              id='newPassword'
+              id='lastName'
             />
             <ErrorMessage
-              name='newPassword'
+              name='lastName'
               component={Alert}
               variant='danger'
             />
           </div>
           <div className='mb-3'>
-            <label htmlFor='confirmationPassword'>Modificar contraseña:</label>
+            <label htmlFor='costo'>Costo de Servicios:</label>
             <Field
-              type='password'
-              name='confirmationPassword'
+              type='number'
+              name='costo'
               className='form-control'
-              id='confirmationPassword'
+              id='costo'
             />
             <ErrorMessage
-              name='confirmationPassword'
+              name='costo'
+              component={Alert}
+              variant='danger'
+            />
+          </div>
+          <div className='mb-3'>
+            <label htmlFor='urlImg'>Foto de Perfil:</label>
+            <Field
+              type='text'
+              name='urlImg'
+              className='form-control'
+              id='urlImg'
+            />
+            <ErrorMessage
+              name='urlImg'
+              component={Alert}
+              variant='danger'
+            />
+          </div>
+          <div className='mb-3'>
+            <label htmlFor='email'>Email:</label>
+            <Field
+              type='email'
+              name='email'
+              className='form-control'
+              id='email'
+            />
+            <ErrorMessage
+              name='email'
               component={Alert}
               variant='danger'
             />

@@ -22,6 +22,4 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </UserProvider>
     </CompareProvider>
   </CartProvider>
-
-
 )

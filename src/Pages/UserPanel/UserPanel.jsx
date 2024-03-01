@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Button, Col, Row } from 'react-bootstrap';
 import styles from './UserPanel.module.css';
-import { useSendRequest, useUser } from '../../context/Hooks';
+import { usePrepareRequest, useSendRequest, useUser } from '../../context/Hooks';
 import { useContext, useState } from 'react';
 import Modal from '../../components/Modal/Modal';
 import { getUserSales } from '../../utils/fetchSales';
@@ -10,7 +10,6 @@ import { useNavigate } from 'react-router-dom';
 import Loading from '../../components/Loading/Loading';
 import ChangePasswordForm from '../../components/ChangePasswordForm/ChangePasswordForm';
 import { changePasswordRequest } from '../../utils/fetchUser';
-import Swal from 'sweetalert2';
 import { ClimbingBoxLoader } from "react-spinners"
 import { Helmet } from 'react-helmet';
 import { PaginationContext } from '../../context/PaginationContext';
@@ -53,10 +52,10 @@ const UserPanel = () => {
         <title>Panel de Usuario</title>
         <link rel="canonical" href="http://mysite.com/example" />
       </Helmet>
-      <Navbar/>
+      <Navbar />
 
       <div className={styles.main}>
-        
+
         <div className={`container ${styles.container}`}>
 
           {loading ? <Loading /> :
@@ -75,21 +74,21 @@ const SalesSection = ({ saleList }) => {
   const navigate = useNavigate();
   return (
     <>
-    <Row className='justify-content-center align-items-center'>
-      <Col xs={12} lg={10} xl={8} className={styles.box}>
-        <div className={styles.header}>
-          <h1 className={styles.title}>Historial de compras</h1>
-        </div>
-        {saleList && saleList.length > 0 ? (
-          <SalesTable userSales={saleList} />
-        ) : (
-          <>
-            <p>Todavía no ha realizado compras</p>
-            <Button variant="primary" onClick={() => navigate("/")}> Ir a comprar </Button>
-          </>
-        )}
-      </Col>
-    </Row>    
+      <Row className='justify-content-center align-items-center'>
+        <Col xs={12} lg={10} xl={8} className={styles.box}>
+          <div className={styles.header}>
+            <h1 className={styles.title}>Historial de compras</h1>
+          </div>
+          {saleList && saleList.length > 0 ? (
+            <SalesTable userSales={saleList} />
+          ) : (
+            <>
+              <p>Todavía no ha realizado compras</p>
+              <Button variant="primary" onClick={() => navigate("/")}> Ir a comprar </Button>
+            </>
+          )}
+        </Col>
+      </Row>
     </>
   )
 }
@@ -104,10 +103,10 @@ const UserSection = ({ user }) => {
         </div>
         <Col sm={6} className={`d-flex justify-content-center ${styles.box}>`}>
           <div className={styles.box}>
-          <LazyLoadImage effect='blur' src={user.urlImg} loading='lazy' className="w-25" alt={`image-perfil`} />
+            <LazyLoadImage effect='blur' src={user.urlImg} loading='lazy' className="w-25" alt={`image-perfil`} />
 
             <div>
-              <h6 style={{ display: "inline-block", paddingRight: "10px", color: "white"}}>Nombre: </h6>
+              <h6 style={{ display: "inline-block", paddingRight: "10px", color: "white" }}>Nombre: </h6>
               <p style={{ display: "inline-block" }}>{user.firstName}</p>
             </div>
             <div>
@@ -120,7 +119,7 @@ const UserSection = ({ user }) => {
             </div>
             <div>
               <h6 style={{ display: "inline-block", paddingRight: "10px", color: "white" }}>Rol: </h6>
-              <p style={{ display: "inline-block" }}>{user.role === "ROLE_PRO" ? "Profeccional" : "Comprador" }</p>
+              <p style={{ display: "inline-block" }}>{user.role === "ROLE_PRO" ? "Profeccional" : "Comprador"}</p>
             </div>
           </div>
         </Col>
@@ -144,24 +143,14 @@ const UserButtons = () => {
   const handleOpenModalEdit = () => setShowModalEdit(true);
   const [loading, setLoading] = useState(false);
 
-  const prepareRequest = (values) => {
-    const request = {
-      userId: user.id,
-      currentPassword: values.currentPassword,
-      newPassword: values.newPassword,
-      confirmationPassword: values.confirmationPassword
-    }
-    return request;
-  }
-
 
   const handleSubmit = (values) => {
-    const request = prepareRequest(values);
-    useSendRequest(request, setLoading, changePasswordRequest, handleCloseModal );
+    const request = usePrepareRequest(user, values, true);
+    useSendRequest(request, setLoading, changePasswordRequest, handleCloseModal);
   }
 
   const submitEdit = (values) => {
-    const request = prepareRequest(values);
+    const request = usePrepareRequest(user, values, false);
     useSendRequest(request, setLoading);
   }
 
@@ -169,7 +158,7 @@ const UserButtons = () => {
     <>
       <Row className='d-flex justify-content-center align-items-center'>
         <Col xs={6} sm={6} className="d-flex gap-3">
-          <Button onClick={handleOpenModal} className='fw-bold'>Cambiar contraseña</Button>
+          <Button onClick={handleOpenModal} className='fw-bold btn-success'>Cambiar contraseña</Button>
           <Button onClick={handleOpenModalEdit} className='fw-bold'>Editar Perfil</Button>
         </Col>
       </Row>
@@ -187,7 +176,7 @@ const UserButtons = () => {
             <ClimbingBoxLoader color="rgba(239, 239, 239, 1)" />
           </div>
           :
-          <EditPerfiles handleSubmit={submitEdit} />}
+          <EditPerfiles handleSubmit={submitEdit} user={user} />}
       </Modal>
     </>
   );
