@@ -1,11 +1,12 @@
 {
-  "name": "proyecto-final-front-end-softek",
+  "name": "corralon-online",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "purge:css": "purgecss --safelist=content:**,node_modules/@headlessui/**/*.js", 
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },

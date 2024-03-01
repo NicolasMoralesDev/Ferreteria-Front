@@ -24,7 +24,7 @@ const CartWidget = () => {
   return (
 
     <div className={styles.cartWrapper} >
-      <div className={styles.cartIcon} aria-expanded="false" data-bs-toggle="dropdown">
+      <div className={styles.cartIcon} aria-expanded="true" data-bs-toggle="dropdown">
         <BsCart4 />
       </div>
       <div className="dropdown-menu mt-2">

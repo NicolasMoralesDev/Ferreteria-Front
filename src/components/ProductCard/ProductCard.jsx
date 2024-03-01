@@ -14,7 +14,7 @@ const ProductCard = ({product, handleClick}) => {
       <div className={`${styles.card}`} >
     
            <div className={styles.imgconte} onClick={() => {handleClick(product)}}>
-                  <LazyLoadImage loading='lazy' height={150} width={120}  effect="blur" src={product.imageUrl} className={styles.img} alt={product.name}/>
+                  <LazyLoadImage title={"img-"+ product.name} loading='lazy' height={150} width={120}  effect="blur" src={product.imageUrl} className={styles.img} alt={product.name}/>
                   </div>
                <div className="d-flex flex-column p-2">  
               <div className={`${styles.cardbody} w-100`} onClick={() => {handleClick(product)}}>

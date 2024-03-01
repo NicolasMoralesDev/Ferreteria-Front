@@ -5,7 +5,7 @@ const CardUsersPro = ({user}) => {
 
     return (
         <Card style={{ width: '18rem' }}>
-            <Card.Img variant="top" src=/* {user.urlImg} */ "https://us.123rf.com/450wm/belopoppa/belopoppa1809/belopoppa180900002/109693900-imagen-de-marcador-de-posici%C3%B3n-de-perfil-silueta-gris-sin-foto-de-una-persona-en-el-avatar-la.jpg" />
+            <Card.Img alt={'img-'+ user.nombre} title={'img-'+ user.nombre} variant="top" src=/* {user.urlImg} */ "https://us.123rf.com/450wm/belopoppa/belopoppa1809/belopoppa180900002/109693900-imagen-de-marcador-de-posici%C3%B3n-de-perfil-silueta-gris-sin-foto-de-una-persona-en-el-avatar-la.jpg" />
             <Card.Body>
                  <Card.Title className='text-center'>{user.nombre}</Card.Title> 
                  <Card.Subtitle>Precio del Servicio: $ {user.costo}</Card.Subtitle>
