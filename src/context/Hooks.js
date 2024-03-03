@@ -13,7 +13,7 @@ export const useUser = () => {
     throw new Error("useUser must be used within a UserProvider");
   }
   return context;
-}
+};
 
 export const useCompare = () => {
 
@@ -24,7 +24,7 @@ export const useCompare = () => {
   }
   return context; 
   
-}
+};
 
 // Hook for CartContext, returns the context value
 export const useCart = () => {
@@ -33,7 +33,7 @@ export const useCart = () => {
     throw new Error("useCart must be used within a CartProvider");
   }
   return context;
-}
+};
 
 export const useOnAdd = (product, amount, handleCloseModal, addToCart, isEnabled) => {
 
@@ -42,7 +42,7 @@ export const useOnAdd = (product, amount, handleCloseModal, addToCart, isEnabled
     handleCloseModal();
   }
 
-}
+};
 
 export const useProductPdf = (cart) => {
   const product = [];
@@ -74,7 +74,7 @@ export const useProductPdf = (cart) => {
 
   return product;
 
-}
+};
 
 export const useStorage = ( response) => {
 
@@ -85,9 +85,10 @@ export const useStorage = ( response) => {
     location.replace("/productos");
 
 
-}
+};
 
 export const useAlert = (response, status) => {
+
   if (response.status == status) {
     Swal.fire({
     title: response.data.msg,
@@ -104,7 +105,7 @@ export const useAlert = (response, status) => {
       confirmButtonColor: '#009EE3',
     });
   }
-}
+};
 
 export const useOptions = {
     margin: 30,
@@ -134,33 +135,14 @@ export const useOptions = {
 
 export const useSendRequest = async (request, setLoading, funcion, handleCloseModal) => {
 
-  try {
+  
     setLoading(true);
     const response = await funcion(request);
     setLoading(false);
-    if (response.status == 200) {
-      Swal.fire({
-        icon: 'success',
-        title: 'Contraseña cambiada con éxito',
-        showConfirmButton: false,
-        timer: 1500
-      })
-      handleCloseModal();
-    } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Algo salió mal, intente nuevamente',
-      })
-    }
-  } catch (error) {
-    Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: 'Algo salió mal, intente nuevamente',
-    })
-  }
-}
+    useAlert(response, 200);
+    handleCloseModal();
+
+};
 
 export const usePrepareRequest = (user, values, isRecoverPassword) => {
   
@@ -182,10 +164,11 @@ export const usePrepareRequest = (user, values, isRecoverPassword) => {
       lastName: values.lastName,
       costo: values.costo,
       firstName: values.firstName,
-      email: values.email
+      email: values.email,
+      rol: values.rol
     }
     return request;
 
   }
  
-}
+};

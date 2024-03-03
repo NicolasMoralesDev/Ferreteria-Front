@@ -7,7 +7,7 @@ export const loginRequest = async (data) => {
   } catch (error) {
     return error
   }
-}
+};
 
 export const registerRequest = async (data) => {
   try {
@@ -17,7 +17,7 @@ export const registerRequest = async (data) => {
     console.log(error)
     return error
   }
-}
+};
 
 /**
  * This method is used to provide the "change password" functionality. In order to use it, the user must be logged in.
@@ -37,7 +37,7 @@ export const changePasswordRequest = async (data) => {
   } catch (error) {
     return error;
   }
-} 
+};
 
 export const changePasswordEmail = async (data) => {
   try {
@@ -46,7 +46,7 @@ export const changePasswordEmail = async (data) => {
   } catch (error) {
     return error;
   }
-} 
+}; 
 
 export const sendEmailLink = async (data) => {
   try {
@@ -55,7 +55,7 @@ export const sendEmailLink = async (data) => {
   } catch (error) {
     return error
   }
-}
+};
 
 export const getUsers = async () => {
   try {
@@ -78,6 +78,19 @@ export const getAllUsersPro = async () => {
     return response.data;
   } catch (error) {
     console.error("Error al obtener la lista de usuarios profeccionales", error);
+    throw error;
+  }
+};
+
+export const editUser = async (user) => {
+ 
+  try {
+
+    const response = await axiosConf.put(`user/edit`, user);
+    console.log(response);
+    return response;  
+
+  } catch (error) {
     throw error;
   }
 };

@@ -24,7 +24,8 @@ const EditPerfiles = ({ handleSubmit, user }) => {
         firstName: user.firstName,
         lastName: user.lastName,
         costo: user.costo,
-        email: user.email
+        email: user.email,
+        rol: user.role
       }}
       validationSchema={validationSchema}
       onSubmit={handleSubmit}

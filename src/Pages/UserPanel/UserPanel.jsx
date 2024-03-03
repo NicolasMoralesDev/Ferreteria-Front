@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Loading from '../../components/Loading/Loading';
 import ChangePasswordForm from '../../components/ChangePasswordForm/ChangePasswordForm';
-import { changePasswordRequest } from '../../utils/fetchUser';
+import { changePasswordRequest, editUser } from '../../utils/fetchUser';
 import { ClimbingBoxLoader } from "react-spinners"
 import { Helmet } from 'react-helmet';
 import { PaginationContext } from '../../context/PaginationContext';
@@ -151,7 +151,7 @@ const UserButtons = () => {
 
   const submitEdit = (values) => {
     const request = usePrepareRequest(user, values, false);
-    useSendRequest(request, setLoading);
+    useSendRequest(request, setLoading, editUser, handleCloseModalEdit);
   }
 
   return (
