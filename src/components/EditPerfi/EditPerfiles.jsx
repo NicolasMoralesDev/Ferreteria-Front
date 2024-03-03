@@ -60,7 +60,9 @@ const EditPerfiles = ({ handleSubmit, user }) => {
               variant='danger'
             />
           </div>
-          <div className='mb-3'>
+          { user.rol == "ROLE_PRO" ?
+
+            <div className='mb-3'>
             <label htmlFor='costo'>Costo de Servicios:</label>
             <Field
               type='number'
@@ -74,6 +76,9 @@ const EditPerfiles = ({ handleSubmit, user }) => {
               variant='danger'
             />
           </div>
+          :
+          <></>
+          }
           <div className='mb-3'>
             <label htmlFor='urlImg'>Foto de Perfil:</label>
             <Field

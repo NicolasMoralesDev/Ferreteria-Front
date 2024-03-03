@@ -87,7 +87,6 @@ export const editUser = async (user) => {
   try {
 
     const response = await axiosConf.put(`user/edit`, user);
-    console.log(response);
     return response;  
 
   } catch (error) {

@@ -13,7 +13,7 @@ export const getAllProducts = async (page = 0, limit = 10) => {
         return error;
     }
 
-}
+};
 
 export const getProduct = async (id) => {
 
@@ -26,7 +26,7 @@ export const getProduct = async (id) => {
         return error;
     }
 
-}
+};
 
 export const getProductByQuery = async (page = 0, query) => {
 
@@ -39,9 +39,7 @@ export const getProductByQuery = async (page = 0, query) => {
         return error;
     }
 
-}
-
-
+};
 
 export const findProductsSubCategory = async (subCategory, page = 0) => {
 
@@ -55,7 +53,7 @@ export const findProductsSubCategory = async (subCategory, page = 0) => {
         return error;
     }
 
-}
+};
 
 export const findProductsByBrand = async (brand, page = 0) => {
 
@@ -69,7 +67,7 @@ export const findProductsByBrand = async (brand, page = 0) => {
         return error;
     }
 
-}
+};
 
 export const getProductByCategory = async (category, page = 0) => {
 
@@ -82,7 +80,7 @@ export const getProductByCategory = async (category, page = 0) => {
         return error;
     }
 
-}
+};
 
 export const getCategory = async () => {
 
@@ -96,7 +94,7 @@ export const getCategory = async () => {
         return error;
     }
 
-}
+};
 
 /* Requests Admin */
 
@@ -112,7 +110,7 @@ export const deleteProduct = async (id) => {
         return error;
     }
 
-}
+};
 
 export const addProduct = async (product) => {
 
@@ -125,7 +123,7 @@ export const addProduct = async (product) => {
         return error;
     }
 
-}
+};
 
 export const updateProduct = async (updatedProductData) => {
     try {
@@ -149,7 +147,7 @@ export const postSubCategory = async (subCategory) => {
     } catch (error) {
         return error;
     }
-}
+};
 
 
 export const getSubcategory = async () => {
@@ -210,7 +208,7 @@ export const postBrand = async (formData) => {
     } catch (error) {
         return error;
     }
-}
+};
 
 export const modifyTitle = async (data) => {
 
@@ -225,7 +223,7 @@ export const modifyTitle = async (data) => {
         return error;
     }
 
-}
+};
 
 export const deleteBrands = async (id) => {
 
@@ -238,4 +236,4 @@ export const deleteBrands = async (id) => {
     } catch (error) {
         return error;
     }
-}
+};
