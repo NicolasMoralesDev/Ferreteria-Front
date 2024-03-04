@@ -101,9 +101,9 @@ const UserSection = ({ user }) => {
         <div className={`d-flex flex-wrap justify-content-center ${styles.header}`}>
           <h1 className={`${styles.title}`}>Datos de usuario</h1>
         </div>
-        <Col sm={12} xs={12}  md={6} className={`d-flex text-center  ${styles.box}>`}>
+        <Col sm={12} xs={12} md={6} className={`d-flex text-center  ${styles.box}>`}>
           <div className={`${styles.box}`}>
-            <LazyLoadImage effect='blur' src={user.urlImg} loading='lazy' className="p-2" alt={`image-perfil`} width="65%"/>
+            <LazyLoadImage effect='blur' src={user.urlImg} loading='lazy' className="p-2" alt={`image-perfil`} width="65%" />
             <div className='text-justify'>
               <h6 style={{ display: "inline-block", paddingRight: "10px", color: "white" }}>Nombre: </h6>
               <p style={{ display: "inline-block" }}>{user.firstName}</p>
@@ -176,7 +176,7 @@ const UserButtons = () => {
           </div>
           :
           <EditPerfiles handleSubmit={submitEdit} user={user} />}
-          
+
       </Modal>
     </>
   );

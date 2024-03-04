@@ -94,7 +94,7 @@ const RegisterForm = ({ handleSubmit, secondaryButton = null, titleStyle }) => {
             <option value="" disabled>Selecciona una opcion</option>
 
             <option value={"ROLE_USER"} >comprador</option>
-            <option value={"ROLE_PRO"} >profeccional</option>
+            <option value={"ROLE_PRO"} >profesional</option>
 
             
           </Field>

@@ -338,7 +338,7 @@ const CheckoutModal = () => {
                 <option value="" disabled>Selecciona un Flete</option>
                 {
                   userPro.map(i =>
-                    <option value={i.user.id} key={uuidv4()} >costo: {i.costo}</option>)
+                    <option value={i.user.id} key={uuidv4()} >{i.nombre} --- ${i.costo}</option>)
                 }
               </Field>
               <ErrorMessage name="userFlete" component={Alert} variant="danger" />

@@ -27,7 +27,7 @@ const CompareProduct = () => {
 
                         compare.map((product) => (
 
-                            <Col xs={12} lg={12} xl={3} className='d-flex gap-3 justify-content-center' key={uuidv4()}>
+                            <Col xs={12} lg={6} xl={3} className='d-flex gap-3 justify-content-center g-5' key={uuidv4()}>
                                 <Card style={{ width: '15rem' }} className='p-2'>
                                     <div className='w-100 text-center p-2'>
                                         <LazyLoadImage effect='blur' src={product.product.imageUrl} alt={product.product.name} style={{ maxWidth: "100px" }} />
