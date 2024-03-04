@@ -20,22 +20,27 @@ const EditPerfiles = ({ handleSubmit, user }) => {
       return;
     }
     updateUrl(result?.info?.secure_url);
-
   }
+
+  
 
   
   const handleChange = (e) => {
 
     const { name, value } = e.target;
-   data.urlImg = url;
+    data.urlImg = url;
     setdata((prevState) => ({ ...prevState, [name]: value })); 
     
 }
+  
+  if (url != undefined) {
+    data.urlImg = url;
+  }
 
-data.urlImg = url;
   return (
       <BootstrapForm  onSubmit={()=> handleSubmit(data)} className="d-flex justify-content-center">
         <div className='col-8'>
+        <p className='text-center text-black'> Cierre seccion y vuelva a ingresar para ver reflejados los cambios</p>
           <div className='mb-3'>
             <label htmlFor='firstName'>Nombre:</label>
             <input
@@ -78,7 +83,7 @@ data.urlImg = url;
           <></>
           }
           <div className='mb-3'>
-            <label>Foto de Perfil:</label>
+            <label className='p-2'>Foto de Perfil :</label>
             <UploadWidget onUpload={handleOnUpload} name="urlImg" id="url">
             {({ open }) => {
               function handleOnClick(e) {
@@ -105,6 +110,7 @@ data.urlImg = url;
               id='email'
             />
           </div>
+          
           <Button  type='submit' className='me-2 fw-bold'>
             Guardar Cambios
           </Button>

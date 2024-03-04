@@ -60,8 +60,8 @@ const UserPanel = () => {
 
           {loading ? <Loading /> :
             <>
-              <SalesSection saleList={saleList} />
               <UserSection user={user} />
+              <SalesSection saleList={saleList} />
             </>
           }
         </div>
@@ -97,15 +97,14 @@ const UserSection = ({ user }) => {
 
   return (
     <>
-      <Row className='d-flex justify-content-center align-items-center'>
-        <div className={`d-flex justify-content-center ${styles.header}`}>
-          <h1 className={styles.title}>Datos de usuario</h1>
+      <Row className='d-flex mt-5 justify-content-center align-items-center flex-wrap'>
+        <div className={`d-flex flex-wrap justify-content-center ${styles.header}`}>
+          <h1 className={`${styles.title}`}>Datos de usuario</h1>
         </div>
-        <Col sm={6} className={`d-flex justify-content-center ${styles.box}>`}>
-          <div className={styles.box}>
-            <LazyLoadImage effect='blur' src={user.urlImg} loading='lazy' className="w-25" alt={`image-perfil`} />
-
-            <div>
+        <Col sm={12} xs={12}  md={6} className={`d-flex text-center  ${styles.box}>`}>
+          <div className={`${styles.box}`}>
+            <LazyLoadImage effect='blur' src={user.urlImg} loading='lazy' className="p-2" alt={`image-perfil`} width="65%"/>
+            <div className='text-justify'>
               <h6 style={{ display: "inline-block", paddingRight: "10px", color: "white" }}>Nombre: </h6>
               <p style={{ display: "inline-block" }}>{user.firstName}</p>
             </div>
@@ -114,16 +113,16 @@ const UserSection = ({ user }) => {
               <p style={{ display: "inline-block" }}>{user.lastName}</p>
             </div>
             <div>
-              <h6 style={{ display: "inline-block", paddingRight: "10px", color: "white" }}>Email: </h6>
+              <h6 style={{ display: "inline-block", paddingRight: "10px", color: "white" }}>Email:</h6>
               <p style={{ display: "inline-block" }}>{user.email}</p>
             </div>
             <div>
-              <h6 style={{ display: "inline-block", paddingRight: "10px", color: "white" }}>Rol: </h6>
+              <h6 style={{ display: "inline-block", paddingRight: "10px", color: "white" }}>Usuario: </h6>
               <p style={{ display: "inline-block" }}>{user.role === "ROLE_PRO" ? "Profeccional" : "Comprador"}</p>
             </div>
           </div>
         </Col>
-        <Col sm={6} className={styles.box}>
+        <Col sm={10} xs={12} md={7} className={styles.box}>
           <UserButtons />
         </Col>
       </Row>
@@ -157,7 +156,7 @@ const UserButtons = () => {
   return (
     <>
       <Row className='d-flex justify-content-center align-items-center'>
-        <Col xs={6} sm={6} className="d-flex gap-3">
+        <Col xs={12} sm={12} md={12} className="d-flex gap-3 justify-content-center align-items-center">
           <Button onClick={handleOpenModal} className='fw-bold btn-success'>Cambiar contraseña</Button>
           <Button onClick={handleOpenModalEdit} className='fw-bold'>Editar Perfil</Button>
         </Col>
@@ -177,6 +176,7 @@ const UserButtons = () => {
           </div>
           :
           <EditPerfiles handleSubmit={submitEdit} user={user} />}
+          
       </Modal>
     </>
   );
