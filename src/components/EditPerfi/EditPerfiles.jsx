@@ -1,118 +1,115 @@
 /* eslint-disable react/prop-types */
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { Button, Form as BootstrapForm, Alert } from 'react-bootstrap';
-import { number, object, string } from 'yup';
+import { useState } from 'react';
+import { Button, Form as BootstrapForm } from 'react-bootstrap';
+import UploadWidget from '../cloundinary/UploadWidget';
 
-const validationSchema = object().shape({
-  lastName: string()
-    .required('El Apellido es requerido'),
-  firstName: string()
-    .required('El nombre es requerido'),
-  urlImg: string()
-    .required('La foto de perfil es requerida'),
-  costo: number()
-  .required('El costo es requerido'),
-  email: string()
-  .required('El email es requerido'),
-});
+
 
 const EditPerfiles = ({ handleSubmit, user }) => {
+
+  const [url, updateUrl] = useState();
+  const [data, setdata] = useState(user);
+
+  function handleOnUpload(error, result, widget) {
+
+    if (error) {
+      updateError(error);
+      widget.close({
+        quiet: true
+      });
+      return;
+    }
+    updateUrl(result?.info?.secure_url);
+
+  }
+
+  
+  const handleChange = (e) => {
+
+    const { name, value } = e.target;
+   data.urlImg = url;
+    setdata((prevState) => ({ ...prevState, [name]: value })); 
+    
+}
+
+data.urlImg = url;
   return (
-    <Formik
-      initialValues={{
-        urlImg: user.urlImg,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        costo: user.costo,
-        email: user.email,
-        rol: user.role
-      }}
-      validationSchema={validationSchema}
-      onSubmit={handleSubmit}
-    >
-      <Form as={BootstrapForm} className="d-flex justify-content-center">
+      <BootstrapForm  onSubmit={()=> handleSubmit(data)} className="d-flex justify-content-center">
         <div className='col-8'>
           <div className='mb-3'>
             <label htmlFor='firstName'>Nombre:</label>
-            <Field
+            <input
+              required
+              onChange={handleChange}
               type='text'
               name='firstName'
+              value={data.firstName}
               className='form-control'
               id='firstName'
-            />
-            <ErrorMessage
-              name='currentPassword'
-              component={Alert}
-              variant='danger'
             />
           </div>
           <div className='mb-3'>
             <label htmlFor='lastName'>Apellido:</label>
-            <Field
+            <input
+              onChange={handleChange}
+              required
               type='text'
               name='lastName'
+              value={data.lastName}
               className='form-control'
               id='lastName'
-            />
-            <ErrorMessage
-              name='lastName'
-              component={Alert}
-              variant='danger'
             />
           </div>
           { user.rol == "ROLE_PRO" ?
 
             <div className='mb-3'>
             <label htmlFor='costo'>Costo de Servicios:</label>
-            <Field
+            <input
+              required
+              onChange={handleChange}
+              value={data.costo}
               type='number'
               name='costo'
               className='form-control'
               id='costo'
-            />
-            <ErrorMessage
-              name='costo'
-              component={Alert}
-              variant='danger'
             />
           </div>
           :
           <></>
           }
           <div className='mb-3'>
-            <label htmlFor='urlImg'>Foto de Perfil:</label>
-            <Field
-              type='text'
-              name='urlImg'
-              className='form-control'
-              id='urlImg'
-            />
-            <ErrorMessage
-              name='urlImg'
-              component={Alert}
-              variant='danger'
-            />
+            <label>Foto de Perfil:</label>
+            <UploadWidget onUpload={handleOnUpload} name="urlImg" id="url">
+            {({ open }) => {
+              function handleOnClick(e) {
+                e.preventDefault();
+                open();
+              }
+              return (
+                <button onClick={handleOnClick}>
+                  Subir imagen
+                </button>
+              )
+            }}
+          </UploadWidget>
           </div>
           <div className='mb-3'>
             <label htmlFor='email'>Email:</label>
-            <Field
+            <input
+             required
+              onChange={handleChange}
+              value={data.email}
               type='email'
               name='email'
               className='form-control'
               id='email'
             />
-            <ErrorMessage
-              name='email'
-              component={Alert}
-              variant='danger'
-            />
           </div>
-          <Button type='submit' className='me-2 fw-bold'>
+          <Button  type='submit' className='me-2 fw-bold'>
             Guardar Cambios
           </Button>
         </div>
-      </Form>
-    </Formik>
+      </BootstrapForm>
   );
 };
 

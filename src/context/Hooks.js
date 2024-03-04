@@ -148,7 +148,7 @@ export const usePrepareRequest = (user, values, isRecoverPassword) => {
   
   if (isRecoverPassword) {
 
-     const request = {
+    const request = {
     userId: user.id,
     currentPassword: values.currentPassword,
     newPassword: values.newPassword,
@@ -160,7 +160,7 @@ export const usePrepareRequest = (user, values, isRecoverPassword) => {
 
     const request = {
       userId: user.id,
-      urlImg: user.urlImg,
+      urlImg: values.urlImg,
       lastName: values.lastName,
       costo: values.costo,
       firstName: values.firstName,
