@@ -36,7 +36,7 @@ export const DeleteBrand = () => {
 
     return (
         <section className='container'>
-            <h6 className='text-light p-2'>ELIMINAR MARCA</h6>
+            <h6 className='text-black p-2'>ELIMINAR MARCA</h6>
 
             <div>
                 <Formik
@@ -47,7 +47,7 @@ export const DeleteBrand = () => {
                     <Form as={BoostrappForm}>
 
                         <div className='mb-3'>
-                            <label htmlFor="id" className='text-light p-2'> Seleccione una Marca</label>
+                            <label htmlFor="id" className='text-black p-2'> Seleccione una Marca</label>
                             <Field name="id" id="id" as={"select"} className='form-control p-2'  multiple={false}>
 
                                 {brand.map(i =>
@@ -109,15 +109,15 @@ export const ModifyBrands = () => {
 
     return (
         <section className='container mt-3'>
-            <h6 className='text-light p-2'>CAMBIAR TITULO</h6>
+            <h6 className='text-black p-2'>CAMBIAR TITULO</h6>
             
             <div>
                     <div className='d-flex flex-column gap-3'>
-                        <label htmlFor="title" className='text-light'> Ingrese el nuevo Titulo</label>
+                        <label htmlFor="title" className='text-black'> Ingrese el nuevo Titulo</label>
                         <input name="title" id="title" required className='p-2' type="text" placeholder="nuevo titulo..." onChange={(e)=> setTitulo(e.target.value) }/>
                     </div>
                     <div className='d-flex flex-column gap-3'>
-                        <label htmlFor="brand" className='text-light'> Seleccione una Marca</label>
+                        <label htmlFor="brand" className='text-black'> Seleccione una Marca</label>
                         <select name="brand" id="brand"  className='p-2' required  multiple={false} onChange={(e)=> setMarca(e.target.value)}>
                             {brand.map((i, index) =>
                                 <option value={index} id='brand' key={uuidv4()} >{i.title}</option>

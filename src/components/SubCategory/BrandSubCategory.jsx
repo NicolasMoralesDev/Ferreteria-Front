@@ -10,7 +10,7 @@ const BrandSubCategory = () => {
   return (
     <div className='container'>
       <Row>
-        <h2 className=" text-light mt-5 p-2">SUB CATEGORIAS</h2>
+        <h2 className="text-black mt-5 p-2">SUB CATEGORIAS</h2>
         <Col xs={12} lg={12} xl={6}>
           <CreateSubCategory />
         </Col>
@@ -21,7 +21,7 @@ const BrandSubCategory = () => {
           <ModifySubCategory />
         </Col>
       </Row>
-      <hr className='text-light' />
+      <hr className='text-black' />
       <Row>
         <h2 className=" text-light mt-5 p-2">MARCAS</h2>
         <Col xs={12} lg={12} xl={6}>

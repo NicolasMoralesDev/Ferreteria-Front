@@ -21,7 +21,7 @@ const CompareProduct = () => {
             </Helmet>
             <Navbar />
             <div>
-                <h1 className='text-center text-light mb-5 mt-5'>Comparador de productos</h1>
+                <h1 className='text-center products-title mb-5 mt-5'>Comparador de productos</h1>
                 <div className='container mt-5 mb-5'> <Row>
                     {compare && compare.length > 0 ?
 

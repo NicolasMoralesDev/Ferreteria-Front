@@ -20,7 +20,7 @@ const CreateSubCategory = () => {
 
   return (
     <section className='container'>
-      <h6 className='text-light mt-5 p-2'>CREAR</h6>
+      <h6 className='text-black mt-5 p-2'>CREAR</h6>
       <section>
         <Formik
           initialValues={{ name: '' }}
@@ -30,7 +30,7 @@ const CreateSubCategory = () => {
           <Form as={boostrappForm}>
 
             <div className="mb-3">
-              <label htmlFor="password" className={"text-light"}>Titulo</label>
+              <label htmlFor="password" className={"text-black"}>Titulo</label>
               <Field
                 type="text"
                 name="title"

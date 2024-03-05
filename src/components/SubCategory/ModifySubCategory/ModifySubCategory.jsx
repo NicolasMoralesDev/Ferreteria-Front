@@ -110,15 +110,15 @@ const ModifySubCategory = () => {
 
   return (
       <section className='container mt-3'>
-          <h6 className='text-light p-2'>CAMBIAR TITULO</h6>
+          <h6 className='text-black p-2'>CAMBIAR TITULO</h6>
           
           <div>
                   <div className='d-flex flex-column gap-3'>
-                      <label htmlFor="title" className='text-light'> Ingrese el nuevo Titulo</label>
+                      <label htmlFor="title" className='text-black'> Ingrese el nuevo Titulo</label>
                       <input name="title" id="title" required className='p-2' type="text" placeholder="nuevo titulo..." onChange={(e)=> setTitulo(e.target.value) }/>
                   </div>
                   <div className='d-flex flex-column gap-3'>
-                      <label htmlFor="subCate" className='text-light'> Seleccione una Sub Categoria</label>
+                      <label htmlFor="subCate" className='text-black'> Seleccione una Sub Categoria</label>
                       <select name="subCate" id="subCate"  className='p-2' required  multiple={false} onChange={(e)=> setSub(e.target.value)}>
 
                           {subCate.map((i, index) =>
