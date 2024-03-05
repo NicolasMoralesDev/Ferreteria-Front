@@ -18,7 +18,7 @@ const Navbar = () => {
           <div className="container d-flex justify-content-center">
             <div className="h-50">
               <Link className='nav-link  link-light fw-bold' to='/' >
-              <LazyLoadImage width={"80%"} height={"10%"} effect="blur" src={logo} loading="lazy" alt="Logo del Sitio" className="mx-auto img-fluid logo-nav p-2"/>
+              <LazyLoadImage width={"120%"} height={"10%"} effect="blur" src={logo} loading="lazy" alt="Logo del Sitio" className="mx-auto img-fluid logo-nav p-2"/>
               </Link>
             </div>
           </div>

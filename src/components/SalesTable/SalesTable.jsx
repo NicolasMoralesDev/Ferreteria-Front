@@ -59,7 +59,7 @@ export const SalesTable = ({ userSales }) => {
 
     return (
         <div>
-            <div className="mt-4">
+            <div className="mt-4 shadow-lg">
                 <Suspense fallback={<Loading />}>
                     {userSales.length > 0 ? (
                         <Table responsive className="table">

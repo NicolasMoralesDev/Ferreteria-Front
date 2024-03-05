@@ -35,11 +35,12 @@ const AdminPanel = () => {
             <div className='container mb-5 '>
 
                 <div className="row mx-auto container-admin">
-                    <div className="col-12 col-md-2 mt-5">
-                        <div className="accordion accordion-flush" id="accordionFlush">
-                            <div>
-                                <h2>Secciones</h2>
-                            </div>
+                    <div className="col-12 col-md-2 mt-5 ">
+                        <div>
+                            <h2 className='text-center'>Secciones</h2>
+                        </div>
+                        <div className="accordion accordion-flush shadow-lg" id="accordionFlush">
+
                             <div className="accordion-item">
                                 <h2 className="accordion-header">
                                     <button

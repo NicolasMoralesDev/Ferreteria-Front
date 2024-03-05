@@ -77,6 +77,11 @@ export const DeleteBrand = () => {
 
 export const ModifyBrands = () => {
 
+    
+    const validationSchema = yup.object().shape({
+        id: yup.number().required('La Marca es requerida!'),
+    });
+
     const [brand, setBrand] = useState([{}]);
     const [titulo, setTitulo] = useState("");
     const [marca, setMarca] = useState(0);
@@ -118,7 +123,7 @@ export const ModifyBrands = () => {
                     </div>
                     <div className='d-flex flex-column gap-3'>
                         <label htmlFor="brand" className='text-black'> Seleccione una Marca</label>
-                        <select name="brand" id="brand"  className='p-2' required  multiple={false} onChange={(e)=> setMarca(e.target.value)}>
+                        <select name="brand" id="brand"  className='p-2' required   onChange={(e)=> setMarca(e.target.value)}>
                             {brand.map((i, index) =>
                                 <option value={index} id='brand' key={uuidv4()} >{i.title}</option>
                             )

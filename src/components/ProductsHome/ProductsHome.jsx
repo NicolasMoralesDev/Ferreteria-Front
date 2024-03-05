@@ -53,7 +53,7 @@ const ProductsHome = () => {
 
   return (
 
-    <main className="container mb-5">
+    <section className="container mb-5">
       <h1 className="text-center m-5 products-title">ULTIMOS INGRESOS</h1>
       {products && products.length > 1 ?
         <ReactOwlCarousel className='owl-theme' loop margin={11}   {...useOptions}>
@@ -74,7 +74,7 @@ const ProductsHome = () => {
         <Modal show={showModal} handleClose={handleCloseModal} title={selectedProduct.name}>
           <ProductDetail product={selectedProduct} handleCloseModal={handleCloseModal} />
         </Modal>}
-    </main>
+    </section>
   )
 }
 

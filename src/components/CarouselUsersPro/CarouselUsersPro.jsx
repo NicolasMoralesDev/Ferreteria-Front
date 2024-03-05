@@ -24,10 +24,10 @@ const CarouselUsersPro = () => {
     }, [])
     
   return (
-    <main className="container mb-5">
+    <section className="container mb-5">
     <h1 className="text-center m-5 products-title">NUESTROS PROFECIONALES</h1>
     {users && users.length > 0 ?
-      <ReactOwlCarousel className='owl-theme' loop margin={11}   {...useOptions}>
+      <ReactOwlCarousel className='owl-theme h-50' loop margin={11}   {...useOptions}>
 
         {
           users.map((user) => (
@@ -41,7 +41,7 @@ const CarouselUsersPro = () => {
       <h2 className="text-center">Sin Profesionales</h2>
 
     }
-    </main>
+    </section>
   )
 }
 
