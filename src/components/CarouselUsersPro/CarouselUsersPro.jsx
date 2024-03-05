@@ -31,7 +31,7 @@ const CarouselUsersPro = () => {
 
         {
           users.map((user) => (
-            <div key={uuidv4()} className='item d-flex flex-column '>
+            <div key={uuidv4()} className='item d-flex flex-column justify-content-center align-items-center'>
               <CardUsersPro className="card-orange" user={user}  /* handleClick={handleProductClick} */ /> 
             </div>
           )

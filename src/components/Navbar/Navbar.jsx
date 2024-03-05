@@ -13,12 +13,12 @@ const Navbar = () => {
   return (
     <div className="container-fluid navbar-contenenedor">
 
-      <Row className="d-flex align-items-center justify-content-around gap-3 pt-2">
+      <Row className="d-flex align-items-center justify-content-around gap-3 p-3">
         <Col xs={7} sm={4} md={2} className="d-flex justify-content-center">
           <div className="container d-flex justify-content-center">
             <div className="h-50">
               <Link className='nav-link  link-light fw-bold' to='/' >
-              <LazyLoadImage  effect="blur" src={logo} loading="lazy" alt="Logo del Sitio" className="mx-auto img-fluid bg-light logonav"/>
+              <LazyLoadImage width={"80%"} height={"10%"} effect="blur" src={logo} loading="lazy" alt="Logo del Sitio" className="mx-auto img-fluid logo-nav p-2"/>
               </Link>
             </div>
           </div>

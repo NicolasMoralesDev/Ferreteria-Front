@@ -140,7 +140,7 @@ const TableCheckout = () => {
           </button>
 
           <ExportAsPdf
-            fileName='Presupuesto Corralon-Online'
+            fileName='Presupuesto Te lo LLevo'
             data={data}
             headers={[/* "Imagen", */ "Nombre", "Medida", "Marca", "Precio", "Cantidad"]}
             headerStyles={{ fillColor: "red" }}

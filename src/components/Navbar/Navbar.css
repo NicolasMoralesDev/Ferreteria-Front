@@ -7,9 +7,8 @@
     background-color: rgb(226, 67, 9);
 }
 
-.logonav {
-    width: 70px;
-    border-radius: 100px;
+.logo-nav{
+    background-color: rgb(255, 217, 0);
 }
 
 .navbar-toggler-icon {

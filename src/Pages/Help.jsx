@@ -51,7 +51,7 @@ const Help = () => {
                 </div>
 
                 <div className="container mt-4  text-black">
-                    <h2>Corralon Online te ayuda, ¿Cuál es tu consulta?</h2>
+                    <h2>En Te lo LLevo, te ayudamos, ¿Cuál es tu consulta?</h2>
                     <ul>
                         <li>
                         <p><strong>Contactanos:</strong></p>

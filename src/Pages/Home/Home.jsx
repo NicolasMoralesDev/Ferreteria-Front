@@ -15,9 +15,9 @@ export default function Home() {
     <>
       <Helmet className="App">
         <meta charSet='utf-8' />
-        <title>El corralon | Inicio</title>
+        <title>Te lo LLevo | Inicio</title>
         <link rel='canonical' href='http://mysite.com/example' />
-        <meta name="description" content="Bienvenido a Corralon Online! Una web con los mejores precios en del mercado." />
+        <meta name="description" content="Bienvenido a Te lo llevo! Una web con los mejores precios en del mercado." />
       </Helmet>
       <Navbar />
       <main className='main-conteiner App'>

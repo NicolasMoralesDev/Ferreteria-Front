@@ -27,7 +27,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="text-center m-2">
-          <p className="fs-6">© Copyright 2024 corralon Online. All rights reserved</p>
+          <p className="fs-6">© Copyright 2024 Te lo LLevo. All rights reserved</p>
         </div>
 
       </div>
