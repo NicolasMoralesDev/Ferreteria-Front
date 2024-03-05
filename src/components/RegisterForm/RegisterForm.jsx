@@ -91,7 +91,7 @@ const RegisterForm = ({ handleSubmit, secondaryButton = null, titleStyle }) => {
             id='role'
             as="select"
           >
-            <option value="" disabled>Selecciona una opcion</option>
+            <option disabled>Selecciona una opcion</option>
 
             <option value={"ROLE_USER"} >comprador</option>
             <option value={"ROLE_PRO"} >profesional</option>

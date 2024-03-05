@@ -24,16 +24,23 @@ const TableCheckout = () => {
 
 
   const [showModal, setShowModal] = useState(false);
-  const { cart, removeFromCart } = useCart();
+  const [flete, setFlete] = useState();
+  const {cart, removeFromCart } = useCart();
 
   const data = useProductPdf(cart);
 
   const { isAuthenticated } = useUser();
   const navigate = useNavigate();
-  const total = cart.reduce(
+
+  let total = cart.reduce(
     (acc, item) => acc + item.amount * item.product.price,
     0
   );
+
+  if (flete != undefined) {
+      total = total + parseInt(flete);
+    }
+
 
   useEffect(() => {
 
@@ -148,12 +155,12 @@ const TableCheckout = () => {
           </ExportAsPdf>
         </div>
         <div className='d-flex w-50 fw-bold fs-4'>
-          {' '}
+          {''}
           <span>TOTAL = $ {total}</span>
         </div>
       </div>
       <Modal show={showModal} handleClose={handleCloseModal} title="Procesar compra">
-        <CheckoutModal />
+        <CheckoutModal setFlete={setFlete} total={total} />
       </Modal>
     </div>
   );
@@ -161,33 +168,29 @@ const TableCheckout = () => {
 
 export default TableCheckout;
 
-const CheckoutModal = () => {
+const CheckoutModal = ({setFlete, total}) => {
 
   const { cart, clearCart } = useCart();
   const [userPro, setUserPro] = useState([]);
+  const [usersPro, setUsersPro] = useState({...userPro});
+
   const { user } = useUser();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const total = cart.reduce(
-    (acc, item) => acc + item.amount * item.product.price,
-    0
-  );
+
 
   const getUsersPro = async () => {
 
     const request = await getAllUsersPro();
     setUserPro(request);
   }
-
   useEffect(() => {
 
     getUsersPro();
+   setUsersPro(userPro);
 
   }, [])
 
-  const totalItems = cart.reduce(
-    (acc, item) => acc + item.amount + item.amount, 0
-  );
 
   const validationSchema = object().shape({
     address: string().required('Requerido'),
@@ -333,12 +336,13 @@ const CheckoutModal = () => {
                 as="select"
                 name="userFlete"
                 className="form-control"
+                
                 id="userFlete"
               >
-                <option value="" disabled>Selecciona un Flete</option>
+                <option value="">Seleccione un flete</option>
                 {
                   userPro.map(i =>
-                    <option value={i.user.id} key={uuidv4()} >{i.nombre} --- ${i.costo}</option>)
+                    <option name="userFlete" value={i.user.id} key={uuidv4()} id={i.costo} onClick={setFlete(i.costo)} >{i.nombre} --- ${i.costo}</option>)
                 }
               </Field>
               <ErrorMessage name="userFlete" component={Alert} variant="danger" />

@@ -122,7 +122,6 @@ const AdminAddProduct = () => {
                         name="brand"
                         onChange={handleInputChange}
                     >
-                        <option value="">Selecciona una Marca</option>
 
                         { 
                             brand.map( i =>

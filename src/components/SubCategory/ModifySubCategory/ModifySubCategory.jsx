@@ -120,7 +120,6 @@ const ModifySubCategory = () => {
                   <div className='d-flex flex-column gap-3'>
                       <label htmlFor="subCate" className='text-light'> Seleccione una Sub Categoria</label>
                       <select name="subCate" id="subCate"  className='p-2' required  multiple={false} onChange={(e)=> setSub(e.target.value)}>
-                         <option value="" >Seleccione una Sub Categoria...</option>
 
                           {subCate.map((i, index) =>
                               <option value={index} id='subCate' key={uuidv4()} >{i.title}</option>

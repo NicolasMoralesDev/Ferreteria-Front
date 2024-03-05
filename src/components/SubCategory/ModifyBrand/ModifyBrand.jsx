@@ -119,8 +119,6 @@ export const ModifyBrands = () => {
                     <div className='d-flex flex-column gap-3'>
                         <label htmlFor="brand" className='text-light'> Seleccione una Marca</label>
                         <select name="brand" id="brand"  className='p-2' required  multiple={false} onChange={(e)=> setMarca(e.target.value)}>
-                           <option value="" >Seleccione una marca...</option>
-
                             {brand.map((i, index) =>
                                 <option value={index} id='brand' key={uuidv4()} >{i.title}</option>
                             )

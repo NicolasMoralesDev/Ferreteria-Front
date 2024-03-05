@@ -96,7 +96,7 @@ export const SalesTable = ({ userSales }) => {
                                                 <>
                                                     <select name="status" onChange={handleChange} id={index}>
 
-                                                        <option value=""> seleccione una opcion</option>
+                                                        <option> seleccione una opcion</option>
                                                         <option value="CANCELADA">cancelar</option>
                                                         <option value="APROBADA">aprobar</option>
                                                         <option value="PENDIENTE">pendiente</option>
@@ -108,7 +108,7 @@ export const SalesTable = ({ userSales }) => {
                                                 sale.status != "CANCELADA" && sale.status != "INFORMADA" && sale.status != "APROBADA" ?
                                                     <>
                                                         <select name="status" onChange={handleChange} id={index}>
-                                                            <option value=""> seleccione una opcion</option>
+                                                            <option> seleccione una opcion</option>
                                                             <option value="CANCELADA">cancelar</option>
                                                             <option value="INFORMADA">informar pago</option>
                                                         </select>
