@@ -11,9 +11,8 @@ const CardUsersPro = ({user}) => {
             <Card.Body>
                  <Card.Title className='text-center'>{user.nombre}</Card.Title> 
                  <Card.Subtitle>Precio del Servicio: $ {user.costo}</Card.Subtitle>
-                    
                 <Card.Text>
-             {result}
+             ⭐{ result }
                 </Card.Text>
                 <Button variant="primary" className='w-100 fw-bold'>ver reseñas</Button>
             </Card.Body>
