@@ -105,20 +105,20 @@ const UserSection = ({ user }) => {
           <div className={`${styles.box}`}>
             <LazyLoadImage effect='blur' src={user.urlImg} loading='lazy' className="p-2" alt={`image-perfil`} width="65%" />
             <div className='text-justify'>
-              <h6 style={{ display: "inline-block", paddingRight: "10px", color: "white" }}>Nombre: </h6>
+              <h6 style={{ display: "inline-block", paddingRight: "10px", color: "black" }}>Nombre: </h6>
               <p style={{ display: "inline-block" }}>{user.firstName}</p>
             </div>
             <div>
-              <h6 style={{ display: "inline-block", paddingRight: "10px", color: "white" }}>Apellido: </h6>
+              <h6 style={{ display: "inline-block", paddingRight: "10px", color: "black" }}>Apellido: </h6>
               <p style={{ display: "inline-block" }}>{user.lastName}</p>
             </div>
             <div>
-              <h6 style={{ display: "inline-block", paddingRight: "10px", color: "white" }}>Email:</h6>
+              <h6 style={{ display: "inline-block", paddingRight: "10px", color: "black" }}>Email:</h6>
               <p style={{ display: "inline-block" }}>{user.email}</p>
             </div>
             <div>
-              <h6 style={{ display: "inline-block", paddingRight: "10px", color: "white" }}>Usuario: </h6>
-              <p style={{ display: "inline-block" }}>{user.role === "ROLE_PRO" ? "Profeccional" : "Comprador"}</p>
+              <h6 style={{ display: "inline-block", paddingRight: "10px", color: "black" }}>Usuario: </h6>
+              <p style={{ display: "inline-block" }}>{user.role === "ROLE_PRO" ? "Profeccional" : user.role === "ROLE_ADMIN" ? "administrador" : "Comprador"}</p>
             </div>
           </div>
         </Col>

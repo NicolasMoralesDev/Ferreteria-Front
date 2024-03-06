@@ -9,10 +9,13 @@ import { useLocation } from 'react-router-dom';
 import { Table } from 'react-bootstrap';
 import { useAlert } from '../../context/Hooks';
 import Loading from '../Loading/Loading';
+import SalesEdit from '../SalesEdit/SalesEdit';
 
 export const SalesTable = ({ userSales }) => {
 
     const [showModal, setShowModal] = useState(false);
+    const [showModalFeed, setShowModalFeed] = useState(false);
+
     const [selectedSale, setSelectedSale] = useState(null);
 
     const ruta = useLocation();
@@ -20,6 +23,9 @@ export const SalesTable = ({ userSales }) => {
 
     const handleCloseModal = () => setShowModal(false);
     const handleOpenModal = () => setShowModal(true);
+
+    const handleCloseModalFeed = () => setShowModalFeed(false);
+    const handleOpenModalFeed = () => setShowModalFeed(true);
 
 
     const pay = async (sale) => {
@@ -33,9 +39,9 @@ export const SalesTable = ({ userSales }) => {
 
     }
 
-    const handleSelectSale = (sale) => {
+    const handleSelectSale = (sale, funcion) => {
         setSelectedSale(sale);
-        handleOpenModal();
+        funcion();
     }
 
     const handleChange = (e) => {
@@ -71,16 +77,17 @@ export const SalesTable = ({ userSales }) => {
                                     <th>Teléfono</th>
                                     <th>Estado</th>
                                     <th></th>
-                                    <th>Opcion Estado</th>
+                                    <th>Editar Estado</th>
                                     <th className='text-center p-2'>Detalle</th>
 
                                     {currentPath == "/admin_panel" ?
                                         <></>
                                         :
+                                        <>
                                         <th>Pagar</th>
-
+                                        <th>Reseña</th>
+                                        </>
                                     }
-
                                 </tr>
                             </thead>
                             <tbody>
@@ -129,7 +136,7 @@ export const SalesTable = ({ userSales }) => {
                                             }
                                         </td>
                                         <td>
-                                            <button className='btn btn-success fw-bold' onClick={() => handleSelectSale(sale)}>ver</button>
+                                            <button className='btn btn-success fw-bold' onClick={() => handleSelectSale(sale, handleOpenModal)}>ver</button>
                                         </td>
                                         <td>
                                             {
@@ -143,6 +150,10 @@ export const SalesTable = ({ userSales }) => {
                                                         <button className='btn btn-primary text-light fw-bold' disabled>Pagar</button>
 
                                             }
+                                        </td>
+                                        <td>
+                                        <button className='btn btn-info text-light fw-bold' onClick={()=> handleSelectSale(sale, handleOpenModalFeed)}>Dar reseña</button> 
+                                            
                                         </td>
                                     </tr>
                                 ))}
@@ -158,6 +169,9 @@ export const SalesTable = ({ userSales }) => {
             <Modal show={showModal} handleClose={handleCloseModal} title="Detalle de la compra">
                 <OrderDetail sale={selectedSale} />
             </Modal>
+            <Modal show={showModalFeed} handleClose={handleCloseModalFeed} title="Agregar Reseña:">
+          <SalesEdit sale={selectedSale} handleClose={handleCloseModalFeed}/>
+      </Modal>
             <div className='m-5 d-flex justify-content-center'><PaginationProduts /></div>
         </div>
     )
