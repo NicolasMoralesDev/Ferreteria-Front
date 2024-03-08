@@ -9,7 +9,7 @@ export const sendSale = async (sale) => {
     } catch (error) {
         return error;
     }
-}
+};
 
 export const payMd = async (sale) => {
     try {
@@ -20,8 +20,7 @@ export const payMd = async (sale) => {
     } catch (error) {
         return error;
     }
-}
-
+};
 
 export const getUserSales = async (idUser, page=0) => {
     
@@ -42,17 +41,30 @@ export const getAllSales = async (page=0) => {
         console.error("Error al obtener todas las ventas", error);
         throw error;
     }
-}
+};
 
 export const putStatusSale = async (sale) => {
 
     try {
-
+        
         const response = await axiosConf.put("user/sale/change", sale);
+        return response;  
+
+    } catch (error) {
+        
+        return error;
+    }
+};
+
+export const putSale = async (sale) => {
+
+    try {
+
+        const response = await axiosConf.put("user/sale/edit", sale);
         return response;
 
     } catch (error) {
         
         return error;
     }
-}
+};

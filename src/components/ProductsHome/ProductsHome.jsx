@@ -1,7 +1,7 @@
 import React from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { useEffect } from 'react';
-import { useCart } from '../../context/Hooks';
+import { useCart, useOptions } from '../../context/Hooks';
 import { useState } from 'react';
 import { getAllProducts } from '../../utils/fetchProductsList';
 import ProductCard from "../ProductCard/ProductCard";
@@ -16,7 +16,6 @@ const ProductsHome = () => {
 
 
   const { addToCart } = useCart();
-/*   const { page, setTotal } = useContext(PaginationContext); */
   const [loading, setLoading] = useState(true);
 
   const [products, setProducts] = useState([{}]);
@@ -26,10 +25,9 @@ const ProductsHome = () => {
 
   const getData = async () => {
 
-    const data = await getAllProducts();
+    const data = await getAllProducts(0,8);
 
     setProducts(data.productos);
- /*    setTotal(data.total) */
     setLoading(false);
 
   }
@@ -51,38 +49,14 @@ const ProductsHome = () => {
     setShowModal(false);
   }
 
-  const opciones = {
-    margin: 30,
-    responsiveClass: true,
-    nav: true,
-    dots: true,
-    autoplay: true,
-    smartSpeed: 1000,
-    responsive: {
-      0: {
-        items: 1,
-      },
-      400: {
-        items: 1,
-      },
-      600: {
-        items: 2,
-      },
-      700: {
-        items: 3,
-      },
-      1000: {
-        items: 4,
-      },
-    },
-  };
+
 
   return (
 
-    <main className="container mb-5">
+    <section className="container mb-5">
       <h1 className="text-center m-5 products-title">ULTIMOS INGRESOS</h1>
       {products && products.length > 1 ?
-        <ReactOwlCarousel className='owl-theme' loop margin={11}   {...opciones}>
+        <ReactOwlCarousel className='owl-theme' loop margin={11}   {...useOptions}>
 
           {
             products.map((product) => (
@@ -100,7 +74,7 @@ const ProductsHome = () => {
         <Modal show={showModal} handleClose={handleCloseModal} title={selectedProduct.name}>
           <ProductDetail product={selectedProduct} handleCloseModal={handleCloseModal} />
         </Modal>}
-    </main>
+    </section>
   )
 }
 

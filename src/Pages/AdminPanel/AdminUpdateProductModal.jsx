@@ -39,7 +39,6 @@ const AdminUpdateProductModal = ({ product, onClose, onSave }) => {
 
   useEffect(() => {
     getAllData();
-  
   }, [])
   
   const handleSave = () => {
@@ -137,7 +136,6 @@ const AdminUpdateProductModal = ({ product, onClose, onSave }) => {
             value={editedProduct.category}
             onChange={handleInputChange}
           >
-            <option value="" disabled>Selecciona una Sub Categoría</option>
             { subCategory.map( i =>
             <option value={i.title} key={uuidv4()}>{i.title}</option>
             )}

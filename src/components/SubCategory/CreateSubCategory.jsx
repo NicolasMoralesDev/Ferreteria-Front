@@ -4,7 +4,6 @@ import { ErrorMessage, Field, Form, Formik } from 'formik'
 import { Alert, Form as boostrappForm } from 'react-bootstrap'
 import * as yup from "yup"
 import { postSubCategory } from '../../utils/fetchProductsList'
-import { useAlert } from '../../context/Hooks'
 
 const CreateSubCategory = () => {
 
@@ -15,15 +14,13 @@ const CreateSubCategory = () => {
 
   const handleSubmit = async (formData) => {
 
-    const response = await postSubCategory(formData);
-
-    useAlert(response, 201);
+     await postSubCategory(formData);
 
   }
 
   return (
     <section className='container'>
-      <h6 className='text-light mt-5 p-2'>CREAR</h6>
+      <h6 className='text-black mt-5 p-2'>CREAR</h6>
       <section>
         <Formik
           initialValues={{ name: '' }}
@@ -33,7 +30,7 @@ const CreateSubCategory = () => {
           <Form as={boostrappForm}>
 
             <div className="mb-3">
-              <label htmlFor="password" className={"text-light"}>Titulo</label>
+              <label htmlFor="password" className={"text-black"}>Titulo</label>
               <Field
                 type="text"
                 name="title"

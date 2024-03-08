@@ -1,18 +1,19 @@
+import { useAlert } from "../context/Hooks";
 import axiosConf from "./axiosConf";
 
 
-export const getAllProducts = async (page = 0) => {
+export const getAllProducts = async (page = 0, limit = 10) => {
 
     try {
 
-        const response = await axiosConf.get(`public/products?page=${page}`);
+        const response = await axiosConf.get(`public/products?page=${page}&limit=${limit}`);
         return response.data;
 
     } catch (error) {
         return error;
     }
 
-}
+};
 
 export const getProduct = async (id) => {
 
@@ -25,7 +26,7 @@ export const getProduct = async (id) => {
         return error;
     }
 
-}
+};
 
 export const getProductByQuery = async (page = 0, query) => {
 
@@ -38,9 +39,7 @@ export const getProductByQuery = async (page = 0, query) => {
         return error;
     }
 
-}
-
-
+};
 
 export const findProductsSubCategory = async (subCategory, page = 0) => {
 
@@ -54,7 +53,7 @@ export const findProductsSubCategory = async (subCategory, page = 0) => {
         return error;
     }
 
-}
+};
 
 export const findProductsByBrand = async (brand, page = 0) => {
 
@@ -68,7 +67,7 @@ export const findProductsByBrand = async (brand, page = 0) => {
         return error;
     }
 
-}
+};
 
 export const getProductByCategory = async (category, page = 0) => {
 
@@ -81,7 +80,7 @@ export const getProductByCategory = async (category, page = 0) => {
         return error;
     }
 
-}
+};
 
 export const getCategory = async () => {
 
@@ -95,7 +94,7 @@ export const getCategory = async () => {
         return error;
     }
 
-}
+};
 
 /* Requests Admin */
 
@@ -111,20 +110,20 @@ export const deleteProduct = async (id) => {
         return error;
     }
 
-}
+};
 
 export const addProduct = async (product) => {
 
     try {
 
-       const response = await axiosConf.post(`admin/products`, product); 
-       return response.data.msg; 
+        const response = await axiosConf.post(`admin/products`, product);
+        return response.data.msg;
 
     } catch (error) {
         return error;
     }
 
-}
+};
 
 export const updateProduct = async (updatedProductData) => {
     try {
@@ -141,13 +140,14 @@ export const updateProduct = async (updatedProductData) => {
 export const postSubCategory = async (subCategory) => {
     try {
 
-        const response = await axiosConf.post("admin/create/subcategory", subCategory);
-        return response;
+        await axiosConf.post("admin/create/subcategory", subCategory).then((response) => useAlert(response, 201)).finally(() => setTimeout(() => {
+            location.reload()
+        }, 999));
 
     } catch (error) {
         return error;
     }
-}
+};
 
 
 export const getSubcategory = async () => {
@@ -159,6 +159,30 @@ export const getSubcategory = async () => {
         return error;
     }
 };
+
+
+export const modifyTitleSub = async (subCate) => {
+
+    try {
+
+        await axiosConf.put(`admin/edit/subcategory`, subCate[0]).then((response) => useAlert(response, 201)).finally(() => setTimeout(() => {
+            location.reload()
+        }, 999));
+
+    } catch (error) {
+        return error;
+    }
+};
+
+/* export const deleteSubCategoria = async (id) => {
+
+    try {
+        const response = await axiosConf.get(`public/get/subCategories`);
+        return response.data;
+    } catch (error) {
+        return error;
+    }
+}; */
 
 export const getBrand = async () => {
 
@@ -176,39 +200,40 @@ export const getBrand = async () => {
 export const postBrand = async (formData) => {
 
     try {
-        
-        const response = await axiosConf.post("admin/brand/create", formData);
 
-        return response;
+        await axiosConf.post("admin/brand/create", formData).then((response) => useAlert(response, 201)).finally(() => setTimeout(() => {
+            location.reload()
+        }, 999));
 
     } catch (error) {
         return error;
     }
-}
+};
 
 export const modifyTitle = async (data) => {
 
     try {
+        
+        await axiosConf.put("admin/brand/put", data[0]).then((response) => useAlert(response, 200)).finally(() => setTimeout(() => {
+            location.reload()
+        }, 999));
 
-        const responnse = await axiosConf.put("admin/brand/put", data[0])
-        return responnse; 
-        
     } catch (error) {
-        
+
         return error;
     }
 
-}
+};
 
 export const deleteBrands = async (id) => {
 
     try {
-        
-        const response = await axiosConf.delete(`admin/brand/deleteById?id=${id.id}`);
 
-        return response;
+        await axiosConf.delete(`admin/brand/deleteById?id=${id.id}`).then((response) => useAlert(response, 200)).finally(() => setTimeout(() => {
+            location.reload()
+        }, 999));
 
     } catch (error) {
         return error;
     }
-}
+};

@@ -20,8 +20,6 @@ const AdminAddProduct = () => {
     const [subCategory, setSubCategory] = useState([{}]);
     const [brand, setBrand] = useState([{}]);
 
-
-
     const [url, updateUrl] = useState();
     const [error, updateError] = useState();
 
@@ -83,8 +81,6 @@ const AdminAddProduct = () => {
         }
     };
 
-
-
     /**
      * handleOnUpload
      */
@@ -109,7 +105,6 @@ const AdminAddProduct = () => {
 
     }, [])
     
-
     return (
         <div className='container mt-3 mb-5'>
             <h2 className='mt-3 mb-3'>Agregar Producto</h2>
@@ -127,7 +122,6 @@ const AdminAddProduct = () => {
                         name="brand"
                         onChange={handleInputChange}
                     >
-                        <option value="">Selecciona una Marca</option>
 
                         { 
                             brand.map( i =>

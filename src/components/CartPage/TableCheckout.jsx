@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import Modal from '../Modal/Modal';
-import { object, string } from 'yup';
+import { number, object, string } from 'yup';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { Button, Form as BootstrapForm, Alert } from 'react-bootstrap';
 import { payMd, sendSale } from '../../utils/fetchSales';
@@ -17,21 +17,30 @@ import ItemCount from '../ProductDetail/ItemCount';
 import { useEffect } from 'react';
 import { ExportAsPdf } from 'react-export-table';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { getAllUsersPro } from '../../utils/fetchUser';
+import { v4 as uuidv4 } from "uuid";
 
 const TableCheckout = () => {
 
 
   const [showModal, setShowModal] = useState(false);
-  const { cart, removeFromCart } = useCart();
+  const [flete, setFlete] = useState();
+  const {cart, removeFromCart } = useCart();
 
   const data = useProductPdf(cart);
 
   const { isAuthenticated } = useUser();
   const navigate = useNavigate();
-  const total = cart.reduce(
+
+  let total = cart.reduce(
     (acc, item) => acc + item.amount * item.product.price,
     0
   );
+
+  if (flete != undefined) {
+      total = total + parseInt(flete);
+    }
+
 
   useEffect(() => {
 
@@ -131,9 +140,9 @@ const TableCheckout = () => {
           </button>
 
           <ExportAsPdf
-            fileName='Presupuesto Corralon-Online'
+            fileName='Presupuesto Te lo LLevo'
             data={data}
-            headers={[/* "Imagen", */ "Nombre","Medida", "Marca", "Precio", "Cantidad"]}
+            headers={[/* "Imagen", */ "Nombre", "Medida", "Marca", "Precio", "Cantidad"]}
             headerStyles={{ fillColor: "red" }}
             title="PRESUPUESTO"
             footerStyles={"background-color:black"}
@@ -146,12 +155,12 @@ const TableCheckout = () => {
           </ExportAsPdf>
         </div>
         <div className='d-flex w-50 fw-bold fs-4'>
-          {' '}
+          {''}
           <span>TOTAL = $ {total}</span>
         </div>
       </div>
       <Modal show={showModal} handleClose={handleCloseModal} title="Procesar compra">
-        <CheckoutModal />
+        <CheckoutModal setFlete={setFlete} total={total} />
       </Modal>
     </div>
   );
@@ -159,24 +168,34 @@ const TableCheckout = () => {
 
 export default TableCheckout;
 
-const CheckoutModal = () => {
+const CheckoutModal = ({setFlete, total}) => {
 
   const { cart, clearCart } = useCart();
+  const [userPro, setUserPro] = useState([]);
+  const [usersPro, setUsersPro] = useState({...userPro});
+
   const { user } = useUser();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const total = cart.reduce(
-    (acc, item) => acc + item.amount * item.product.price,
-    0
-  );
 
-  const totalItems = cart.reduce(
-    (acc, item) => acc + item.amount + item.amount, 0
-  );
+
+  const getUsersPro = async () => {
+
+    const request = await getAllUsersPro();
+    setUserPro(request);
+  }
+  useEffect(() => {
+
+    getUsersPro();
+   setUsersPro(userPro);
+
+  }, [])
+
 
   const validationSchema = object().shape({
     address: string().required('Requerido'),
     phone: string().required('Requerido'),
+    userFlete: number().required("Requerido")
   });
 
   const sendSaleRequest = async (shippingData) => {
@@ -185,7 +204,7 @@ const CheckoutModal = () => {
     return res;
   }
   const enviarPago = async () => {
-    const data = {id: user.id, price: total}
+    const data = { id: user.id, price: total }
     await payMd(data);
   }
 
@@ -199,7 +218,7 @@ const CheckoutModal = () => {
       phone: values.phone,
       status: "PENDIENTE",
       idUser: user.id,
-
+      userFlete: values.userFlete
     };
     return shippingData;
   }
@@ -265,7 +284,7 @@ const CheckoutModal = () => {
             <tr key={item.product.id}>
               <td>{item.product.name}</td>
               <td>${item.product.price}</td>
-              <td>{item.amount}</td>
+              <td className='text-center'>{item.amount}</td>
               <td>${item.product.price * item.amount}</td>
             </tr>
           ))}
@@ -284,12 +303,12 @@ const CheckoutModal = () => {
         </tfoot>
       </Table>
       <Formik
-        initialValues={{ address: '', phone: '' }}
+        initialValues={{ address: '', phone: '', userFlete: "" }}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
         <Form as={BootstrapForm}>
-          <div className="d-flex gap-4">
+          <div className="d-flex flex-wrap gap-4">
             <div className="mb-3">
               <label htmlFor="address">Dirección de entrega:</label>
               <Field
@@ -310,6 +329,23 @@ const CheckoutModal = () => {
                 id="phone"
               />
               <ErrorMessage name="phone" component={Alert} variant="danger" />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="userFlete">Seleccione el Flete:</label>
+              <Field
+                as="select"
+                name="userFlete"
+                className="form-control"
+                
+                id="userFlete"
+              >
+                <option value="">Seleccione un flete</option>
+                {
+                  userPro.map(i =>
+                    <option name="userFlete" value={i.user.id} key={uuidv4()} id={i.costo} onClick={setFlete(i.costo)} >{i.nombre} --- ${i.costo}</option>)
+                }
+              </Field>
+              <ErrorMessage name="userFlete" component={Alert} variant="danger" />
             </div>
           </div>
           <div className="d-flex justify-content-center">

@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { Suspense, lazy, useState } from "react";
+import { useCompare } from "../../../context/Hooks";
 const LazyOffcanva = lazy(() => import('../../OffCanvas/Offcanva'));
 
 
@@ -7,6 +8,7 @@ const NavbarLinks = () => {
 
   const location = useLocation();
   const currentPath = location.pathname;
+  const { compare } = useCompare();
 
   const [show, setShow] = useState(false);
 
@@ -50,13 +52,20 @@ const NavbarLinks = () => {
                 PRODUCTOS
               </Link>
             </li>
+            {compare.length > 1 ?
+              <li className='nav-item text-center mx-2'>
+                <Link className='nav-link mx-5 link-light fw-bold' to="/comparar">
+                  COMPARE PRODUCTOS
+                </Link>
+              </li> : <></>
+            }
           </ul>
         </div>
       </nav>
 
       <Suspense fallback={<div>Cargando Offcanva...</div>}>
-      <LazyOffcanva show={show} handleClose={handleClose} />
-    </Suspense>
+        <LazyOffcanva show={show} handleClose={handleClose} />
+      </Suspense>
     </>
   );
 };

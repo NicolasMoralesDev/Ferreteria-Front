@@ -21,13 +21,14 @@ const Footer = () => {
                   <h3>Contacto</h3>
             <ul>
               <li>Email: infocorralon@corralononline.com</li>
-              <li>WhatsApp: +54 - 011 - 1234565</li>
+              <li>WhatsApp: +54 9 236 451-9612 - +54 9 2364 38-0471</li>
+              <li>Instagram: @corralontelollevo</li>
             </ul>
             </div>
           </div>
         </div>
         <div className="text-center m-2">
-          <p className="fs-6">© Copyright 2024 corralon Online. All rights reserved</p>
+          <p className="fs-6">© Copyright 2024 Te lo LLevo. All rights reserved - Desarrollado por Luno</p>
         </div>
 
       </div>

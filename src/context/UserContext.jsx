@@ -23,6 +23,8 @@ export const UserProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isPro, setIsPro] = useState(false);
+
 
   const saveTokenToCookie = (token) => {
     // Expiration date 10hs
@@ -47,6 +49,7 @@ export const UserProvider = ({ children }) => {
       const decodedToken = jwtDecode(token);
       setUser({
         firstName: decodedToken.firstName,
+        urlImg: decodedToken.urlImg,
         lastName: decodedToken.lastName,
         email: decodedToken.sub,
         role: decodedToken.role,
@@ -54,6 +57,8 @@ export const UserProvider = ({ children }) => {
       });
       setIsAuthenticated(true);
       setIsAdmin(decodedToken.role === "ROLE_ADMIN");
+      setIsPro(decodedToken.role === "ROLE_PRO");
+
     } catch (err) {
       handleTokenError();
     }
@@ -135,6 +140,7 @@ export const UserProvider = ({ children }) => {
     logout,
     isAuthenticated,
     isAdmin,
+    isPro,
     register,
     loading
   };

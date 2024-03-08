@@ -29,8 +29,15 @@ export const OrderDetail = ({sale}) => {
       <p className="text-black">
         <strong>Total:</strong> ${total}
       </p>
+    
       <p className="text-black">
         <strong>Estado:</strong> {sale.status}
+      </p>  
+      <p className="text-black">
+        <strong>Reseña otorgada:</strong> {sale.feedback.observation}
+      </p>
+      <p className="text-black">
+        <strong>Estrellas:</strong> {sale.feedback.stars}
       </p>
     </div>
     

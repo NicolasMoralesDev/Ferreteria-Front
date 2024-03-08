@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { deleteBrands, getBrand, modifyTitle } from '../../../utils/fetchProductsList'
 import { v4 as uuidv4 } from "uuid";
-import { useAlert } from '../../../context/Hooks';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { Alert, Form as BoostrappForm } from 'react-bootstrap'
 import * as yup from "yup" 
@@ -24,9 +23,7 @@ export const DeleteBrand = () => {
 
     const deleteBrand = async (id) => {
 
-        const response = await deleteBrands(id);
-
-        useAlert(response, 200);
+     await deleteBrands(id);
 
     }
 
@@ -39,7 +36,7 @@ export const DeleteBrand = () => {
 
     return (
         <section className='container'>
-            <h6 className='text-light p-2'>ELIMINAR MARCA</h6>
+            <h6 className='text-black p-2'>ELIMINAR MARCA</h6>
 
             <div>
                 <Formik
@@ -50,7 +47,7 @@ export const DeleteBrand = () => {
                     <Form as={BoostrappForm}>
 
                         <div className='mb-3'>
-                            <label htmlFor="id" className='text-light p-2'> Seleccione una Marca</label>
+                            <label htmlFor="id" className='text-black p-2'> Seleccione una Marca</label>
                             <Field name="id" id="id" as={"select"} className='form-control p-2'  multiple={false}>
 
                                 {brand.map(i =>
@@ -80,6 +77,11 @@ export const DeleteBrand = () => {
 
 export const ModifyBrands = () => {
 
+    
+    const validationSchema = yup.object().shape({
+        id: yup.number().required('La Marca es requerida!'),
+    });
+
     const [brand, setBrand] = useState([{}]);
     const [titulo, setTitulo] = useState("");
     const [marca, setMarca] = useState(0);
@@ -92,8 +94,7 @@ export const ModifyBrands = () => {
         brandNew.push(brand[marca]);
         brandNew[0].title = titulo;
 
-        const response = await modifyTitle(brandNew);
-        useAlert(response, 200); 
+         await modifyTitle(brandNew);
 
     }
 
@@ -109,22 +110,20 @@ export const ModifyBrands = () => {
 
         getBrands();
 
-    }, [deleteBrands, modifyTitle]);
+    }, []);
 
     return (
         <section className='container mt-3'>
-            <h6 className='text-light p-2'>CAMBIAR TITULO</h6>
+            <h6 className='text-black p-2'>CAMBIAR TITULO</h6>
             
             <div>
                     <div className='d-flex flex-column gap-3'>
-                        <label htmlFor="title" className='text-light'> Ingrese el nuevo Titulo</label>
+                        <label htmlFor="title" className='text-black'> Ingrese el nuevo Titulo</label>
                         <input name="title" id="title" required className='p-2' type="text" placeholder="nuevo titulo..." onChange={(e)=> setTitulo(e.target.value) }/>
                     </div>
                     <div className='d-flex flex-column gap-3'>
-                        <label htmlFor="brand" className='text-light'> Seleccione una Marca</label>
-                        <select name="brand" id="brand"  className='p-2' required  multiple={false} onChange={(e)=> setMarca(e.target.value)}>
-                           <option value="" >Seleccione una marca...</option>
-
+                        <label htmlFor="brand" className='text-black'> Seleccione una Marca</label>
+                        <select name="brand" id="brand"  className='p-2' required   onChange={(e)=> setMarca(e.target.value)}>
                             {brand.map((i, index) =>
                                 <option value={index} id='brand' key={uuidv4()} >{i.title}</option>
                             )

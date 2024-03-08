@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Button, Col, Row } from 'react-bootstrap';
 import styles from './UserPanel.module.css';
-import { useUser } from '../../context/Hooks';
+import { usePrepareRequest, useSendRequest, useUser } from '../../context/Hooks';
 import { useContext, useState } from 'react';
 import Modal from '../../components/Modal/Modal';
 import { getUserSales } from '../../utils/fetchSales';
@@ -9,13 +9,14 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Loading from '../../components/Loading/Loading';
 import ChangePasswordForm from '../../components/ChangePasswordForm/ChangePasswordForm';
-import { changePasswordRequest } from '../../utils/fetchUser';
-import Swal from 'sweetalert2';
+import { changePasswordRequest, editUser } from '../../utils/fetchUser';
 import { ClimbingBoxLoader } from "react-spinners"
 import { Helmet } from 'react-helmet';
 import { PaginationContext } from '../../context/PaginationContext';
 import { SalesTable } from '../../components/SalesTable/SalesTable';
 import Navbar from '../../components/Navbar/Navbar';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import EditPerfiles from '../../components/EditPerfi/EditPerfiles';
 
 const UserPanel = () => {
 
@@ -51,14 +52,16 @@ const UserPanel = () => {
         <title>Panel de Usuario</title>
         <link rel="canonical" href="http://mysite.com/example" />
       </Helmet>
-      <Navbar/>
+      <Navbar />
 
       <div className={styles.main}>
+
         <div className={`container ${styles.container}`}>
+
           {loading ? <Loading /> :
             <>
-              <SalesSection saleList={saleList} />
               <UserSection user={user} />
+              <SalesSection saleList={saleList} />
             </>
           }
         </div>
@@ -71,48 +74,55 @@ const SalesSection = ({ saleList }) => {
   const navigate = useNavigate();
   return (
     <>
-    <Row className='justify-content-center align-items-center'>
-      <Col xs={12} lg={10} xl={8} className={styles.box}>
-        <div className={styles.header}>
-          <h1 className={styles.title}>Historial de compras</h1>
-        </div>
-        {saleList && saleList.length > 0 ? (
-          <SalesTable userSales={saleList} />
-        ) : (
-          <>
-            <p>Todavía no ha realizado compras</p>
-            <Button variant="primary" onClick={() => navigate("/")}> Ir a comprar </Button>
-          </>
-        )}
-      </Col>
-    </Row>    </>
+      <Row className='justify-content-center align-items-center'>
+        <Col xs={12} lg={10} xl={8} className={styles.box}>
+          <div className={styles.header}>
+            <h1 className={styles.title}>Historial de compras</h1>
+          </div>
+          {saleList && saleList.length > 0 ? (
+            <SalesTable userSales={saleList} />
+          ) : (
+            <>
+              <p>Todavía no ha realizado compras</p>
+              <Button variant="primary" onClick={() => navigate("/")}> Ir a comprar </Button>
+            </>
+          )}
+        </Col>
+      </Row>
+    </>
   )
 }
 
 const UserSection = ({ user }) => {
+
   return (
     <>
-      <Row className='d-flex justify-content-center align-items-center'>
-        <div className={`d-flex justify-content-center ${styles.header}`}>
-          <h1 className={styles.title}>Datos de usuario</h1>
+      <Row className='d-flex mt-5 justify-content-center align-items-center flex-wrap'>
+        <div className={`d-flex flex-wrap justify-content-center ${styles.header}`}>
+          <h1 className={`${styles.title}`}>Datos de usuario</h1>
         </div>
-        <Col sm={6} className={`d-flex justify-content-center ${styles.box}>`}>
-          <div className={styles.box}>
-            <div>
-              <h6 style={{ display: "inline-block", paddingRight: "10px", color: "white"}}>Nombre: </h6>
+        <Col sm={12} xs={12} md={6} className={`d-flex text-center  ${styles.box}>`}>
+          <div className={`${styles.box}`}>
+            <LazyLoadImage effect='blur' src={user.urlImg} loading='lazy' className="p-2" alt={`image-perfil`} width="65%" />
+            <div className='text-justify'>
+              <h6 style={{ display: "inline-block", paddingRight: "10px", color: "black" }}>Nombre: </h6>
               <p style={{ display: "inline-block" }}>{user.firstName}</p>
             </div>
             <div>
-              <h6 style={{ display: "inline-block", paddingRight: "10px", color: "white" }}>Apellido: </h6>
+              <h6 style={{ display: "inline-block", paddingRight: "10px", color: "black" }}>Apellido: </h6>
               <p style={{ display: "inline-block" }}>{user.lastName}</p>
             </div>
             <div>
-              <h6 style={{ display: "inline-block", paddingRight: "10px", color: "white" }}>Email: </h6>
+              <h6 style={{ display: "inline-block", paddingRight: "10px", color: "black" }}>Email:</h6>
               <p style={{ display: "inline-block" }}>{user.email}</p>
+            </div>
+            <div>
+              <h6 style={{ display: "inline-block", paddingRight: "10px", color: "black" }}>Usuario: </h6>
+              <p style={{ display: "inline-block" }}>{user.role === "ROLE_PRO" ? "Profeccional" : user.role === "ROLE_ADMIN" ? "administrador" : "Comprador"}</p>
             </div>
           </div>
         </Col>
-        <Col sm={6} className={styles.box}>
+        <Col sm={10} xs={12} md={7} className={styles.box}>
           <UserButtons />
         </Col>
       </Row>
@@ -123,61 +133,39 @@ const UserSection = ({ user }) => {
 
 const UserButtons = () => {
   const { user } = useUser();
+  const [userSelect, setUserSelect] = useState(null);
 
+  const [showModalEdit, setShowModalEdit] = useState(false);
   const [showModal, setShowModal] = useState(false);
+
   const handleCloseModal = () => setShowModal(false);
+  const handleCloseModalEdit = () => setShowModalEdit(false);
   const handleOpenModal = () => setShowModal(true);
+
+  const handleOpenModalEdit = (userSe) => { 
+    setShowModalEdit(true);
+    setUserSelect(userSe);
+
+  };
   const [loading, setLoading] = useState(false);
 
-  const prepareRequest = (values) => {
-    const request = {
-      userId: user.id,
-      currentPassword: values.currentPassword,
-      newPassword: values.newPassword,
-      confirmationPassword: values.confirmationPassword
-    }
-    return request;
-  }
-
-  const sendRequest = async (request) => {
-    try {
-      setLoading(true);
-      const response = await changePasswordRequest(request);
-      setLoading(false);
-      if (response.status == 200) {
-        Swal.fire({
-          icon: 'success',
-          title: 'Contraseña cambiada con éxito',
-          showConfirmButton: false,
-          timer: 1500
-        })
-        handleCloseModal();
-      } else {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Algo salió mal, intente nuevamente',
-        })
-      }
-    } catch (error) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Algo salió mal, intente nuevamente',
-      })
-    }
-  }
 
   const handleSubmit = (values) => {
-    const request = prepareRequest(values);
-    sendRequest(request);
+    const request = usePrepareRequest(user, values, true);
+    useSendRequest(request, setLoading, changePasswordRequest, handleCloseModal);
+  }
+
+  const submitEdit = (values) => {
+    const request = usePrepareRequest(user, values, false);
+    useSendRequest(request, setLoading, editUser, handleCloseModalEdit);
   }
 
   return (
     <>
       <Row className='d-flex justify-content-center align-items-center'>
-        <Col xs={6} sm={6} className="d-flex gap-3">
-          <Button onClick={handleOpenModal} className='fw-bold'>Cambiar contraseña</Button>
+        <Col xs={12} sm={12} md={12} className="d-flex gap-3 justify-content-center align-items-center">
+          <Button onClick={handleOpenModal} className='fw-bold btn-success'>Cambiar contraseña</Button>
+          <Button onClick={() => handleOpenModalEdit(user)} className='fw-bold'>Editar Perfil</Button>
         </Col>
       </Row>
       <Modal show={showModal} handleClose={handleCloseModal} title="Cambiar contraseña">
@@ -187,6 +175,15 @@ const UserButtons = () => {
           </div>
           :
           <ChangePasswordForm handleSubmit={handleSubmit} />}
+      </Modal>
+      <Modal show={showModalEdit} handleClose={handleCloseModalEdit} title="Editar Perfil">
+        {loading ?
+          <div className="d-flex justify-content-center align-items-center" style={{ minHeight: "300px" }}>
+            <ClimbingBoxLoader color="rgba(239, 239, 239, 1)" />
+          </div>
+          :
+          <EditPerfiles handleSubmit={submitEdit} user={userSelect} />}
+
       </Modal>
     </>
   );

@@ -3,7 +3,6 @@ import { ErrorMessage, Field, Form, Formik } from 'formik'
 import * as yup from "yup"
 import { Alert, Form as boostrappForm } from 'react-bootstrap'
 import { postBrand } from '../../../utils/fetchProductsList'
-import { useAlert } from '../../../context/Hooks'
 
 const CreateBrand = () => {
 
@@ -13,14 +12,13 @@ const CreateBrand = () => {
 
   const handleSubmit = async (formData) => {
 
-    const response = await postBrand(formData);
-    useAlert(response, 201);
+   await postBrand(formData);
 
   }
 
   return (
     <section className='container'>
-      <h6 className="text-light p-2">CREAR MARCAS</h6>
+      <h6 className="text-black p-2">CREAR MARCAS</h6>
 
       <div>
         <Formik
@@ -31,7 +29,7 @@ const CreateBrand = () => {
           <Form as={boostrappForm}>
 
             <div className="mb-3">
-              <label htmlFor="titulo" className={"text-light p-2"}>Titulo:</label>
+              <label htmlFor="titulo" className={"text-black p-2"}>Titulo:</label>
               <Field
                 type="text"
                 name="title"
