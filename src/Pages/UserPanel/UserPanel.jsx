@@ -133,13 +133,20 @@ const UserSection = ({ user }) => {
 
 const UserButtons = () => {
   const { user } = useUser();
+  const [userSelect, setUserSelect] = useState(null);
 
   const [showModalEdit, setShowModalEdit] = useState(false);
   const [showModal, setShowModal] = useState(false);
+
   const handleCloseModal = () => setShowModal(false);
   const handleCloseModalEdit = () => setShowModalEdit(false);
   const handleOpenModal = () => setShowModal(true);
-  const handleOpenModalEdit = () => setShowModalEdit(true);
+
+  const handleOpenModalEdit = (userSe) => { 
+    setShowModalEdit(true);
+    setUserSelect(userSe);
+
+  };
   const [loading, setLoading] = useState(false);
 
 
@@ -158,7 +165,7 @@ const UserButtons = () => {
       <Row className='d-flex justify-content-center align-items-center'>
         <Col xs={12} sm={12} md={12} className="d-flex gap-3 justify-content-center align-items-center">
           <Button onClick={handleOpenModal} className='fw-bold btn-success'>Cambiar contraseña</Button>
-          <Button onClick={handleOpenModalEdit} className='fw-bold'>Editar Perfil</Button>
+          <Button onClick={() => handleOpenModalEdit(user)} className='fw-bold'>Editar Perfil</Button>
         </Col>
       </Row>
       <Modal show={showModal} handleClose={handleCloseModal} title="Cambiar contraseña">
@@ -175,7 +182,7 @@ const UserButtons = () => {
             <ClimbingBoxLoader color="rgba(239, 239, 239, 1)" />
           </div>
           :
-          <EditPerfiles handleSubmit={submitEdit} user={user} />}
+          <EditPerfiles handleSubmit={submitEdit} user={userSelect} />}
 
       </Modal>
     </>

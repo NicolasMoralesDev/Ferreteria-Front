@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState } from 'react';
+import {  useState } from 'react';
 import { Button, Form as BootstrapForm } from 'react-bootstrap';
 import UploadWidget from '../cloundinary/UploadWidget';
 
@@ -8,7 +8,7 @@ import UploadWidget from '../cloundinary/UploadWidget';
 const EditPerfiles = ({ handleSubmit, user }) => {
 
   const [url, updateUrl] = useState();
-  const [data, setdata] = useState(user);
+  const [data, setdata] = useState({...user});
 
   function handleOnUpload(error, result, widget) {
 
@@ -23,12 +23,13 @@ const EditPerfiles = ({ handleSubmit, user }) => {
   }
 
   
-
   
   const handleChange = (e) => {
 
     const { name, value } = e.target;
-    data.urlImg = url;
+    if (url != undefined) {
+      data.urlImg = url;
+    }
     setdata((prevState) => ({ ...prevState, [name]: value })); 
     
 }
@@ -36,6 +37,7 @@ const EditPerfiles = ({ handleSubmit, user }) => {
   if (url != undefined) {
     data.urlImg = url;
   }
+
 
   return (
       <BootstrapForm  onSubmit={()=> handleSubmit(data)} className="d-flex justify-content-center">
@@ -45,10 +47,10 @@ const EditPerfiles = ({ handleSubmit, user }) => {
             <label htmlFor='firstName'>Nombre:</label>
             <input
               required
-              onChange={handleChange}
               type='text'
               name='firstName'
-              value={data.firstName}
+              value={data.firstName} 
+              onChange={handleChange}
               className='form-control'
               id='firstName'
             />

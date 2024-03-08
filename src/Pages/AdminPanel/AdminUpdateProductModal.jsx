@@ -39,7 +39,6 @@ const AdminUpdateProductModal = ({ product, onClose, onSave }) => {
 
   useEffect(() => {
     getAllData();
-  
   }, [])
   
   const handleSave = () => {

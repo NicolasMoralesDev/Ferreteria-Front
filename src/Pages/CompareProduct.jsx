@@ -4,12 +4,14 @@ import Navbar from '../components/Navbar/Navbar'
 import Footer from '../components/Footer'
 import { Button, Card, Col, Row } from 'react-bootstrap'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
-import { useCompare } from '../context/Hooks'
+import { useCart, useCompare } from '../context/Hooks'
 import { v4 as uuidv4 } from "uuid";
+import { Toaster } from 'react-hot-toast'
 
 const CompareProduct = () => {
 
     const {compare, removeFromCompare} = useCompare();
+    const {addToCart} = useCart();
 
     return (
         <>
@@ -45,10 +47,14 @@ const CompareProduct = () => {
                                     </div>
                                     <div className='d-flex justify-content-center gap-2'>
                                         <Button variant="danger" onClick={()=> removeFromCompare(product.product.id)}>Quitar</Button>
-                                        <Button variant="success">Comprar</Button>
+                                        <Button variant="success" onClick={()=> addToCart(product.product, 1)}>Comprar</Button>
                                     </div>
 
                                 </Card>
+                                <Toaster
+            position="bottom-right"
+            reverseOrder={false}
+          />
                             </Col>
 
 

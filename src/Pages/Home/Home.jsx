@@ -8,6 +8,8 @@ import Footer from '../../components/Footer';
 import '../../App.css';
 import Loading from '../../components/Loading/Loading';
 import { Toaster } from 'react-hot-toast';
+import ReactWhatsappButton from "react-whatsapp-button";
+
 
 
 export default function Home() {
@@ -30,6 +32,10 @@ export default function Home() {
         <Suspense fallback={<Loading/>}>
           <LazyUsersProHome/>
         </Suspense>
+        <ReactWhatsappButton 
+        countryCode="54"
+        phoneNumber="2364380471"
+        />
       </main>
       <Toaster
         position="bottom-right"

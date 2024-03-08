@@ -46,9 +46,8 @@ export const getAllSales = async (page=0) => {
 export const putStatusSale = async (sale) => {
 
     try {
-        console.log(sale);
-
-         const response = await axiosConf.put("user/sale/change", sale);
+        
+        const response = await axiosConf.put("user/sale/change", sale);
         return response;  
 
     } catch (error) {

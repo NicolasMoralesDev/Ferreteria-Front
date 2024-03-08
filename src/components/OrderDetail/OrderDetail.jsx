@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 export const OrderDetail = ({sale}) => {
   
   const total = sale.itemList.reduce((acc, item) => acc + item.amount * item.product.price, 0);
-console.log(sale);
+
   return (
     <div>
       <p className="text-black">

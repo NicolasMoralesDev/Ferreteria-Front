@@ -25,7 +25,7 @@ const CarouselUsersPro = () => {
     
   return (
     <section className="container mb-5">
-    <h1 className="text-center m-5 products-title">NUESTROS PROFECIONALES</h1>
+    <h1 className="text-center m-5 products-title">NUESTROS PROFESIONALES</h1>
     {users && users.length > 0 ?
       <ReactOwlCarousel className='owl-theme h-50' loop margin={11}   {...useOptions}>
 
