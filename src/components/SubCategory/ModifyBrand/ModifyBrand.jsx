@@ -111,7 +111,7 @@ export const ModifyBrands = () => {
         getBrands();
 
     }, []);
-
+console.log(brand);
     return (
         <section className='container mt-3'>
             <h6 className='text-black p-2'>CAMBIAR TITULO</h6>
@@ -123,7 +123,7 @@ export const ModifyBrands = () => {
                     </div>
                     <div className='d-flex flex-column gap-3'>
                         <label htmlFor="brand" className='text-black'> Seleccione una Marca</label>
-                        <select name="brand" id="brand"  className='p-2' required   onChange={(e)=> setMarca(e.target.value)}>
+                        <select name="brand" id="brand" multiple={false}  className='p-2' required   onChange={(e)=> setMarca(e.target.value)}>
                             {brand.map((i, index) =>
                                 <option value={index} id='brand' key={uuidv4()} >{i.title}</option>
                             )

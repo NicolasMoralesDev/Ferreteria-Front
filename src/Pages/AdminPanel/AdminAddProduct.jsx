@@ -147,7 +147,6 @@ const AdminAddProduct = () => {
                         name="subCategory"
                         onChange={handleInputChange}
                     >
-                        <option value="">Selecciona una subCategoria</option>
 
                         {
                             subCategory.map( i =>
