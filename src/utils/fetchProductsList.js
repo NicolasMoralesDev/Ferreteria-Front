@@ -211,7 +211,7 @@ export const postBrand = async (formData) => {
 };
 
 export const modifyTitle = async (data) => {
-
+console.log(data);
     try {
         
         await axiosConf.put("admin/brand/put", data[0]).then((response) => useAlert(response, 200)).finally(() => setTimeout(() => {

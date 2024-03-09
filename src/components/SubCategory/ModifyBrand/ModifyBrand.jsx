@@ -79,20 +79,17 @@ export const ModifyBrands = () => {
 
     
     const validationSchema = yup.object().shape({
-        id: yup.number().required('La Marca es requerida!'),
+        brand: yup.number().required('La Marca es requerida!'),
+        title: yup.string().required("El titulo es obligatorio!")
     });
 
     const [brand, setBrand] = useState([{}]);
-    const [titulo, setTitulo] = useState("");
-    const [marca, setMarca] = useState(0);
 
-
-
-    const modifyName = async () => {
+    const modifyName = async (data) => {
 
         const brandNew = [];
-        brandNew.push(brand[marca]);
-        brandNew[0].title = titulo;
+        brandNew.push(brand[data.brand]);
+        brandNew[0].title = data.title;
 
          await modifyTitle(brandNew);
 
@@ -111,32 +108,39 @@ export const ModifyBrands = () => {
         getBrands();
 
     }, []);
-console.log(brand);
+
     return (
         <section className='container mt-3'>
             <h6 className='text-black p-2'>CAMBIAR TITULO</h6>
-            
-            <div>
+            <Formik
+                    initialValues={{ id: 0, title:"" }}
+                    validationSchema={validationSchema}
+                    onSubmit={modifyName}
+                >
+            <Form as={BoostrappForm}>
                     <div className='d-flex flex-column gap-3'>
                         <label htmlFor="title" className='text-black'> Ingrese el nuevo Titulo</label>
-                        <input name="title" id="title" required className='p-2' type="text" placeholder="nuevo titulo..." onChange={(e)=> setTitulo(e.target.value) }/>
+                        <Field name="title" id="title" required className='p-2' type="text" placeholder="nuevo titulo..."/>
+                        <ErrorMessage name="title" component={Alert} variant="danger" />
                     </div>
                     <div className='d-flex flex-column gap-3'>
                         <label htmlFor="brand" className='text-black'> Seleccione una Marca</label>
-                        <select name="brand" id="brand" multiple={false}  className='p-2' required   onChange={(e)=> setMarca(e.target.value)}>
+                        <Field as="select" name="brand" id="brand" multiple={false}  className='p-2' required >
                             {brand.map((i, index) =>
                                 <option value={index} id='brand' key={uuidv4()} >{i.title}</option>
                             )
 
                             }
-                        </select>
+                        </Field>
+                        <ErrorMessage name="brand" component={Alert} variant="danger" />
 
                     </div>            
                     <div className='d-flex gap-3 mt-3 '>
 
                         <button  className=' me-2 btn btn-success fw-bold' onClick={()=> modifyName()}>Modificar Nombre</button>
                     </div>
-            </div>
+            </Form>
+            </Formik>
         </section>
     )
 }
