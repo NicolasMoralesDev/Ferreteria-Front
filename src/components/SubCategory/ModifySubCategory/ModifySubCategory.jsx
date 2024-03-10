@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { getSubcategory, modifyTitleSub } from '../../../utils/fetchProductsList';
 import { v4 as uuidv4 } from "uuid";
-import { useState } from 'react';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
+import { Alert, Form as BoostrappForm } from 'react-bootstrap'
+import * as yup from "yup"
 
 /*export const DeleteSubCategory = () => {
 
@@ -79,25 +81,28 @@ import { useState } from 'react';
 const ModifySubCategory = () => {
 
   const [subCate, setSubCate] = useState([{}]);
-  const [titulo, setTitulo] = useState("");
-  const [sub, setSub] = useState(0);
+
+  const validationSchema = yup.object().shape({
+    subCate: yup.number().required('La Sub Categoria es requerida!'),
+    title: yup.string().required("El titulo es obligatorio!")
+  });
 
 
 
-  const modifyName = async () => {
+  const modifyName = async (data) => {
 
-      const subNew = [];
-      subNew.push(subCate[sub]);
-      subNew[0].title = titulo;
+    const subNew = [];
+    subNew.push(subCate[data.subCate]);
+    subNew[0].title = data.title;
 
-      await modifyTitleSub(subNew);
+    await modifyTitleSub(subNew);
 
   }
 
   const getSubCategory = async () => {
 
-      const request = await getSubcategory();
-      setSubCate(request);
+    const request = await getSubcategory();
+    setSubCate(request);
 
   }
 
@@ -109,32 +114,45 @@ const ModifySubCategory = () => {
 
 
   return (
-      <section className='container mt-3'>
-          <h6 className='text-black p-2'>CAMBIAR TITULO</h6>
-          
-          <div>
-                  <div className='d-flex flex-column gap-3'>
-                      <label htmlFor="title" className='text-black'> Ingrese el nuevo Titulo</label>
-                      <input name="title" id="title" required className='p-2' type="text" placeholder="nuevo titulo..." onChange={(e)=> setTitulo(e.target.value) }/>
-                  </div>
-                  <div className='d-flex flex-column gap-3'>
-                      <label htmlFor="subCate" className='text-black'> Seleccione una Sub Categoria</label>
-                      <select name="subCate" id="subCate"  className='p-2'  onChange={(e)=> setSub(e.target.value)}>
+    <section className='container mt-3'>
+      <h6 className='text-black p-2'>CAMBIAR TITULO</h6>
 
-                          {subCate.map((i, index) =>
-                              <option value={index} id='subCate' key={uuidv4()} >{i.title}</option>
-                          )
+      <div>
+        <Formik
+          initialValues={{ id: 0, title: "" }}
+          validationSchema={validationSchema}
+          onSubmit={modifyName}
+        >
+          <Form as={BoostrappForm}>
 
-                          } 
-                      </select>
+            <div className='d-flex flex-column gap-3'>
+              <label htmlFor="title" className='text-black'> Ingrese el nuevo Titulo</label>
+              <Field name="title" id="title" required className='p-2' type="text" placeholder="nuevo titulo..." />
+              <ErrorMessage name="title" component={Alert} variant="danger" />
 
-                  </div>            
-                  <div className='d-flex gap-3 mt-3 '>
+            </div>
+            <div className='d-flex flex-column gap-3'>
+              <label htmlFor="subCate" className='text-black'> Seleccione una Sub Categoria</label>
+              <Field as={"select"} name="subCate" id="subCate" className='p-2'>
+             
+                { subCate && subCate.length > 0 ?
+                subCate.map((i, index) =>
+                  <option value={index} id='subCate' key={uuidv4()} >{i.title}</option>
+                )
+                : 
+                <></>
 
-                      <button  className=' me-2 btn btn-success fw-bold' onClick={()=> modifyName()}>Modificar Nombre</button>
-                  </div>
-          </div>
-      </section>
+                }
+              </Field>
+              <ErrorMessage name="subCate" component={Alert} variant="danger" />
+            </div>
+            <div className='d-flex gap-3 mt-3 '>
+              <button className=' me-2 btn btn-success fw-bold' type='submit'>Modificar Nombre</button>
+            </div>
+          </Form>
+        </Formik>
+      </div>
+    </section>
   )
 }
 
