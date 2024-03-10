@@ -113,9 +113,14 @@ const AdminUpdateProductModal = ({ product, onClose, onSave }) => {
             onChange={handleInputChange}
           >
             <option value="" disabled>Selecciona una Marca</option>
-            { brand.map( i =>
+            {brand && brand.length > 0 ?
+            
+            brand.map( i =>
             <option value={i.title} key={uuidv4()}>{i.title}</option>
-            )}
+            ):
+            <></>
+          
+          }
           </select>
         </div>
         <div className="mb-3">
@@ -136,9 +141,13 @@ const AdminUpdateProductModal = ({ product, onClose, onSave }) => {
             value={editedProduct.category}
             onChange={handleInputChange}
           >
-            { subCategory.map( i =>
+            { 
+            brand && subCategory.length > 0 ?
+            subCategory.map( i =>
             <option value={i.title} key={uuidv4()}>{i.title}</option>
-            )}
+            ):
+            <></>
+          }
           </select>
         </div>
         <div className="mb-3">

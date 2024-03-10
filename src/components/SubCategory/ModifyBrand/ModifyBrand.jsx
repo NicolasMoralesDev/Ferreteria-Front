@@ -50,10 +50,12 @@ export const DeleteBrand = () => {
                             <label htmlFor="id" className='text-black p-2'> Seleccione una Marca</label>
                             <Field name="id" id="id" as={"select"} className='form-control p-2'  multiple={false}>
 
-                                {brand.map(i =>
+                                {
+                                brand && brand.length > 0 ?
+                                brand.map(i =>
                                     <option value={i.idBrand} id='id' key={uuidv4()}>{i.title}</option>
                                 )
-
+                                : <></>
                                 }
                             </Field>
                         <ErrorMessage name="id" component={Alert} variant="danger" />
@@ -126,9 +128,10 @@ export const ModifyBrands = () => {
                     <div className='d-flex flex-column gap-3'>
                         <label htmlFor="brand" className='text-black'> Seleccione una Marca</label>
                         <Field as="select" name="brand" id="brand" multiple={false}  className='p-2' required >
-                            {brand.map((i, index) =>
+                            {brand && brand.length > 0 ?
+                            brand.map((i, index) =>
                                 <option value={index} id='brand' key={uuidv4()} >{i.title}</option>
-                            )
+                            ): <></>
 
                             }
                         </Field>

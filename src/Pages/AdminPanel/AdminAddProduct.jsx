@@ -109,11 +109,13 @@ const AdminAddProduct = () => {
                             id="floatingBrand"
                             name="brand"
                         >
-                            {
+                            { brand && brand.length > 0 ?
                                 brand.map(i =>
 
                                     <option value={i.title} key={uuidv4()} onChange={() => handleInputBrand(i)}>{i.title}</option>
                                 )
+                                :
+                            <></>
                             }
                             <ErrorMessage name="brand" component={Alert} variant="danger" />
                         </Field>
@@ -138,9 +140,12 @@ const AdminAddProduct = () => {
                         >
 
                             {
+                                subCategory && subCategory.length > 0 ?
                                 subCategory.map(i =>
                                     <option value={i.title} key={uuidv4()}>{i.title}</option>
                                 )
+                                :
+                                <></>
                             }
                         </Field>
                         <ErrorMessage name="subCategory" component={Alert} variant="danger" />

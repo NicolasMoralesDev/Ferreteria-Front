@@ -78,7 +78,7 @@ const CategoryPanel = () => {
                     </div>
 
                     <Accordion>
-                        {data && data.length > 0 ?
+                        {data && data.length > 1 ?
                             data.map(i => (
                                 <Accordion.Item eventKey={i.idCategory} key={i.idCategory}>
                                     <Accordion.Header>{i.title}</Accordion.Header>
