@@ -3,7 +3,7 @@
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 
-const url = [ "https://vps-3966392-x.dattaweb.com:8080/api/",   "http://localhost:8080/api/", "http://localhost:8081/api/", "http://35.199.85.239:80/api/"]
+const url = [ "https://vps-3966392-x.dattaweb.com/api/",   "http://localhost:8080/api/", "http://localhost:8081/api/", "http://35.199.85.239:80/api/"]
 
 
 const baseUrl = import.meta.env.VITE_BACKEND_HOST || url[0];
