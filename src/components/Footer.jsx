@@ -28,7 +28,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="text-center m-2">
-          <p className="fs-6">© Copyright 2024 Te lo LLevo. All rights reserved - Desarrollado por Luno</p>
+          <p className="fs-6">© Copyright 2024 Te lo LLevo. All rights reserved - Desarrollado por Luno y Neuro Marketing</p>
         </div>
 
       </div>
