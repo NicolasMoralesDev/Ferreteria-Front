@@ -26,7 +26,7 @@ const Navbar = () => {
         <Col xs={12} sm={7} md={4} className="container-fluid d-flex justify-content-center"> {/* Añadido el breakpoint `lg` y la clase `container-fluid` */}
           <SearchBar />
         </Col>
-        <Col xs={10} md={5} className="d-flex gap-3 justify-content-center">
+        <Col xs={12} md={5} className="d-flex gap-3 justify-content-center">
           <RegisterWidget/>
           <UserWidget />
           <CartWidget />

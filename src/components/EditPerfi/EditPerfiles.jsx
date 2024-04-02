@@ -42,7 +42,7 @@ const EditPerfiles = ({ handleSubmit, user }) => {
   return (
       <BootstrapForm  onSubmit={()=> handleSubmit(data)} className="d-flex justify-content-center">
         <div className='col-8'>
-        <p className='text-center text-black'> Cierre seccion y vuelva a ingresar para ver reflejados los cambios</p>
+        <p className='text-center text-black'> Cierre sesion y vuelva a ingresar para ver reflejados los cambios</p>
           <div className='mb-3'>
             <label htmlFor='firstName'>Nombre:</label>
             <input
